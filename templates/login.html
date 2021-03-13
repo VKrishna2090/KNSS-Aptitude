@@ -1,0 +1,32 @@
+{% extends "layout.html" %}
+{% block content %}
+    <h1>Login</h1>
+    <div class="row">
+        <div class="container col-md-5 pull-left">
+            <br>
+            <form class="form-group" action="{{ url_for('login') }}" method="post">
+                {% if msg %}
+                    <div class="msg alert alert-danger">{{ msg }}</div>
+                {% endif %}
+                <label for="email" class="form-label">Email</label>
+                <input type="text" class="form-control has-validation" name="email" placeholder="Email" id="email" required>
+                <div class="invalid-tooltip">
+                    Please enter valid username.
+                </div>
+                <br>
+                <label for="password" class="form-label">Password</label>
+                <input type="password" class="form-control" name="password" placeholder="Password" id="password" required>
+                <br>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+            <br>
+            <div class="border-top pt-3">
+                <small class="text-muted">
+                    Don't Have An Account? <a class="ml-2" href="{{ url_for('register') }}">Sign Up Now</a>
+                </small>
+            </div>
+        </div>
+        <div class="col-md-7">
+        </div>
+    </div>
+{% endblock %}
