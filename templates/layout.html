@@ -9,10 +9,25 @@
     <title>KNSS Aptitude</title>
 </head>
 <body>
-    
-    <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-secondary">
+    <style>
+      #logo {
+        display: block;
+        max-width: 100%;
+        height: auto;
+        width:200px;
+      }
+      #loginbtn:hover{
+        background-color: #188781;
+        color: white;
+      }
+      #regisbtn:hover{
+        border-color: #188781;
+        color: rgb(104, 104, 104);
+      }
+    </style>
+    <nav class="navbar sticky-top navbar-expand-lg navbar-light bg-white">
         <div class="container">
-          <a class="navbar-brand" href="/home">KNSS Aptitude</a>
+          <a class="navbar-brand" href="/home"><img id="logo" src="static/uploads/colorlogowithbackground.png" class="img-fluid" alt="Logo"></a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
@@ -25,18 +40,18 @@
                 <a class="nav-item nav-link" aria-current="page" href="/about">About</a>
               </li>
             </ul>
-            <ul class="nav ">
+            <ul class="nav">
               {% if 'loggedin' in session %}
                 <li class="nav-item">
-                  <a class="nav-item nav-link btn btn-outline-light" aria-current="page" href="/logout">Logout</a>
+                  <a class="nav-item nav-link btn btn-outline-light" aria-current="page" href="/logout"><b>Logout</b></a>
                 </li>
               {% else %}
                 <li class="nav-item">
-                  <a class="nav-item nav-link btn btn-outline-light" aria-current="page" href="/login">Login</a>
+                  <a id="regisbtn" class="nav-item nav-link btn  rounded-pill" aria-current="page" href="/register">Register</a>
                 </li>
                 &nbsp; &nbsp;
                 <li class="nav-item">
-                  <a class="nav-item nav-link btn btn-outline-light" aria-current="page" href="/register">Register</a>
+                  <a id="loginbtn" class="nav-item nav-link btn btn-outline-success rounded-pill" aria-current="page" href="/login"><b>Login</b></a>
                 </li>
               {% endif %}
             </ul>
@@ -44,11 +59,12 @@
         </div>
       </nav>
     
+
     <div class="container">
         {% block content %}
         {% endblock %}
     </div> 
-   
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
 </body>
 </html>
