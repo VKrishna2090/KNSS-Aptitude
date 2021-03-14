@@ -59,11 +59,11 @@ def login():
 @app.route('/logout')
 def logout():
     # Remove session data to log the user out
-   session.pop('loggedin', None)
-   session.pop('email', None)
-   session.pop('role_id', None)
-   # Redirect to home page
-   return redirect(url_for('home'))
+    session.pop('loggedin', None)
+    session.pop('email', None)
+    session.pop('role_id', None)
+    # Redirect to home page
+    return redirect(url_for('home'))
 
 @app.route('/register', methods = ['POST','GET'])
 def register():
