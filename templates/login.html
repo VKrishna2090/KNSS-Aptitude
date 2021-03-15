@@ -2,20 +2,24 @@
 {% block content %}
     <h2>Login</h2>
     <div class="row">
-        <div class="container col-md-5 pull-left">
+        <div class="container col-md-5">
             <br>
             <form class="form-group" action="{{ url_for('login') }}" method="post">
                 {% if msg %}
                     <div class="msg alert alert-danger">{{ msg }}</div>
                 {% endif %}
-                <label for="email" class="form-label">Email</label>
-                <input type="text" class="form-control has-validation" name="email" placeholder="Email" id="email" required>
+                <div class="form-floating">
+                    <input type="text" class="form-control has-validation " name="email" placeholder="Email" id="email" required>
+                    <label for="email">Email</label>
+                </div>
                 <div class="invalid-tooltip">
                     Please enter valid username.
                 </div>
                 <br>
-                <label for="password" class="form-label">Password</label>
-                <input type="password" class="form-control" name="password" placeholder="Password" id="password" required>
+                <div class="form-floating">
+                    <input type="password" class="form-control" name="password" placeholder="Password" id="password" required>
+                    <label for="password">Password</label>
+                </div>
                 <br>
                 <button type="submit" class="btn btn-primary">Login</button>
             </form>

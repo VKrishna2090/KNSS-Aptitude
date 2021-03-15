@@ -2,23 +2,39 @@
 {% block content %}
     <h2>Register</h2>
     <div class="row">
-        <div class="container col-md-5 pull-left">
+        <div class="container col-md-5">
             <br>
             <form class="form-group" action="{{ url_for('register') }}" method="post">
                 {% if msg %}
                     <div class="msg alert alert-danger">{{ msg }}</div>
                 {% endif %}
-                <label for="name" class="form-label">Name</label>
-                <input type="text" class="form-control" name="name" placeholder="Name" id="name" required>
+                <div class="row">
+                    <div class="col">
+                        <div class="form-floating">
+                            <input type="text" class="form-control" name="firstname" placeholder="First name" id="firstname" required>
+                            <label for="firstname">First name</label>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-floating">
+                            <input type="text" class="form-control" name="lastname" placeholder="Last name" id="lastname" required>
+                            <label for="lastname">Last name</label>
+                        </div>
+                    </div>
+                </div>
                 <br>
-                <label for="email" class="form-label">Email</label>
-                <input type="text" class="form-control has-validation" name="email" placeholder="Email" id="email" required>
+                <div class="form-floating">
+                    <input type="text" class="form-control has-validation" name="email" placeholder="Email" id="email" required>
+                    <label for="email">Email</label>
+                </div>
                 <div class="invalid-tooltip">
                     Please enter valid username.
                 </div>
                 <br>
-                <label for="password" class="form-label">Password</label>
-                <input type="password" class="form-control" name="password" placeholder="Password" id="password" required>
+                <div class="form-floating">
+                    <input type="password" class="form-control" name="password" placeholder="Password" id="password" required>
+                    <label for="password">Password</label>
+                </div>
                 <br>
                 <label for="role" class="form-label">Role</label>
                 <select class="form-select" id="role" name="role">
