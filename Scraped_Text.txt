@@ -1,0 +1,103 @@
+
+
+This Section of our 1000+ Java MCQs focuses on Integer and Floating Datatypes of Java Programming Language.
+1. What is the range of short data type in Java?
+a) -128 to 127
+b) -32768 to 32767
+c) -2147483648 to 2147483647
+d) None of the mentioned
+View Answer Answer: b
+Explanation: Short occupies 16 bits in memory. Its range is from -32768 to 32767.
+
+
+advertisement
+
+
+    var adpushup = adpushup || {};
+    adpushup.que = adpushup.que || [];
+    adpushup.que.push(function() {
+        adpushup.triggerAd("e5da93a0-b61a-4789-96be-a57ebec165b0");
+    });
+
+
+
+2. What is the range of byte data type in Java?
+a) -128 to 127
+b) -32768 to 32767
+c) -2147483648 to 2147483647
+d) None of the mentioned
+View Answer Answer: a
+Explanation: Byte occupies 8 bits in memory. Its range is from -128 to 127.
+
+3. Which of the following are legal lines of Java code?
+   1. int w = (int)888.8;
+   2. byte x = (byte)100L;
+   3. long y = (byte)100;
+   4. byte z = (byte)100L;
+a) 1 and 2
+b) 2 and 3
+c) 3 and 4
+d) All statements are correct
+View Answer Answer:  d
+Explanation: Statements (1), (2), (3), and (4) are correct. (1) is correct because when a floating-point number (a double in this case) is cast to an int, it simply loses the digits after the decimal. (2) and (4) are correct because a long can be cast into a byte. If the long is over 127, it loses its most significant (leftmost) bits. (3) actually works, even though a cast is not necessary, because a long can store a byte.
+
+
+advertisement
+
+    var sectionId = 'sf-video-ads';
+    var adContainer = document.getElementById(sectionId);
+    var scr = document.createElement('script');
+    scr.type="text/javascript";
+    scr.language="javascript";
+    scr.src="https://live.sekindo.com/live/liveView.php?s=105213&cbuster=[CACHE_BUSTER]&pubUrl="+encodeURIComponent(window.location.href)+"&subId=[SUBID_ENCODED]&x=[WIDTH]&y=[HEIGHT]&schain=1.0,1!adpushup.com,14a05823e471c9369f7876231e6070c3,1";
+    adContainer.appendChild(scr);
+
+
+4. An expression involving byte, int, and literal numbers is promoted to which of these?
+a) int
+b) long
+c) byte
+d) float
+View Answer Answer: a
+Explanation: An expression involving bytes, ints, shorts, literal numbers, the entire expression is promoted to int before any calculation is done.
+
+5. Which of these literals can be contained in float data type variable?
+a) -1.7e+308
+b) -3.4e+038
+c) +1.7e+308
+d) -3.4e+050
+View Answer Answer: b
+Explanation: Range of float data type is -(3.4e38) To +(3.4e38)
+
+6. Which data type value is returned by all transcendental math functions?
+a) int
+b) float
+c) double
+d) long
+View Answer Answer: c
+Explanation: None.
+
+7. What will be the output of the following Java code?
+    class average {        public static void main(String args[])        {            double num[] = {5.5, 10.1, 11, 12.8, 56.9, 2.5};            double result;            result = 0;            for (int i = 0; i < 6; ++i)                 result = result + num[i];	    System.out.print(result/6);         }     }
+a) 16.34
+b) 16.566666644
+c) 16.46666666666667
+d) 16.46666666666666
+View Answer Answer: c
+Explanation: None.
+output:
+
+advertisement
+
+
+    var adpushup = adpushup || {};
+    adpushup.que = adpushup.que || [];
+    adpushup.que.push(function() {
+        adpushup.triggerAd("21eae76a-c83f-42b0-aec5-01d590a53f37");
+    });
+
+
+
+$ javac average.java
+$ java average
+16.46666666666667
