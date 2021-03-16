@@ -86,7 +86,7 @@ def register():
         elif not role or not password or not email:
             msg = 'Please fill out the form!'
         else:
-            cursor.execute('INSERT INTO users VALUES (%s, %s, %s, %s, %s)', ('', email, password, name, role))
+            cursor.execute('INSERT INTO users VALUES (%s, %s, %s, %s, %s)', ('', email, password, fname, lname, mobile, role))
             mysql.connection.commit()
             msg = 'You have successfully registered!'
             return redirect(url_for('login'))
