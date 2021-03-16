@@ -71,7 +71,9 @@ def register():
     msg = ''
     if request.method == 'POST' and 'email' in request.form and 'password' in request.form:
         email = request.form['email']
-        name = request.form['name']
+        fname = request.form['firstname']
+        lname = request.form['lastname']
+        mobile = request.form['mobile']
         password = request.form['password']
         role = request.form['role'] 
         cursor = mysql.connection.cursor()
