@@ -1,10 +1,13 @@
 {% extends "layout.html" %}
 {% block content %}
-    
+<div class="container-fluid" style="background-image: url('static/uploads/background_image.jpg'); background-attachment: fixed; " >
     <div class="row">
+        <br><br>
+    </div>
+    <div class="row" >
         <div class="col-md-3.5">
         </div>
-        <div class="container rounded-3 border border-secondary p-4 col-md-5">
+        <div class="container rounded-3 border border-secondary p-4 col-md-5 bg-white shadow-lg">
             <h2>Login</h2>
             <br>
             <form class="form-group" action="{{ url_for('login') }}" method="post">
@@ -36,6 +39,9 @@
         
         <div class="col-md-3.5">
         </div>
-        
     </div>
+    <div class="row">
+        <br><br>
+    </div>
+</div>
 {% endblock %}
