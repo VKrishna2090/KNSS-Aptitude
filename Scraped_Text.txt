@@ -1,137 +1,103 @@
 
 
-This Section of our 1000+ Java MCQs focuses on Integer and Floating Datatypes of Java Programming Language.
-1. What is the range of short data type in Java?
-a) -128 to 127
-b) -32768 to 32767
-c) -2147483648 to 2147483647
-d) None of the mentioned
-View Answer Answer: b
-Explanation: Short occupies 16 bits in memory. Its range is from -32768 to 32767.
-
+This set of Python Coding Interview Questions & Answers focuses on “Lists”.
+1. What will be the output of the following Python code?
 
 advertisement
 
 
 
 
-2. What is the range of byte data type in Java?
-a) -128 to 127
-b) -32768 to 32767
-c) -2147483648 to 2147483647
-d) None of the mentioned
-View Answer Answer: a
-Explanation: Byte occupies 8 bits in memory. Its range is from -128 to 127.
-
-3. Which of the following are legal lines of Java code?
-   1. int w = (int)888.8;
-   2. byte x = (byte)100L;
-   3. long y = (byte)100;
-   4. byte z = (byte)100L;
-a) 1 and 2
-b) 2 and 3
-c) 3 and 4
-d) All statements are correct
-View Answer Answer:  d
-Explanation: Statements (1), (2), (3), and (4) are correct. (1) is correct because when a floating-point number (a double in this case) is cast to an int, it simply loses the digits after the decimal. (2) and (4) are correct because a long can be cast into a byte. If the long is over 127, it loses its most significant (leftmost) bits. (3) actually works, even though a cast is not necessary, because a long can store a byte.
-
-
-advertisement
-
-
-4. An expression involving byte, int, and literal numbers is promoted to which of these?
-a) int
-b) long
-c) byte
-d) float
-View Answer Answer: a
-Explanation: An expression involving bytes, ints, shorts, literal numbers, the entire expression is promoted to int before any calculation is done.
-
-5. Which of these literals can be contained in float data type variable?
-a) -1.7e+308
-b) -3.4e+038
-c) +1.7e+308
-d) -3.4e+050
-View Answer Answer: b
-Explanation: Range of float data type is -(3.4e38) To +(3.4e38)
-
-6. Which data type value is returned by all transcendental math functions?
-a) int
-b) float
-c) double
-d) long
-View Answer Answer: c
-Explanation: None.
-
-7. What will be the output of the following Java code?
-    class average {        public static void main(String args[])        {            double num[] = {5.5, 10.1, 11, 12.8, 56.9, 2.5};            double result;            result = 0;            for (int i = 0; i < 6; ++i)                 result = result + num[i];	    System.out.print(result/6);         }     }
-a) 16.34
-b) 16.566666644
-c) 16.46666666666667
-d) 16.46666666666666
-View Answer Answer: c
-Explanation: None.
-output:
-
-
-advertisement
-
-
-
-
-$ javac average.java
-$ java average
-16.46666666666667
-
-8. What will be the output of the following Java statement?
-class output {        public static void main(String args[])         {            double a, b,c;            a = 3.0/0;            b = 0/4.0;            c=0/0.0; 	    System.out.println(a);            System.out.println(b);            System.out.println(c);        }     }
-a) Infinity
-b) 0.0
-c) NaN
-d) all of the mentioned
+>>>names = ['Amir', 'Bear', 'Charlton', 'Daman']>>>print(names[-1][-1])
+a) A
+b) Daman
+c) Error
+d) n
 View Answer Answer: d
-Explanation:  For floating point literals, we have constant value to represent (10/0.0) infinity either positive or negative and also have NaN (not a number for undefined like 0/0.0), but for the integral type, we don’t have any constant that’s why we get an arithmetic exception.
+Explanation: Execute in the shell to verify.
+2. What will be the output of the following Python code?
+names1 = ['Amir', 'Bear', 'Charlton', 'Daman']names2 = names1names3 = names1[:] names2[0] = 'Alice'names3[1] = 'Bob' sum = 0for ls in (names1, names2, names3):    if ls[0] == 'Alice':        sum += 1    if ls[1] == 'Bob':        sum += 10 print sum
+a) 11
+b) 12
+c) 21
+d) 22
+View Answer Answer: b
+Explanation: When assigning names1 to names2, we create a second reference to the same list. Changes to names2 affect names1. When assigning the slice of all elements in names1 to names3, we are creating a full copy of names1 which can be modified independently. 
 
+advertisement
+
+
+3. Suppose list1 is [1, 3, 2], What is list1 * 2?
+a) [2, 6, 4] 
+b) [1, 3, 2, 1, 3] 
+c) [1, 3, 2, 1, 3, 2] 
+d) [1, 3, 2, 3, 2, 1] 
+View Answer Answer: c
+Explanation: Execute in the shell and verify. 
+4. Suppose list1 = [0.5 * x for x in range(0, 4)], list1 is:
+a) [0, 1, 2, 3] 
+b) [0, 1, 2, 3, 4] 
+c) [0.0, 0.5, 1.0, 1.5] 
+d) [0.0, 0.5, 1.0, 1.5, 2.0] 
+View Answer Answer: c
+Explanation: Execute in the shell to verify.
+5. What will be the output of the following Python code?
+>>>list1 = [11, 2, 23]>>>list2 = [11, 2, 2]>>>list1 < list2 is
+a) True
+b) False
+c) Error
+d) None
+View Answer Answer: b
+Explanation: Elements are compared one by one.
 
 advertisement
 
 
 
 
-9. What will be the output of the following Java code?
-    class increment {        public static void main(String args[])         {                     int g = 3;             System.out.print(++g * 8);        }     }
-a) 25
-b) 24
-c) 32
-d) 33
-View Answer Answer: c
-Explanation: Operator ++ has more preference than *, thus g becomes 4 and when multiplied by 8 gives 32.
-output:
-
-
-$ javac increment.java
-$ java increment
-32
-
-10. What will be the output of the following Java code?
-    class area {        public static void main(String args[])         {                 double r, pi, a;             r = 9.8;             pi = 3.14;             a = pi * r * r;             System.out.println(a);        }     }
-a) 301.5656
-b) 301
-c) 301.56
-d) 301.56560000
+6. To add a new element to a list we use which command?
+a) list1.add(5)
+b) list1.append(5)
+c) list1.addLast(5)
+d) list1.addEnd(5)
+View Answer Answer: b
+Explanation: We use the function append to add an element to the list. 
+7. To insert 5 to the third position in list1, we use which command?
+a) list1.insert(3, 5)
+b) list1.insert(2, 5)
+c) list1.add(3, 5)
+d) list1.append(3, 5)
+View Answer Answer: b
+Explanation: Execute in the shell to verify.
+8. To remove string “hello” from list1, we use which command?
+a) list1.remove(“hello”)
+b) list1.remove(hello)
+c) list1.removeAll(“hello”)
+d) list1.removeOne(“hello”)
 View Answer Answer: a
-Explanation: None.
-output:
+Explanation: Execute in the shell to verify.
+9. Suppose list1 is [3, 4, 5, 20, 5], what is list1.index(5)?
+a) 0
+b) 1
+c) 4
+d) 2
+View Answer Answer: d
+Explanation: Execute help(list.index) to get details.
+
+advertisement
 
 
-$ javac area.java
-$ java area
-301.5656
 
-Sanfoundry Global Education & Learning Series – Java Programming Language.
 
-Java Practice ResourcesJava Mock Tests & Certification Test | 1000 Java MCQs | 1000 Java Programs | 1000 Java Algorithms | Best Java Books
-
+10. Suppose list1 is [3, 4, 5, 20, 5, 25, 1, 3], what is list1.count(5)?
+a) 0
+b) 4
+c) 1
+d) 2
+View Answer Answer: d
+Explanation: Execute in the shell to verify.
+Sanfoundry Global Education & Learning Series – Python.
+To practice all coding interview questions on Python, here is complete set of 1000+ Multiple Choice Questions and Answers.
 
 Participate in the Sanfoundry Certification contest to get free Certificate of Merit. Join our social networks below and stay updated with latest contests, videos, internships and jobs!
 
@@ -140,4 +106,4 @@ Telegram | Youtube | LinkedIn | Instagram | Facebook | Twitter | Pinterest
 
 Youtube | LinkedIn | Instagram | Facebook | Twitter | Pinterest
 
-» Next - Java Questions & Answers – Character and Boolean Data Types 
+« Prev - Python Questions and Answers – Lists – 1» Next - Python Questions and Answers – Lists – 3 
