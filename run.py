@@ -16,7 +16,7 @@ mysql = MySQL(app)
 
 @app.route('/')
 @app.route('/home')
-def home():
+def home():    
     if 'loggedin' in session:
         if session['role_id'] == '1':
             return redirect(url_for('student_dashboard'))
@@ -48,7 +48,11 @@ def login():
         if account:
             # Create session data, we can access this data in other routes
             session['loggedin'] = True
+            session['user_id'] = account[0]
             session['email'] = account[1]
+            session['fname'] = account[3]
+            session['lname'] = account[4]
+            session['mobile'] = account[5]
             session['role_id'] = account[6]
             # Redirect to home page
             return redirect(url_for('home'))
@@ -61,7 +65,11 @@ def login():
 def logout():
     # Remove session data to log the user out
     session.pop('loggedin', None)
+    session.pop('user_id', None)
     session.pop('email', None)
+    session.pop('fname', None)
+    session.pop('lname', None)
+    session.pop('mobile', None)
     session.pop('role_id', None)
     # Redirect to home page
     return redirect(url_for('home'))
