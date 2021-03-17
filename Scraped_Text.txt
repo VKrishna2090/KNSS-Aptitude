@@ -13,12 +13,6 @@ Explanation: Short occupies 16 bits in memory. Its range is from -32768 to 32767
 advertisement
 
 
-    var adpushup = adpushup || {};
-    adpushup.que = adpushup.que || [];
-    adpushup.que.push(function() {
-        adpushup.triggerAd("e5da93a0-b61a-4789-96be-a57ebec165b0");
-    });
-
 
 
 2. What is the range of byte data type in Java?
@@ -43,14 +37,6 @@ Explanation: Statements (1), (2), (3), and (4) are correct. (1) is correct becau
 
 
 advertisement
-
-    var sectionId = 'sf-video-ads';
-    var adContainer = document.getElementById(sectionId);
-    var scr = document.createElement('script');
-    scr.type="text/javascript";
-    scr.language="javascript";
-    scr.src="https://live.sekindo.com/live/liveView.php?s=105213&cbuster=[CACHE_BUSTER]&pubUrl="+encodeURIComponent(window.location.href)+"&subId=[SUBID_ENCODED]&x=[WIDTH]&y=[HEIGHT]&schain=1.0,1!adpushup.com,14a05823e471c9369f7876231e6070c3,1";
-    adContainer.appendChild(scr);
 
 
 4. An expression involving byte, int, and literal numbers is promoted to which of these?
@@ -87,17 +73,71 @@ View Answer Answer: c
 Explanation: None.
 output:
 
+
 advertisement
 
-
-    var adpushup = adpushup || {};
-    adpushup.que = adpushup.que || [];
-    adpushup.que.push(function() {
-        adpushup.triggerAd("21eae76a-c83f-42b0-aec5-01d590a53f37");
-    });
 
 
 
 $ javac average.java
 $ java average
 16.46666666666667
+
+8. What will be the output of the following Java statement?
+class output {        public static void main(String args[])         {            double a, b,c;            a = 3.0/0;            b = 0/4.0;            c=0/0.0; 	    System.out.println(a);            System.out.println(b);            System.out.println(c);        }     }
+a) Infinity
+b) 0.0
+c) NaN
+d) all of the mentioned
+View Answer Answer: d
+Explanation:  For floating point literals, we have constant value to represent (10/0.0) infinity either positive or negative and also have NaN (not a number for undefined like 0/0.0), but for the integral type, we don’t have any constant that’s why we get an arithmetic exception.
+
+
+advertisement
+
+
+
+
+9. What will be the output of the following Java code?
+    class increment {        public static void main(String args[])         {                     int g = 3;             System.out.print(++g * 8);        }     }
+a) 25
+b) 24
+c) 32
+d) 33
+View Answer Answer: c
+Explanation: Operator ++ has more preference than *, thus g becomes 4 and when multiplied by 8 gives 32.
+output:
+
+
+$ javac increment.java
+$ java increment
+32
+
+10. What will be the output of the following Java code?
+    class area {        public static void main(String args[])         {                 double r, pi, a;             r = 9.8;             pi = 3.14;             a = pi * r * r;             System.out.println(a);        }     }
+a) 301.5656
+b) 301
+c) 301.56
+d) 301.56560000
+View Answer Answer: a
+Explanation: None.
+output:
+
+
+$ javac area.java
+$ java area
+301.5656
+
+Sanfoundry Global Education & Learning Series – Java Programming Language.
+
+Java Practice ResourcesJava Mock Tests & Certification Test | 1000 Java MCQs | 1000 Java Programs | 1000 Java Algorithms | Best Java Books
+
+
+Participate in the Sanfoundry Certification contest to get free Certificate of Merit. Join our social networks below and stay updated with latest contests, videos, internships and jobs!
+
+Telegram | Youtube | LinkedIn | Instagram | Facebook | Twitter | Pinterest
+
+
+Youtube | LinkedIn | Instagram | Facebook | Twitter | Pinterest
+
+» Next - Java Questions & Answers – Character and Boolean Data Types 
