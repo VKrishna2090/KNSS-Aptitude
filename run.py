@@ -1,6 +1,10 @@
 
 from flask import *
+import random
+import datetime
 from flask_mysqldb import MySQL
+from SanFoundry_Scraped import initiate_scraping, scrape
+from separation_quest_ans import getQuestionAndOption
 import os
 
 app = Flask(__name__)
@@ -31,7 +35,61 @@ def student_dashboard():
 
 @app.route('/staff_dashboard')
 def staff_dashboard():
-    return render_template('staff/dashboard.html')
+    cursor = mysql.connection.cursor()
+    cursor.execute('SELECT * FROM subject')
+    subjects = cursor.fetchall()
+    return render_template('staff/dashboard.html', subjects=subjects)
+
+@app.route('/create_automatic_exam', methods = ['POST','GET'])
+def create_automatic_exam():
+    msg = ''
+    if request.method == 'POST' and 'exam_url' in request.form:
+        url = request.form['exam_url']
+        if not url:
+            msg = 'Please fill out the form!'
+        else:
+            initiate_scraping(url)
+            exam1 = getQuestionAndOption()
+            subject_id = request.form['subject']
+            e_code = random.randint(100,1000000)
+            e_title = request.form['exam_title']
+            total_num_of_questions = len(exam1[1])
+            total_marks = total_num_of_questions * 2
+            time_limit = total_num_of_questions * 3
+            created_by = session['user_id']
+            start_date = datetime.date.today()
+            end_date = start_date+datetime.timedelta(20)
+            
+
+            #check if same exam is there or not
+
+
+            cursor = mysql.connection.cursor()
+            cursor.execute('INSERT INTO exam VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)', (e_code, e_title, '', time_limit, total_num_of_questions, total_marks, start_date, end_date, created_by, subject_id))
+            mysql.connection.commit()
+            for ques,options in exam1[0].items():
+                q_id = random.randint(100,1000000)
+                q_desc = ques
+                q_type = 'O'
+                marks = 2
+                cursor = mysql.connection.cursor()
+                cursor.execute('INSERT INTO question VALUES (%s, %s, %s, %s, %s)', (q_id, q_desc, q_type, marks, e_code))
+                mysql.connection.commit()
+                for option in options:
+                    o_id = random.randint(100,1000000)
+                    o_desc = option
+                    is_correct = '0'
+                    if option[0] == exam1[1][ques][0]:
+                        is_correct = '1'
+                    # print(option,option[0],exam1[1][ques][0],option[0] == exam1[1][ques][0],is_correct)
+                    cursor = mysql.connection.cursor()
+                    cursor.execute('INSERT INTO options VALUES (%s, %s, %s, %s)', (o_id, o_desc, is_correct, q_id))
+                    mysql.connection.commit()                    
+            msg = 'You have successfully registered!'
+            return redirect(url_for('staff_dashboard'))
+    elif request.method == 'POST':
+        msg = 'Please fill out the form!'
+    return redirect(url_for('staff_dashboard'))
 
 @app.route('/login', methods = ['POST','GET'])
 def login():

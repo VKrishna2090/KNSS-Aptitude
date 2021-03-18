@@ -10,8 +10,9 @@ def scrape(url):
         q = q + "\n" + (i.text)
     return q
 
-url = input("Enter a URL:")
-file1 = open(r"Scraped_Text.txt","w+")
-file1.truncate(0)
-file1.write(scrape(url))
-print ("Done Scraping..")
+def initiate_scraping(url):
+    # url = input("Enter a URL:")
+    file1 = open(r"Scraped_Text.txt","w+")
+    file1.truncate(0)
+    file1.write(scrape(url))
+    # print ("Done Scraping..")
