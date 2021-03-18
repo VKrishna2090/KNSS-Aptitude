@@ -124,6 +124,19 @@ def create_automatic_exam():
         msg = 'Please fill out the form!'
     return redirect(url_for('staff_dashboard'))
 
+@app.route('/staff_profile')
+def staff_profile():
+    return render_template('staff/profile.html')
+
+@app.route('/my_exams')
+def my_exams():
+    cursor = mysql.connection.cursor()
+    cursor.execute('SELECT * FROM subject')
+    subjects = cursor.fetchall()
+    cursor.execute('SELECT * FROM exam WHERE user_id = %s',(session['user_id'],))
+    exams = cursor.fetchall()
+    return render_template('staff/dashboard.html', subjects=subjects, exams=exams)
+
 @app.route('/login', methods = ['POST','GET'])
 def login():
     msg = ''

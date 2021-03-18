@@ -4,11 +4,11 @@
     <div class="row">
         <div class="col-md-3">
             <ul class="list-group">
-                <a class="list-group-item list-group-item-action list-group-item-primary" href="">Profile</a>
+                <a class="list-group-item list-group-item-action list-group-item-success" href="{{ url_for('home') }}">Dashboard</a>
+                <a class="list-group-item list-group-item-action list-group-item-primary" href="{{ url_for('staff_profile') }}">Profile</a>
                 <a class="list-group-item list-group-item-action list-group-item-success" href="{{ url_for('create_exam_auto_form') }}">Create Exam</a>
                 <a class="list-group-item list-group-item-action list-group-item-primary" href="{{ url_for('create_subject_form') }}">Add Subject</a>
-                <a class="list-group-item list-group-item-action list-group-item-success" href="">My Exams</a>
-                <a class="list-group-item list-group-item-action list-group-item-primary" href="">All Exams</a>
+                <a class="list-group-item list-group-item-action list-group-item-success" href="{{ url_for('my_exams') }}">My Exams</a>
             </ul>
         </div>
         <div class="col-md-9">

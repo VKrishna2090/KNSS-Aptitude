@@ -1,6 +1,10 @@
 {% extends "staff/staff_layout.html" %}
 {% block staff_content %}
+{% if url_for(request.endpoint) == '/my_exams' %}
+<h3>My Exams</h3>
+{% else %}
 <h3>All Exams</h3>
+{% endif %}
 <br>
 <table class="table table-bordered">
   <thead>
@@ -20,7 +24,7 @@
       <td>{{row[0]}}</td>
       <td>{{row[1]}}&nbsp;&nbsp;<span class="badge rounded-pill bg-success">Active</span></td>
       {% for sub in subjects %}
-      {% if sub[0] == row [9] %}
+      {% if sub[0] == row[9] %}
       <td>{{sub[1]}}</td>
       {% else %}
       {% endif %}
@@ -52,86 +56,5 @@
     {% endfor %}
   </tbody>
 </table>
-
-
-<!--<div class="student-profile py-4">
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-8">
-        <div class="card shadow-sm">
-          <div class="card-header bg-transparent border-0">
-            <h3 class="mb-0"><i class="far fa-clone pr-1"></i>Create exam</h3>
-          </div>
-
-              IMPORTANT
-
-                <div class="container">
-                  <form class="form-group" action="{{ url_for('create_automatic_exam') }}" method="post">
-                    {% if msg %}
-                        <div class="msg alert alert-danger">{{ msg }}</div>
-                    {% endif %}
-                    <div class="form-floating">
-                        <input type="text" class="form-control has-validation" name="exam_url" placeholder="Enter Sanfoundry MCQ URL" id="exam_url" required>
-                        <label for="exam_url">Enter Sanfoundry MCQ URL</label>
-                    </div>
-                    <div class="invalid-tooltip">
-                        Please enter valid url.
-                    </div>            
-                    <br>
-                    <div class="form-floating">
-                      <input type="text" class="form-control has-validation" name="exam_title" placeholder="Title of exam" id="exam_title" required>
-                      <label for="exam_title">Enter exam title</label>
-                    </div>
-                    <div class="invalid-tooltip">
-                        Please enter valid title.
-                    </div>
-                    <br>
-                    <label for="subject" class="form-label">Subject</label>
-                    <select class="form-select" id="subject" name="subject">
-                      {% for sub in subjects %}
-                        <option value='{{ sub[0] }}'>{{sub[1]}}</option>
-                      {% endfor %}
-                    </select>
-                    <br>                
-                    <button type="submit" class="btn btn-primary">Create Exam</button>
-                  </form>
-                </div>
-
-
-
-
-        </div>
-          <div style="height: 26px"></div>
-            <div class="card shadow-sm">
-              <div class="card-header bg-transparent border-0">
-                <h3 class="mb-0"><i class="far fa-clone pr-1"></i>Other Information</h3><br>
-              </div>
-              <div class="card-body pt-0">
-              <div class="card-deck">
-        <div class="card bg-warning" style="color:white">
-          <div class="card-body text-center">
-            <p class="card-text" ><b>Subjects</b></p>
-
-          </div>
-        </div>
-        <div class="card bg-danger">
-          <div class="card-body text-center">
-            <p class="card-text"><b>Grades</b></p>
-          </div>
-
-        </div>
-        <div class="card bg-success">
-          <div class="card-body text-center">
-            <p class="card-text"><b>Performance</b></p>
-          </div>
-        </div>
-
-      </div>
-              </div>
-            </div>
-      </div>
-    </div>
-  </div>
-</div>
 {% endblock %}-->
 
