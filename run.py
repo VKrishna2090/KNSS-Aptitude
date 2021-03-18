@@ -38,7 +38,40 @@ def staff_dashboard():
     cursor = mysql.connection.cursor()
     cursor.execute('SELECT * FROM subject')
     subjects = cursor.fetchall()
-    return render_template('staff/dashboard.html', subjects=subjects)
+    cursor.execute('SELECT * FROM exam')
+    exams = cursor.fetchall()
+    return render_template('staff/dashboard.html', subjects=subjects, exams=exams)
+
+@app.route('/create_subject_form')
+def create_subject_form():
+    return render_template('staff/create_subject_form.html')
+
+@app.route('/create_subject', methods = ['POST','GET'])
+def create_subject():
+    msg = ''
+    if request.method == 'POST' and 'subject_name' in request.form:
+        subject_name = request.form['subject_name']
+        if not subject_name:
+            msg = 'Please fill out the form!'
+        else:
+            subject_desc = request.form['subject_desc']
+            subject_code = random.randint(100,1000000)
+
+            cursor = mysql.connection.cursor()
+            cursor.execute('INSERT INTO subject VALUES (%s, %s, %s)', (subject_code, subject_name, subject_desc))
+            mysql.connection.commit()
+            msg = 'You have successfully created a subject!'
+            return redirect(url_for('staff_dashboard'))
+    elif request.method == 'POST':
+        msg = 'Please fill out the form!'
+    return redirect(url_for('staff_dashboard'))
+
+@app.route('/create_exam_auto_form')
+def create_exam_auto_form():
+    cursor = mysql.connection.cursor()
+    cursor.execute('SELECT * FROM subject')
+    subjects = cursor.fetchall()
+    return render_template('staff/create_exam_auto_form.html', subjects=subjects)
 
 @app.route('/create_automatic_exam', methods = ['POST','GET'])
 def create_automatic_exam():

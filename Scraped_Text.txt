@@ -1,108 +1,73 @@
 
 
-This set of Python Multiple Choice Questions & Answers (MCQs) focuses on “Lists”.
-1. Which of the following commands will create a list?
-a) list1 = list()
-b) list1 = [] 
-c) list1 = list([1, 2, 3])
-d) all of the mentioned
+This section of our 1000+ Java MCQs focuses constructors and garbage collection of Java Programming Language.
+1. What is the return type of Constructors?
+a) int
+b) float
+c) void
+d) none of the mentioned
 View Answer Answer: d
-Explanation: Execute in the shell to verify
+Explanation: Constructors does not have any return type, not even void.
+
 
 advertisement
 
 
 
 
-2. What is the output when we execute list(“hello”)?
-a) [‘h’, ‘e’, ‘l’, ‘l’, ‘o’] 
-b) [‘hello’] 
-c) [‘llo’] 
-d) [‘olleh’] 
-View Answer Answer: a
-Explanation: Execute in the shell to verify. 
-3. Suppose listExample is [‘h’,’e’,’l’,’l’,’o’], what is len(listExample)?
-a) 5
-b) 4
-c) None
-d) Error
-View Answer Answer: a
-Explanation: Execute in the shell and verify. 
-4. Suppose list1 is [2445,133,12454,123], what is max(list1)?
-a) 2445
-b) 133
-c) 12454
-d) 123
-View Answer Answer: c
-Explanation: Max returns the maximum element in the list.
-5. Suppose list1 is [3, 5, 25, 1, 3], what is min(list1)?
-a) 3
-b) 5
-c) 25
-d) 1
+2. Which keyword is used by the method to refer to the object that invoked it?
+a) import
+b) catch
+c) abstract
+d) this
 View Answer Answer: d
-Explanation: Min returns the minimum element in the list.
+Explanation: this keyword can be used inside any method to refer to the current object. this is always a reference to the object on which the method was invoked.
 
-advertisement
-
-
-
-
-
-advertisement
-
-
-
-
-6. Suppose list1 is [1, 5, 9], what is sum(list1)?
-a) 1
-b) 9
-c) 15
-d) Error
-View Answer Answer: c
-Explanation: Sum returns the sum of all elements in the list. 
-7. To shuffle the list(say list1) what function do we use?
-a) list1.shuffle()
-b) shuffle(list1)
-c) random.shuffle(list1)
-d) random.shuffleList(list1)
-View Answer Answer: c
-Explanation: Execute in the shell to verify.
-8. Suppose list1 is [4, 2, 2, 4, 5, 2, 1, 0], Which of the following is correct syntax for slicing operation?
-a) print(list1[0])
-b) print(list1[:2])
-c) print(list1[:-2])
-d) all of the mentioned
+3. Which of the following is a method having same name as that of its class?
+a) finalize
+b) delete
+c) class
+d) constructor
 View Answer Answer: d
-Explanation: Slicing is allowed in lists just as in the case of strings.
-9. Suppose list1 is [2, 33, 222, 14, 25], What is list1[-1]?
-a) Error
-b) None
-c) 25
-d) 2
-View Answer Answer: c
-Explanation: -1 corresponds to the last index in the list.
+Explanation: A constructor is a method that initializes an object immediately upon creation. It has the same name as that of class in which it resides.
+
+4. Which operator is used by Java run time implementations to free the memory of an object when it is no longer needed?
+a) delete
+b) free
+c) new
+d) none of the mentioned
+View Answer Answer: d
+Explanation: Java handles deallocation of memory automatically, we do not need to explicitly delete an element. Garbage collection only occurs during execution of the program. When no references to the object exist, that object is assumed to be no longer needed, and the memory occupied by the object can be reclaimed.
+
+5. Which function is used to  perform some action when the object is to be destroyed?
+a) finalize()
+b) delete()
+c) main()
+d) none of the mentioned
+View Answer Answer: a
+Explanation: None.
+
 
 advertisement
 
 
 
 
-10. Suppose list1 is [2, 33, 222, 14, 25], What is list1[:-1]?
-a) [2, 33, 222, 14] 
-b) Error
-c) 25
-d) [25, 14, 222, 33, 2] 
-View Answer Answer: a
-Explanation: Execute in the shell to verify.
-Sanfoundry Global Education & Learning Series – Python.
-To practice all areas of Python, here is complete set of 1000+ Multiple Choice Questions and Answers.
 
-Participate in the Sanfoundry Certification contest to get free Certificate of Merit. Join our social networks below and stay updated with latest contests, videos, internships and jobs!
-
-Telegram | Youtube | LinkedIn | Instagram | Facebook | Twitter | Pinterest
+advertisement
 
 
-Youtube | LinkedIn | Instagram | Facebook | Twitter | Pinterest
 
-« Prev - Python Questions and Answers – Strings – 13» Next - Python Questions and Answers – Lists – 2 
+
+6. What will be the output of the following Java code?
+    class box     {        int width;        int height;        int length;        int volume;        box()         {            width = 5;            height = 5;            length = 6;        }        void volume()         {             volume = width*height*length;        }     }        class constructor_output     {        public static void main(String args[])        {            box obj = new box();            obj.volume();            System.out.println(obj.volume);        }   }
+a) 100
+b) 150
+c) 200
+d) 250
+View Answer Answer: b
+Explanation: None.
+output:
+$ constructor_output.java
+$ constructor_output
+150

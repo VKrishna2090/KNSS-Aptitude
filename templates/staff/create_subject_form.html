@@ -1,0 +1,31 @@
+{% extends "staff/staff_layout.html" %}
+{% block staff_content %}
+<div class="container">
+    <h3>New Subject</h3>
+    <br>
+    <form class="form-group" action="{{ url_for('create_subject') }}" method="post">
+        {% if msg %}
+        <div class="msg alert alert-danger">{{ msg }}</div>
+        {% endif %}
+        <div class="form-floating">
+            <input type="text" class="form-control has-validation" name="subject_name"
+                placeholder="Enter Subject Name" id="subject_name" required>
+            <label for="subject_name">Enter Subject Name</label>
+        </div>
+        <div class="invalid-tooltip">
+            Please enter valid subject.
+        </div>
+        <br>
+        <div class="form-floating">
+            <input type="text" class="form-control has-validation" name="subject_desc" placeholder="Enter Subject Description"
+                id="subject_desc" required>
+            <label for="subject_desc">Enter Subject Description</label>
+        </div>
+        <div class="invalid-tooltip">
+            Please enter valid description.
+        </div>
+        <br>
+        <button type="submit" class="btn btn-primary">Add Subject</button>
+    </form>
+</div>
+{% endblock %}

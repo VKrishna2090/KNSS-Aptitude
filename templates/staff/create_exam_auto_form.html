@@ -1,0 +1,38 @@
+{% extends "staff/staff_layout.html" %}
+{% block staff_content %}
+<div class="container">
+    <h3>Create Exam</h3>
+    <br>
+    <form class="form-group" action="{{ url_for('create_automatic_exam') }}" method="post">
+        {% if msg %}
+        <div class="msg alert alert-danger">{{ msg }}</div>
+        {% endif %}
+        <div class="form-floating">
+            <input type="text" class="form-control has-validation" name="exam_url"
+                placeholder="Enter Sanfoundry MCQ URL" id="exam_url" required>
+            <label for="exam_url">Enter Sanfoundry MCQ URL</label>
+        </div>
+        <div class="invalid-tooltip">
+            Please enter valid url.
+        </div>
+        <br>
+        <div class="form-floating">
+            <input type="text" class="form-control has-validation" name="exam_title" placeholder="Title of exam"
+                id="exam_title" required>
+            <label for="exam_title">Enter exam title</label>
+        </div>
+        <div class="invalid-tooltip">
+            Please enter valid title.
+        </div>
+        <br>
+        <label for="subject" class="form-label">Subject</label>
+        <select class="form-select" id="subject" name="subject">
+            {% for sub in subjects %}
+            <option value='{{ sub[0] }}'>{{sub[1]}}</option>
+            {% endfor %}
+        </select>
+        <br>
+        <button type="submit" class="btn btn-primary">Create Exam</button>
+    </form>
+</div>
+{% endblock %}
