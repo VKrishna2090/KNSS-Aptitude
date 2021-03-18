@@ -88,7 +88,7 @@ def create_automatic_exam():
             e_title = request.form['exam_title']
             total_num_of_questions = len(exam1[1])
             total_marks = total_num_of_questions * 2
-            time_limit = total_num_of_questions * 3
+            time_limit = total_num_of_questions * 2 * 60
             created_by = session['user_id']
             start_date = datetime.date.today()
             end_date = start_date+datetime.timedelta(20)
