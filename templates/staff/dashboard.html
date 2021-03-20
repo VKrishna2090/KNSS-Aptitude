@@ -1,6 +1,10 @@
 {% extends "staff/staff_layout.html" %}
 {% block staff_content %}
 {% if url_for(request.endpoint) == '/my_exams' %}
+<div class="alert alert-success alert-dismissible fade show" role="alert">
+  <strong>Hello {{session['fname']}}!</strong> Welcome to KNSS Aptitude
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
 <h3>My Exams</h3>
 {% else %}
 <h3>All Exams</h3>

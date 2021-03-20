@@ -31,7 +31,19 @@ def home():
 
 @app.route('/student_dashboard')
 def student_dashboard():
-    return render_template('student/dashboard.html')
+    cursor = mysql.connection.cursor()
+    cursor.execute('SELECT * FROM subject')
+    subjects = cursor.fetchall()
+    cursor.execute('SELECT * FROM exam')
+    exams = cursor.fetchall()
+    return render_template('student/dashboard.html', subjects=subjects, exams=exams)
+
+@app.route('/student_profile')
+def student_profile():
+    cursor = mysql.connection.cursor()
+    cursor.execute('SELECT * FROM users WHERE user_id = %s',(session['user_id'],))
+    profile_student_user = cursor.fetchall()
+    return render_template('student/profile.html', profile_student_user=profile_student_user)
 
 @app.route('/staff_dashboard')
 def staff_dashboard():
@@ -126,7 +138,10 @@ def create_automatic_exam():
 
 @app.route('/staff_profile')
 def staff_profile():
-    return render_template('staff/profile.html')
+    cursor = mysql.connection.cursor()
+    cursor.execute('SELECT * FROM users WHERE user_id = %s',(session['user_id'],))
+    profile_staff_user = cursor.fetchall()
+    return render_template('staff/profile.html', profile_staff_user=profile_staff_user)
 
 @app.route('/my_exams')
 def my_exams():

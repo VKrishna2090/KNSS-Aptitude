@@ -1,6 +1,5 @@
 {% extends "staff/staff_layout.html" %}
 {% block staff_content %}
-
 <h3>Create Exam</h3>
 <br>
 <form class="form-group" action="{{ url_for('create_automatic_exam') }}" method="post">
@@ -34,5 +33,4 @@
     <br>
     <button type="submit" class="btn btn-primary">Create Exam</button>
 </form>
-
 {% endblock %}
