@@ -18,6 +18,10 @@ app.config['MYSQL_DB'] = 'knss_aptitude'
 
 mysql = MySQL(app)
 
+
+#-----------------------GENERAL ROUTES-----------------------------
+
+
 @app.route('/')
 @app.route('/home')
 def home():    
@@ -28,31 +32,87 @@ def home():
             return redirect(url_for('staff_dashboard'))
     return render_template('home.html')
 
+@app.route('/login', methods = ['POST','GET'])
+def login():
+    msg = ''
+    if request.method == 'POST' and 'email' in request.form and 'password' in request.form:
+        email = request.form['email']
+        password = request.form['password']
+        cursor = mysql.connection.cursor()
+        cursor.execute('SELECT * FROM users WHERE email = %s AND password = %s',(email,password,))
+        account = cursor.fetchone()
+        if account:
+            # Create session data, we can access this data in other routes
+            session['loggedin'] = True
+            session['user_id'] = account[0]
+            session['email'] = account[1]
+            session['fname'] = account[3]
+            session['lname'] = account[4]
+            session['mobile'] = account[5]
+            session['role_id'] = account[6]
+            # Redirect to home page
+            return redirect(url_for('home'))
+        else:
+            # Account doesnt exist or username/password incorrect
+            msg = 'Incorrect username/password!'
+    return render_template('login.html',msg=msg)
 
-@app.route('/student_dashboard')
-def student_dashboard():
-    cursor = mysql.connection.cursor()
-    cursor.execute('SELECT * FROM subject')
-    subjects = cursor.fetchall()
-    cursor.execute('SELECT * FROM exam')
-    exams = cursor.fetchall()
-    return render_template('student/dashboard.html', subjects=subjects, exams=exams)
+@app.route('/logout')
+def logout():
+    # Remove session data to log the user out
+    session.pop('loggedin', None)
+    session.pop('user_id', None)
+    session.pop('email', None)
+    session.pop('fname', None)
+    session.pop('lname', None)
+    session.pop('mobile', None)
+    session.pop('role_id', None)
+    # Redirect to home page
+    return redirect(url_for('home'))
 
-@app.route('/student_profile')
-def student_profile():
-    cursor = mysql.connection.cursor()
-    cursor.execute('SELECT * FROM users WHERE user_id = %s',(session['user_id'],))
-    profile_student_user = cursor.fetchall()
-    return render_template('student/profile.html', profile_student_user=profile_student_user)
+@app.route('/register', methods = ['POST','GET'])
+def register():
+    msg = ''
+    if request.method == 'POST' and 'email' in request.form and 'password' in request.form:
+        email = request.form['email']
+        fname = request.form['firstname']
+        lname = request.form['lastname']
+        mobile = request.form['mobile']
+        password = request.form['password']
+        role = request.form['role'] 
+        cursor = mysql.connection.cursor()
+        cursor.execute('SELECT * FROM users WHERE email = %s', (email,))
+        account = cursor.fetchone()
+        if account:
+            msg = 'Account already exists!'
+        # elif not re.match(r'[^@]+@[^@]+\.[^@]+', email):
+        #     msg = 'Invalid email address!'
+        elif not role or not password or not email:
+            msg = 'Please fill out the form!'
+        else:
+            cursor.execute('INSERT INTO users VALUES (%s, %s, %s, %s, %s, %s, %s)', ('', email, password, fname, lname, mobile, role))
+            mysql.connection.commit()
+            msg = 'You have successfully registered!'
+            return redirect(url_for('login'))
+    elif request.method == 'POST':
+        msg = 'Please fill out the form!'
+    return render_template('register.html',msg=msg)
+
+
+
+#-----------------------STAFF ROUTES-----------------------------
+
+
 
 @app.route('/staff_dashboard')
 def staff_dashboard():
+    today = datetime.date.today()
     cursor = mysql.connection.cursor()
     cursor.execute('SELECT * FROM subject')
     subjects = cursor.fetchall()
     cursor.execute('SELECT * FROM exam')
     exams = cursor.fetchall()
-    return render_template('staff/dashboard.html', subjects=subjects, exams=exams)
+    return render_template('staff/dashboard.html', subjects=subjects, exams=exams, today=today)
 
 @app.route('/create_subject_form')
 def create_subject_form():
@@ -130,7 +190,7 @@ def create_automatic_exam():
                     cursor = mysql.connection.cursor()
                     cursor.execute('INSERT INTO options VALUES (%s, %s, %s, %s)', (o_id, o_desc, is_correct, q_id))
                     mysql.connection.commit()                    
-            msg = 'You have successfully registered!'
+            msg = 'You have successfully created exam!'
             return redirect(url_for('staff_dashboard'))
     elif request.method == 'POST':
         msg = 'Please fill out the form!'
@@ -145,78 +205,37 @@ def staff_profile():
 
 @app.route('/my_exams')
 def my_exams():
+    today = datetime.date.today()
     cursor = mysql.connection.cursor()
     cursor.execute('SELECT * FROM subject')
     subjects = cursor.fetchall()
     cursor.execute('SELECT * FROM exam WHERE user_id = %s',(session['user_id'],))
     exams = cursor.fetchall()
-    return render_template('staff/dashboard.html', subjects=subjects, exams=exams)
+    return render_template('staff/dashboard.html', subjects=subjects, exams=exams, today=today)
 
-@app.route('/login', methods = ['POST','GET'])
-def login():
-    msg = ''
-    if request.method == 'POST' and 'email' in request.form and 'password' in request.form:
-        email = request.form['email']
-        password = request.form['password']
-        cursor = mysql.connection.cursor()
-        cursor.execute('SELECT * FROM users WHERE email = %s AND password = %s',(email,password,))
-        account = cursor.fetchone()
-        if account:
-            # Create session data, we can access this data in other routes
-            session['loggedin'] = True
-            session['user_id'] = account[0]
-            session['email'] = account[1]
-            session['fname'] = account[3]
-            session['lname'] = account[4]
-            session['mobile'] = account[5]
-            session['role_id'] = account[6]
-            # Redirect to home page
-            return redirect(url_for('home'))
-        else:
-            # Account doesnt exist or username/password incorrect
-            msg = 'Incorrect username/password!'
-    return render_template('login.html',msg=msg)
 
-@app.route('/logout')
-def logout():
-    # Remove session data to log the user out
-    session.pop('loggedin', None)
-    session.pop('user_id', None)
-    session.pop('email', None)
-    session.pop('fname', None)
-    session.pop('lname', None)
-    session.pop('mobile', None)
-    session.pop('role_id', None)
-    # Redirect to home page
-    return redirect(url_for('home'))
 
-@app.route('/register', methods = ['POST','GET'])
-def register():
-    msg = ''
-    if request.method == 'POST' and 'email' in request.form and 'password' in request.form:
-        email = request.form['email']
-        fname = request.form['firstname']
-        lname = request.form['lastname']
-        mobile = request.form['mobile']
-        password = request.form['password']
-        role = request.form['role'] 
-        cursor = mysql.connection.cursor()
-        cursor.execute('SELECT * FROM users WHERE email = %s', (email,))
-        account = cursor.fetchone()
-        if account:
-            msg = 'Account already exists!'
-        # elif not re.match(r'[^@]+@[^@]+\.[^@]+', email):
-        #     msg = 'Invalid email address!'
-        elif not role or not password or not email:
-            msg = 'Please fill out the form!'
-        else:
-            cursor.execute('INSERT INTO users VALUES (%s, %s, %s, %s, %s, %s, %s)', ('', email, password, fname, lname, mobile, role))
-            mysql.connection.commit()
-            msg = 'You have successfully registered!'
-            return redirect(url_for('login'))
-    elif request.method == 'POST':
-        msg = 'Please fill out the form!'
-    return render_template('register.html',msg=msg)
+#-----------------------STUDENT ROUTES-----------------------------
+
+
+@app.route('/student_dashboard')
+def student_dashboard():
+    today = datetime.date.today()
+    cursor = mysql.connection.cursor()
+    cursor.execute('SELECT * FROM subject')
+    subjects = cursor.fetchall()
+    cursor.execute('SELECT * FROM exam')
+    exams = cursor.fetchall()
+    return render_template('student/dashboard.html', subjects=subjects, exams=exams, today=today)
+
+@app.route('/student_profile')
+def student_profile():
+    cursor = mysql.connection.cursor()
+    cursor.execute('SELECT * FROM users WHERE user_id = %s',(session['user_id'],))
+    profile_student_user = cursor.fetchall()
+    return render_template('student/profile.html', profile_student_user=profile_student_user)
+
+
 
 if __name__ == '__main__':
     app.run(debug=True)

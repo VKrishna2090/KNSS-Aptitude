@@ -1,12 +1,12 @@
 {% extends "staff/staff_layout.html" %}
 {% block staff_content %}
 {% if url_for(request.endpoint) == '/my_exams' %}
+<h3>My Exams</h3>
+{% else %}
 <div class="alert alert-success alert-dismissible fade show" role="alert">
   <strong>Hello {{session['fname']}}!</strong> Welcome to KNSS Aptitude
   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 </div>
-<h3>My Exams</h3>
-{% else %}
 <h3>All Exams</h3>
 {% endif %}
 <br>
@@ -26,12 +26,18 @@
     {% for row in exams %}
     <tr>
       <td>{{row[0]}}</td>
-      <td>{{row[1]}}&nbsp;&nbsp;<span class="badge rounded-pill bg-success">Active</span></td>
+      <td>{{row[1]}}&nbsp;&nbsp;
+        {% if row[6] <= today %}        
+          <span class="badge rounded-pill bg-success">Live</span>
+        {% else %}
+          <span class="badge rounded-pill bg-success">Ended</span>
+        {% endif %}
+      </td>
       {% for sub in subjects %}
-      {% if sub[0] == row[9] %}
-      <td>{{sub[1]}}</td>
-      {% else %}
-      {% endif %}
+        {% if sub[0] == row[9] %}
+          <td>{{sub[1]}}</td>
+        {% else %}
+        {% endif %}
       {% endfor %}
       <td><button type="button" class="btn btn-outline-primary"><svg xmlns="http://www.w3.org/2000/svg" width="16"
             height="16" fill="currentColor" class="bi bi-file-text" viewBox="0 0 16 16">
@@ -60,5 +66,5 @@
     {% endfor %}
   </tbody>
 </table>
-{% endblock %}-->
+{% endblock %}
 
