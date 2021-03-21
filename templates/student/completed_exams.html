@@ -1,0 +1,32 @@
+{% extends "student/student_layout.html" %}
+{% block student_content %}
+<h3>Exams Given</h3>
+<br>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th scope="col">Exam</th>
+            <th scope="col">Subject</th>
+            <th scope="col">Date Attempted</th>
+            <th scope="col">Marks</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for row in exams_given %}
+        <tr>
+            {% for ex in exams %}
+            <td>{{row[1]}}</td>
+            {% endfor %}
+            {% for sub in subjects %}
+            {% if sub[0] == row[9] %}
+                <td>{{sub[1]}}</td>
+            {% else %}
+            {% endif %}
+            {% endfor %}
+            <td>{{row[4]}}</td>
+            <td>{{row[2]}}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
