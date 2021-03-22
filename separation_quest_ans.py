@@ -21,8 +21,8 @@ def getQuestionAndOption():
             answers[ques] = ""
         if re.search('^[a-d]\).*', line):
             qno[ques].append(line)
-        if re.search('^View Answer Answer:.*', line):
-            answers[ques] = line[20:22]    
+        if re.search('^View Answer Answer:.*', line) or re.search('^View AnswerAnswer:.*', line):
+            answers[ques] = re.sub('[^a-zA-Z]+', '', line[19:22])    
 
     def filterTheDict(dictObj, callback):
         newDict = dict()

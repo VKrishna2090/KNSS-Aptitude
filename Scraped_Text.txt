@@ -1,6 +1,5 @@
 
 
-<<<<<<< HEAD
 This set of Computer Networks Multiple Choice Questions & Answers (MCQs) focuses on “Reference Models – 1”.
 1. How many layers are present in the Internet protocol stack (TCP/IP model)?
 a) 5
@@ -10,23 +9,12 @@ d) 10
 View Answer Answer: a
 Explanation: There are five layers in the Internet Protocol stack. The five layers in Internet Protocol stack is Application, Transport, Network, Data link and Physical layer. The internet protocol stack model is also called the TCP/IP model and it’s used in modern Internet Communication.
 
-=======
-This set of Computer Networks Multiple Choice Questions & Answers focuses on “RIP v2”.
-1. Which statement is true regarding classless routing protocols?
-a) The use of discontinuous networks is not allowed
-b) The use of variable length subnet masks is permitted
-c) RIPv1 is a classless routing protocol
-d) RIPv2 supports classless routing
-View AnswerAnswer: b
-Explanation: Classful routing means that all hosts in the internetwork use the same mask. Classless routing means that you can use Variable Length Subnet Masks (VLSMs) and can also support discontinuous networking.
->>>>>>> 77f60222482774d8fcd5ae97ba7503bc4b0e5ed4
 
 advertisement
 
 
 
 
-<<<<<<< HEAD
 2. The number of layers in ISO OSI reference model is __________
 a) 5
 b) 7
@@ -94,75 +82,13 @@ c) Link layer
 d) Session layer
 View Answer Answer: a
 Explanation: In TCP/IP model, the fifth layer is application layer. When data is sent from device A to device B, the 5th layer to receive data at B is application layer. Application layer provides the interface between applications and the network. The user interacts with only this layer.
-=======
-2. What is route poisoning?
-a) It sends back the protocol received from a router as a poison pill, which stops the regular updates. The use of variable length subnet masks is permitted
-b) It is information received from a router that can’t be sent back to the originating router.RIPv2 supports classless routing
-c) It prevents regular update messages from reinstating a route that has just come up
-d) It describes when a router sets the metric for a downed link to infinity
-View AnswerAnswer: d
-Explanation: When a network goes down, the distance-vector routing protocol initiates route poisoning by advertising the network with a metric of 16, or unreachable.
-3. Which of the following is true regarding RIPv2?
-a) It has a lower administrative distance than RIPv1
-b) It converges faster than RIPv1
-c) It has the same timers as RIPv1
-d) It is harder to configure than RIPv1
-View AnswerAnswer: c
-Explanation: RIPv2 is pretty much just like RIPv1. It has the same administrative distance and timers and is configured just like RIPv1.
-4. Which of the situations might not require multiple routing protocols in a network?
-a) When a new Layer 2-only switch is added to the network
-b) When you are migrating from one routing protocol to another
-c) When you are using routers from multiple vendors
-d) When there are host-based routers from multiple vendors
-View AnswerAnswer: a
-Explanation: Multiple routing protocols are required only when we need to migrate from one routing protocol to another, or when we are using routers from multiple vendors, or when there are host-based routers from multiple vendors. Routing is not a layer-2 function so we don’t require multiple routing protocols when new layer-2 switch is added.
-5. Which two routing protocols can be redistributed into OSPF by a Cisco router?
-a) IP EIGRP and AppleTalk EIGRP
-b) AppleTalk EIGRP and RIPv2
-c) RIPv2 and IP EIGRP
-d) IPX RIP & AppleTalk EIGRP
-View AnswerAnswer: c
-Explanation: OSPF stands for Open Shortest Path First. It is a Link state routing protocol. IP EIGRP and RIPv2 can be redistributed into OSPF by a Cisco router.
 
-advertisement
-
->>>>>>> 77f60222482774d8fcd5ae97ba7503bc4b0e5ed4
-
-6. Which is a reason for avoiding doing route redistribution on two routers between the same two routing domains?
-a) Higher cost of two routers
-b) Routing feedback
-c) Cisco IOS incompatibility
-d) Not possible to use two routers
-View AnswerAnswer: b
-Explanation: Routing feedback is an anomaly in which the routing protocols go back and forth between one route and another. Routing feedback is a reason for avoiding doing route redistribution on two routers between the same two routing domains.
-7. What does administrative distance rank?
-a) Metrics
-b) Sources of routing information
-c) Router reliability
-d) Best paths
-View AnswerAnswer: b
-Explanation: Sources of routing information is the administrative distance rank. It is used by routers to select the best path when there are different routes to the same destination. It’s used only two different routing protocols are being used.
-8. Which protocol maintains neighbor adjacencies?
-a) RIPv2 and EIGRP
-b) IGRP and EIGRP
-c) RIPv2
-d) EIGRP
-View AnswerAnswer: c
-Explanation: Neighbor adjacency refers to the formal handshake performed by neighboring routers. It is to be done before the router share any routing information. RIP V2 maintains neighbor adjacencies.
-9. Which routing protocol implements the diffusing update algorithm?
-a) IS-IS
-b) IGRP
-c) EIGRP
-d) OSPF
-View AnswerAnswer: c
-Explanation: The diffusing update algorithm (DUAL) is used to maintain backup routes to a destination for when the primary route fails. EIGRP routing protocol implements the diffusing update algorithm.
 
 advertisement
 
 
 
 
-<<<<<<< HEAD
 10. In the OSI model, as a data packet moves from the lower to the upper layers, headers are _______
 a) Added
 b) Removed
@@ -181,26 +107,12 @@ Explanation: One layer may use the information from another layer, for example t
 
 Sanfoundry Global Education & Learning Series – Computer Networks.
 To practice all areas of Computer Networks, here is complete set of 1000+ Multiple Choice Questions and Answers.
-=======
-10. Which protocol should you select if the network diameter is more than 17 hops?
-a) RIPv1
-b) RIPv2
-c) EIGRP
-d) OSPF
-View AnswerAnswer: b
-Explanation: RIPv2protocol should you select if the network diameter is more than 17 hops. It uses classless routing and the routing updates are broadcasted over the network. It notifies routers about the update so that they update their own routing tables.
-Sanfoundry Global Education & Learning Series – Computer Networks.
-To practice  all areas of Computer Networks, here is complete set of 1000+ Multiple Choice Questions and Answers.
->>>>>>> 77f60222482774d8fcd5ae97ba7503bc4b0e5ed4
 
-Participate in the Sanfoundry Certification contest to get free Certificate of Merit. Join our social networks below and stay updated with latest contests, videos, internships and jobs!
-
-Telegram | Youtube | LinkedIn | Instagram | Facebook | Twitter | Pinterest
+advertisement
 
 
-Youtube | LinkedIn | Instagram | Facebook | Twitter | Pinterest
 
-<<<<<<< HEAD
+
 
 Participate in the Sanfoundry Certification contest to get free Certificate of Merit. Join our social networks below and stay updated with latest contests, videos, internships and jobs!
 
@@ -210,6 +122,3 @@ Telegram | Youtube | LinkedIn | Instagram | Facebook | Twitter | Pinterest
 Youtube | LinkedIn | Instagram | Facebook | Twitter | Pinterest
 
 « Prev - Computer Networks Questions & Answers – Access Networks» Next - Computer Networks Questions & Answers – Reference Models – 2 
-=======
-« Prev - Computer Networks Questions & Answers – RIP v1» Next - Computer Networks Questions & Answers – Cryptography 
->>>>>>> 77f60222482774d8fcd5ae97ba7503bc4b0e5ed4
