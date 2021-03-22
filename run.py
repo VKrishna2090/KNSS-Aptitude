@@ -135,10 +135,10 @@ def create_subject():
             cursor.execute('INSERT INTO subject VALUES (%s, %s, %s)', (subject_code, subject_name, subject_desc))
             mysql.connection.commit()
             msg = 'You have successfully created a subject!'
-            return redirect(url_for('staff_dashboard'))
+            return redirect(url_for('create_subject_form'))
     elif request.method == 'POST':
         msg = 'Please fill out the form!'
-    return redirect(url_for('staff_dashboard'))
+    return redirect(url_for('create_subject_form'))
 
 @app.route('/create_exam_auto_form')
 def create_exam_auto_form():
