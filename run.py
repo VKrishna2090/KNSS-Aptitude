@@ -1,4 +1,3 @@
-
 from flask import *
 import random
 import datetime
@@ -116,7 +115,10 @@ def staff_dashboard():
 
 @app.route('/create_subject_form')
 def create_subject_form():
-    return render_template('staff/create_subject_form.html')
+    cursor = mysql.connection.cursor()
+    cursor.execute('SELECT * FROM subject')
+    subjects = cursor.fetchall()
+    return render_template('staff/create_subject_form.html', subjects=subjects)
 
 @app.route('/create_subject', methods = ['POST','GET'])
 def create_subject():
@@ -235,7 +237,25 @@ def student_profile():
     profile_student_user = cursor.fetchall()
     return render_template('student/profile.html', profile_student_user=profile_student_user)
 
+@app.route('/join_exam')
+def join_exam():
+    return render_template('student/join_exam.html')
 
+@app.route('/completed_exams')
+def completed_exams():
+    today = datetime.date.today()
+    cursor = mysql.connection.cursor()
+    cursor.execute('SELECT * FROM exams_given')
+    exams_given = cursor.fetchall()
+    cursor.execute('SELECT * FROM subject')
+    subjects = cursor.fetchall()
+    cursor.execute('SELECT * FROM exam')
+    exams = cursor.fetchall()
+    return render_template('student/completed_exams.html', exams_given=exams_given, subjects=subjects, exams=exams, today=today)
+
+@app.route('/results')
+def results():
+    return render_template('student/results.html')
 
 if __name__ == '__main__':
     app.run(debug=True)
