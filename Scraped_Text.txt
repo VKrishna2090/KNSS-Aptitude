@@ -1,93 +1,118 @@
 
 
-This set of Java Multiple Choice Questions & Answers focuses on “Data Structures-Queue”.
-1. Which of the below is not a subinterface of Queue?
-a) BlockingQueue
-b) BlockingEnque
-c) TransferQueue
-d) BlockingQueue
-View AnswerAnswer: b
-Explanation: BlockingQueue, TransferQueue and BlockingQueue are subinterfaces of Queue.
+This set of Computer Networks Multiple Choice Questions & Answers (MCQs) focuses on “Reference Models – 1”.
+1. How many layers are present in the Internet protocol stack (TCP/IP model)?
+a) 5
+b) 7
+c) 6
+d) 10
+View Answer Answer: a
+Explanation: There are five layers in the Internet Protocol stack. The five layers in Internet Protocol stack is Application, Transport, Network, Data link and Physical layer. The internet protocol stack model is also called the TCP/IP model and it’s used in modern Internet Communication.
+
 
 advertisement
 
 
 
 
-2. What is the remaining capacity of BlockingQueue whose intrinsic capacity is not defined?
-a) Integer.MAX_VALUE
-b) BigDecimal.MAX_VALUE
-c) 99999999
-d) Integer.INFINITY
-View AnswerAnswer: a
-Explanation: A BlockingQueue without any intrinsic capacity constraints always reports a remaining capacity of Integer.MAX_VALUE.
-3. PriorityQueue is thread safe.
-a) True
-b) False
-View AnswerAnswer: a
-Explanation: PriorityQueue is not synchronized. BlockingPriorityQueue is the thread safe implementation.
-4. What is difference between dequeue() and peek() function of java?
-a) dequeue() and peek() remove and return the next time in line
-b) dequeue() and peek() return the next item in line
-c) dequeue() removes and returns the next item in line while peek() returns the next item in line
-d) peek() removes and returns the next item in line while dequeue() returns the next item in line
-View AnswerAnswer: c
-Explanation: dequeue() removes the item next in line. peek() returns the item without removing it from the queue.
-5. What is the difference between Queue and Stack?
-a) Stack is LIFO; Queue is FIFO
-b) Queue is LIFO; Stack is FIFO
-c) Stack and Queue is FIFO
-d) Stack and Queue is LIFO
-View AnswerAnswer: a
-Explanation: Stack is Last in First out (LIFO) and Queue is First in First out(FIFO).
+2. The number of layers in ISO OSI reference model is __________
+a) 5
+b) 7
+c) 6
+d) 10
+View Answer Answer: b
+Explanation: The seven layers in ISO OSI reference model is Application, Presentation, Session, Transport, Network, Data link and Physical layer. OSI stands for Open System Interconnect and it is a generalized model.
+
+3. Which of the following layers is an addition to OSI model when compared with TCP IP model?
+a) Application layer
+b) Presentation layer
+c) Session layer
+d) Session and Presentation layer
+View Answer Answer: d
+Explanation: The only difference between OSI model and TCP/IP model is that the functions of Presentation and Session layer in the OSI model are handled by the transport layer itself in TCP/IP. OSI is a generalized model and TCP/IP is an application specific model.
+
+4. Application layer is implemented in ____________
+a) End system
+b) NIC
+c) Ethernet
+d) Packet transport
+View Answer Answer: a
+Explanation: Not only application layer, but presentation layer, session layer and transport layer are also implemented in the end system. The layers below are implemented outside the end system, for example, the network layer is implemented on the routers and the physical layer is implemented for the medium.
+
+5. Transport layer is implemented in ______________
+a) End system
+b) NIC
+c) Ethernet
+d) Signal transmission
+View Answer Answer: a
+Explanation: Application, Presentation, Session and Transport layer are implemented in the end system. The transport layer handles the process to process delivery of the packet through ports.
+
 
 advertisement
 
 
-6. What are the use of front and rear pointers in CircularQueue implementation?
-a) Front pointer points to first element; rear pointer points to the last element
-b) Rear pointer points to first element; front pointer points to the last element
-c) Front and read pointers point to the first element
-d) Front pointer points to the first element; rear pointer points to null object
-View AnswerAnswer: c
-Explanation: CircularQueue implementation is an abstract class where first and rear pointer point to the same object.
-7. What is the correct method used to insert and delete items from the queue?
-a) push and pop
-b) enqueue and dequeue
-c) enqueue and peek
-d) add and remove
-View AnswerAnswer: b
-Explanation: enqueue is pushing item into queue; dequeue is removing item from queue; peek returns object without removing it from queue.
-Stack uses push and pop methods. add and remove are used in the list.
-8. Which data structure is used in Breadth First Traversal of a graph?
-a) Stack
-b) Queue
-c) Array
-d) Tree
-View AnswerAnswer: b
-Explanation: In Breadth First Traversal of graph the nodes at the same level are accessed in the order of retrieval (i.e FIFO).
-9. Where does a new element be inserted in linked list implementation of a queue?
-a) Head of list
-b) Tail of list
-c) At the centre of list
-d) All the old entries are pushed and then the new element is inserted
-View AnswerAnswer: b
-Explanation: To maintain FIFO, newer elements are inserted to the tail of the list.
+6. The functionalities of the presentation layer include ____________
+a) Data compression
+b) Data encryption
+c) Data description
+d) All of the mentioned
+View Answer Answer: d
+Explanation: Some functions of the presentation layer include character-code translation, data conversion, data encryption and decryption, and data translation. It connects the application layer with the layers below converting the human readable text and media to machine readable format and vice-versa.
+
+7. Delimiting and synchronization of data exchange is provided by __________
+a) Application layer
+b) Session layer
+c) Transport layer
+d) Link layer
+View Answer Answer: b
+Explanation: The session layer provides the mechanism for opening, closing and managing a session between end-user application processes. The session layer 5 is responsible for establishing managing synchronizing and terminating sessions. In TCP/IP protocol stack, the functions of the session layer are handled by the transport layer itself and thus the session layer is missing from the TCP/IP model.
+
+8. In OSI model, when data is sent from device A to device B, the 5th layer to receive data at B is _________
+a) Application layer
+b) Transport layer
+c) Link layer
+d) Session layer
+View Answer Answer: d
+Explanation: In OSI reference model, the fifth layer is Session layer. Session layer provides the mechanism for opening, closing and managing a session between end-user application processes. In TCP/IP protocol stack, the functions of the session layer are handled by the transport layer itself and thus the session layer is missing from the TCP/IP model.
+
+9. In TCP IP Model, when data is sent from device A to device B, the 5th layer to receive data at B is ____________
+a) Application layer
+b) Transport layer
+c) Link layer
+d) Session layer
+View Answer Answer: a
+Explanation: In TCP/IP model, the fifth layer is application layer. When data is sent from device A to device B, the 5th layer to receive data at B is application layer. Application layer provides the interface between applications and the network. The user interacts with only this layer.
+
 
 advertisement
 
 
 
 
-10. If the size of the array used to implement a circular queue is MAX_SIZE. How rear moves to traverse inorder to insert an element in the queue?
-a) rear=(rear%1)+MAX_SIZE
-b) rear=(rear+1)%MAX_SIZE
-c) rear=rear+(1%MAX_SIZE)
-d) rear=rear%(MAX_SIZE+1)
-View AnswerAnswer: b
-Explanation: The front and rear pointer od circular queue point to the first element.
-Sanfoundry Global Education & Learning Series – Java Programming Language.
-To practice  all areas of Java, here is complete set on 1000+ Multiple Choice Questions and Answers on Java.
+10. In the OSI model, as a data packet moves from the lower to the upper layers, headers are _______
+a) Added
+b) Removed
+c) Rearranged
+d) Randomized
+View Answer Answer: b
+Explanation: In OSI reference model, when data packet moves from lower layers to higher layer, headers get removed. Whereas when the data packet moves from higher layer to lower layers, headers are added. These headers contain the essential control information for the protocols used on the specific layer.
+
+11. Which of the following statements can be associated with OSI model?
+a) A structured way to discuss and easier update system components
+b) One layer may duplicate lower layer functionality
+c) Functionality at one layer no way requires information from another layer
+d) It is an application specific network model
+View Answer Answer: c
+Explanation: One layer may use the information from another layer, for example timestamp value. The information is contained in the header inserted by the previous layer. The headers are added as the packet moves from higher layers to the lower layers.
+
+Sanfoundry Global Education & Learning Series – Computer Networks.
+To practice all areas of Computer Networks, here is complete set of 1000+ Multiple Choice Questions and Answers.
+
+advertisement
+
+
+
+
 
 Participate in the Sanfoundry Certification contest to get free Certificate of Merit. Join our social networks below and stay updated with latest contests, videos, internships and jobs!
 
@@ -96,4 +121,4 @@ Telegram | Youtube | LinkedIn | Instagram | Facebook | Twitter | Pinterest
 
 Youtube | LinkedIn | Instagram | Facebook | Twitter | Pinterest
 
-« Prev - Java Questions & Answers – Iterators» Next - Java Questions & Answers – Java.util – Array Class 
+« Prev - Computer Networks Questions & Answers – Access Networks» Next - Computer Networks Questions & Answers – Reference Models – 2 
