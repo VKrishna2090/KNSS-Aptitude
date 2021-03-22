@@ -7,7 +7,7 @@
     <div class="msg alert alert-danger">{{ msg }}</div>
     {% endif %}
     <div class="form-floating">
-        <input type="text" class="form-control has-validation" name="exam_url" placeholder="Enter Sanfoundry MCQ URL" id="exam_url" required>
+        <input type="text" class="shadow form-control has-validation" name="exam_url" placeholder="Enter Sanfoundry MCQ URL" id="exam_url" required>
         <label for="exam_url">Enter Sanfoundry MCQ URL</label>
     </div>
     <div class="invalid-tooltip">
@@ -15,7 +15,7 @@
     </div>
     <br>
     <div class="form-floating">
-        <input type="text" class="form-control has-validation" name="exam_title" placeholder="Title of exam" id="exam_title" required>
+        <input type="text" class="shadow form-control has-validation" name="exam_title" placeholder="Title of exam" id="exam_title" required>
         <label for="exam_title">Enter exam title</label>
     </div>
     <div class="invalid-tooltip">
@@ -23,7 +23,7 @@
     </div>
     <br>
     <div class="form-floating">
-        <select class="form-select" id="subject" name="subject">
+        <select class="shadow form-select" id="subject" name="subject">
             {% for sub in subjects %}
             <option value='{{ sub[0] }}'>{{sub[1]}}</option>
             {% endfor %}
