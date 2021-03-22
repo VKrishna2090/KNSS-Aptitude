@@ -1,92 +1,118 @@
 
 
-This set of Computer Fundamentals Multiple Choice Questions & Answers (MCQs) focuses on “DBMS”.
-1. A collection of related data.
-a) Information
-b) Valuable information
-c) Database
-d) Metadata
-View AnswerAnswer: c
-Explanation: Database is the collection of related data and its metadata organized in a structured format. It is designed for optimized information management.
+This set of Computer Networks Multiple Choice Questions & Answers (MCQs) focuses on “Reference Models – 1”.
+1. How many layers are present in the Internet protocol stack (TCP/IP model)?
+a) 5
+b) 7
+c) 6
+d) 10
+View Answer Answer: a
+Explanation: There are five layers in the Internet Protocol stack. The five layers in Internet Protocol stack is Application, Transport, Network, Data link and Physical layer. The internet protocol stack model is also called the TCP/IP model and it’s used in modern Internet Communication.
+
 
 advertisement
 
 
 
 
-2. DBMS is software.
-a) True
-b) False
-View AnswerAnswer: a
-Explanation: The statement is true. DBMS stands for Database Management System. It enables easy creation and access of the database.
-3. DBMS manages the interaction between __________ and  database.
-a) Users
-b) Clients
-c) End Users
-d) Stake Holders
-View AnswerAnswer: c
-Explanation: DBMS manages the interaction between the end users and the database. End users are the final users that interact with the database.
-4. Which of the following is not involved in DBMS?
-a) End Users
-b) Data
-c) Application Request
-d) HTML
-View AnswerAnswer: d
-Explanation: HTML isn’t involved in Database Management System. Other things like the data and application request are a part of the DBMS.
-5. Database is generally __________
-a) System-centered
-b)  User-centered
-c) Company-centered
-d) Data-centered
-View AnswerAnswer: b
-Explanation: Database is user-centered. The perspective is that the user is always right. If there is a problem with the use of the system, the system is the problem, not the user.
+2. The number of layers in ISO OSI reference model is __________
+a) 5
+b) 7
+c) 6
+d) 10
+View Answer Answer: b
+Explanation: The seven layers in ISO OSI reference model is Application, Presentation, Session, Transport, Network, Data link and Physical layer. OSI stands for Open System Interconnect and it is a generalized model.
+
+3. Which of the following layers is an addition to OSI model when compared with TCP IP model?
+a) Application layer
+b) Presentation layer
+c) Session layer
+d) Session and Presentation layer
+View Answer Answer: d
+Explanation: The only difference between OSI model and TCP/IP model is that the functions of Presentation and Session layer in the OSI model are handled by the transport layer itself in TCP/IP. OSI is a generalized model and TCP/IP is an application specific model.
+
+4. Application layer is implemented in ____________
+a) End system
+b) NIC
+c) Ethernet
+d) Packet transport
+View Answer Answer: a
+Explanation: Not only application layer, but presentation layer, session layer and transport layer are also implemented in the end system. The layers below are implemented outside the end system, for example, the network layer is implemented on the routers and the physical layer is implemented for the medium.
+
+5. Transport layer is implemented in ______________
+a) End system
+b) NIC
+c) Ethernet
+d) Signal transmission
+View Answer Answer: a
+Explanation: Application, Presentation, Session and Transport layer are implemented in the end system. The transport layer handles the process to process delivery of the packet through ports.
+
 
 advertisement
 
 
-6. A characteristic of an entity.
-a) Relation
-b) Attribute
-c) Parameter
-d) Constraint
-View AnswerAnswer: b
-Explanation: An attribute is a characteristic of an entity. The association among the entities is described by the relationship.
-7. The restrictions placed on the data.
-a) Relation
-b) Attribute
-c) Parameter
-d) Constraint
-View AnswerAnswer: d
-Explanation: Constraint is a restriction that is placed on the data. Attribute is the characteristic and the relation describes the association.
-8. IMS stands for?
-a) Information Mastering System
-b) Instruction Management System
-c) Instruction Manipulating System
-d) Information Management System
-View AnswerAnswer: d
-Explanation: IMS stands for Information Management System. It is developed to manage large amounts of data for complex projects.
-9. A model developed by Hammer and Mc Leod in 1981.
-a) SDM
-b) OODBM
-c) DDM
-d) RDM
-View AnswerAnswer: a
-Explanation: SDM stands for Semantic Data Model. It models both data and their relationships in a single structure.
+6. The functionalities of the presentation layer include ____________
+a) Data compression
+b) Data encryption
+c) Data description
+d) All of the mentioned
+View Answer Answer: d
+Explanation: Some functions of the presentation layer include character-code translation, data conversion, data encryption and decryption, and data translation. It connects the application layer with the layers below converting the human readable text and media to machine readable format and vice-versa.
+
+7. Delimiting and synchronization of data exchange is provided by __________
+a) Application layer
+b) Session layer
+c) Transport layer
+d) Link layer
+View Answer Answer: b
+Explanation: The session layer provides the mechanism for opening, closing and managing a session between end-user application processes. The session layer 5 is responsible for establishing managing synchronizing and terminating sessions. In TCP/IP protocol stack, the functions of the session layer are handled by the transport layer itself and thus the session layer is missing from the TCP/IP model.
+
+8. In OSI model, when data is sent from device A to device B, the 5th layer to receive data at B is _________
+a) Application layer
+b) Transport layer
+c) Link layer
+d) Session layer
+View Answer Answer: d
+Explanation: In OSI reference model, the fifth layer is Session layer. Session layer provides the mechanism for opening, closing and managing a session between end-user application processes. In TCP/IP protocol stack, the functions of the session layer are handled by the transport layer itself and thus the session layer is missing from the TCP/IP model.
+
+9. In TCP IP Model, when data is sent from device A to device B, the 5th layer to receive data at B is ____________
+a) Application layer
+b) Transport layer
+c) Link layer
+d) Session layer
+View Answer Answer: a
+Explanation: In TCP/IP model, the fifth layer is application layer. When data is sent from device A to device B, the 5th layer to receive data at B is application layer. Application layer provides the interface between applications and the network. The user interacts with only this layer.
+
 
 advertisement
 
 
 
 
-10.  Object=_________+relationships.
-a) data
-b) attributes
-c) entity
-d) constraints
-View AnswerAnswer: c
-Explanation: The answer is entity. It is a part of OODBM (Object-Oriented Database Model). It maintains the advantages of ER-model but adds more features.
-Sanfoundry Global Education & Learning Series – Computer Fundamentals.
-To practice all areas of Computer Fundamentals, here is complete set of 1000+ Multiple Choice Questions and Answers.  
+10. In the OSI model, as a data packet moves from the lower to the upper layers, headers are _______
+a) Added
+b) Removed
+c) Rearranged
+d) Randomized
+View Answer Answer: b
+Explanation: In OSI reference model, when data packet moves from lower layers to higher layer, headers get removed. Whereas when the data packet moves from higher layer to lower layers, headers are added. These headers contain the essential control information for the protocols used on the specific layer.
+
+11. Which of the following statements can be associated with OSI model?
+a) A structured way to discuss and easier update system components
+b) One layer may duplicate lower layer functionality
+c) Functionality at one layer no way requires information from another layer
+d) It is an application specific network model
+View Answer Answer: c
+Explanation: One layer may use the information from another layer, for example timestamp value. The information is contained in the header inserted by the previous layer. The headers are added as the packet moves from higher layers to the lower layers.
+
+Sanfoundry Global Education & Learning Series – Computer Networks.
+To practice all areas of Computer Networks, here is complete set of 1000+ Multiple Choice Questions and Answers.
+
+advertisement
+
+
+
+
 
 Participate in the Sanfoundry Certification contest to get free Certificate of Merit. Join our social networks below and stay updated with latest contests, videos, internships and jobs!
 
@@ -95,4 +121,4 @@ Telegram | Youtube | LinkedIn | Instagram | Facebook | Twitter | Pinterest
 
 Youtube | LinkedIn | Instagram | Facebook | Twitter | Pinterest
 
-« Prev - Computer Fundamentals Questions and Answers – File Management Systems» Next - Computer Fundamentals Questions and Answers – Components of DBMS 
+« Prev - Computer Networks Questions & Answers – Access Networks» Next - Computer Networks Questions & Answers – Reference Models – 2 
