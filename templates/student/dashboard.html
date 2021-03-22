@@ -6,39 +6,41 @@
 </div>
 <h3>All Exams</h3>
 <br>
-<table class="table table-bordered">
-  <thead>
-    <tr>
-      <th scope="col">Exam</th>
-      <th scope="col">Subject</th>
-      <th scope="col">End Date</th>
-      <th scope="col">Duration</th>
-      <th scope="col">&nbsp;</th>
-    </tr>
-  </thead>
-  <tbody>
-    {% for row in exams %}
-    <tr>
-      <td>{{row[1]}}&nbsp;&nbsp;
-        {% if row[7] >= today %}        
+<div class="table-responsive">
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th scope="col">Exam</th>
+        <th scope="col">Subject</th>
+        <th scope="col">End Date</th>
+        <th scope="col">Duration</th>
+        <th scope="col">&nbsp;</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for row in exams %}
+      <tr>
+        <td>{{row[1]}}&nbsp;&nbsp;
+          {% if row[7] >= today %}
           <span class="badge rounded-pill bg-success">Live</span>
-        {% else %}
+          {% else %}
           <span class="badge rounded-pill bg-danger">Ended</span>
-        {% endif %}      
-      </td>
-      {% for sub in subjects %}
+          {% endif %}
+        </td>
+        {% for sub in subjects %}
         {% if sub[0] == row[9] %}
-          <td>{{sub[1]}}</td>
+        <td>{{sub[1]}}</td>
         {% else %}
         {% endif %}
+        {% endfor %}
+        <td>{{row[7]}}</td>
+        <td>{{row[3]}}</td>
+        <td>
+          <button type="button" class="btn btn-outline-success">Start</button>
+        </td>
+      </tr>
       {% endfor %}
-      <td>{{row[7]}}</td>
-      <td>{{row[3]}}</td>
-      <td>
-        <button type="button" class="btn btn-outline-success">Start</button>
-      </td>
-    </tr>
-    {% endfor %}
-  </tbody>
-</table>
+    </tbody>
+  </table>
+</div>
 {% endblock %}
