@@ -4,6 +4,7 @@ import json
 
 def getQuestionAndOption():
     hand = open('Scraped_Text.txt',"r")
+    #print(hand.readlines())
     quest = [1,2,3,4,5,6,7]
     rows, cols = (50, 3)
     qno = dict()
@@ -38,5 +39,8 @@ def getQuestionAndOption():
     my_list.append(new_answers)
 
     return my_list
-    # print(json.dumps(new_qno, indent=1))
-    # print(json.dumps(new_answers, indent=1))
+
+    #print(json.dumps(new_qno, indent=1))
+    #print(json.dumps(new_answers, indent=1))
+
+#getQuestionAndOption()
