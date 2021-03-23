@@ -10,8 +10,8 @@
   <table class="table table-bordered">
     <thead>
       <tr>
-        <th scope="col" style="width: 410px">Exam</th>
-        <th scope="col" style="width: 280px">Subject</th>
+        <th scope="col" >Exam</th>
+        <th scope="col" >Subject</th>
         <th scope="col">End Date</th>
         <th scope="col">Duration</th>
         <th scope="col">&nbsp;</th>
@@ -36,11 +36,21 @@
         <td>{{row[7]}}</td>
         <td>{{row[3]}}</td>
         <td>
-          <button type="button" class="btn btn-outline-success">Start</button>
+          <a href="{{ url_for('get_exam',exam_code=row[0]) }}"  onclick="return myFunction()" type="button" class="btn btn-outline-success">Start</a>
         </td>
       </tr>
       {% endfor %}
     </tbody>
   </table>
 </div>
+
+<script>
+  function myFunction() {
+    if (confirm("Start the Exam?")){
+    }
+    else{
+      return false;
+    }
+  }
+</script>
 {% endblock %}

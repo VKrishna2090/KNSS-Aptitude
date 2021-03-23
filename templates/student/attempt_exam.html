@@ -1,0 +1,38 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="container">
+    <h2>{{ exam_info[1] }}</h2>
+    <small>{{ exam_info[2] }}</small>
+    <br><br>
+    <form class="form-group" action="" method="post">
+        {% for question in questions %}
+            <div class="card" >
+                <!-- <div class="card-header text-muted">
+                    Marks: {{question[3]}}
+                </div> -->
+                <div class="card-body">
+                    <h5 class="card-title">{{question[1]}}</h5>
+                    <ul class="list-group list-group-flush">
+                        {% for option in options %}
+                            {% if option[3] == question[0] %}
+                                <div class="list-group-item borderless">
+                                    <label>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="chosenOptions" id="{{option[0]}}">
+                                            <label class="form-check-label" for="flexRadioDefault1">
+                                                {{ option[1] }}
+                                            </label>
+                                        </div>
+                                    </label>
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                    </ul>
+                </div>
+                
+        </div>
+        <br>
+        {% endfor %}
+    </form>
+</div>
+{% endblock %}

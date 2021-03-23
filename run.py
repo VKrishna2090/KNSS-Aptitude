@@ -258,5 +258,18 @@ def completed_exams():
 def results():
     return render_template('student/results.html')
 
+@app.route('/exam/<int:exam_code>',methods=["GET"])
+def get_exam(exam_code):
+    cursor = mysql.connection.cursor()
+    cursor.execute('SELECT * FROM exam WHERE exam_code = %s',(exam_code,))
+    exam_info = cursor.fetchone()
+    cursor = mysql.connection.cursor()
+    cursor.execute('SELECT * FROM question WHERE exam_code = %s ORDER BY RAND()',(exam_code,))
+    questions = cursor.fetchall()
+    cursor = mysql.connection.cursor()
+    cursor.execute('SELECT * FROM options ORDER BY RAND()')
+    options = cursor.fetchall()
+    return render_template('student/attempt_exam.html', exam_info=exam_info, questions=questions, options=options)
+
 if __name__ == '__main__':
     app.run(debug=True)
