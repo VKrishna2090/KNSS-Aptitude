@@ -50,10 +50,11 @@ def login():
             session['mobile'] = account[5]
             session['role_id'] = account[6]
             # Redirect to home page
+            flash('You were successfully logged in','success')
             return redirect(url_for('home'))
         else:
             # Account doesnt exist or username/password incorrect
-            msg = 'Incorrect username/password!'
+            flash('Incorrect username/password!','danger')
     return render_template('login.html',msg=msg)
 
 @app.route('/logout')
@@ -83,18 +84,18 @@ def register():
         cursor.execute('SELECT * FROM users WHERE email = %s', (email,))
         account = cursor.fetchone()
         if account:
-            msg = 'Account already exists!'
+            flash('Account already exists','danger')
         # elif not re.match(r'[^@]+@[^@]+\.[^@]+', email):
         #     msg = 'Invalid email address!'
         elif not role or not password or not email:
-            msg = 'Please fill out the form!'
+            flash('Fill the form!','danger')
         else:
             cursor.execute('INSERT INTO users VALUES (%s, %s, %s, %s, %s, %s, %s)', ('', email, password, fname, lname, mobile, role))
             mysql.connection.commit()
-            msg = 'You have successfully registered!'
+            flash('You have successfully registered!','success')
             return redirect(url_for('login'))
     elif request.method == 'POST':
-        msg = 'Please fill out the form!'
+        flash('Fill the form!','danger')
     return render_template('register.html',msg=msg)
 
 
@@ -126,7 +127,7 @@ def create_subject():
     if request.method == 'POST' and 'subject_name' in request.form:
         subject_name = request.form['subject_name']
         if not subject_name:
-            msg = 'Please fill out the form!'
+            flash('Fill the form!','danger')
         else:
             subject_desc = request.form['subject_desc']
             subject_code = random.randint(100,1000000)
@@ -134,10 +135,10 @@ def create_subject():
             cursor = mysql.connection.cursor()
             cursor.execute('INSERT INTO subject VALUES (%s, %s, %s)', (subject_code, subject_name, subject_desc))
             mysql.connection.commit()
-            msg = 'You have successfully created a subject!'
+            flash('Subject created successfully','success')
             return redirect(url_for('create_subject_form'))
     elif request.method == 'POST':
-        msg = 'Please fill out the form!'
+        flash('Fill the form!','danger')
     return redirect(url_for('create_subject_form'))
 
 @app.route('/create_exam_auto_form')
@@ -153,7 +154,7 @@ def create_automatic_exam():
     if request.method == 'POST' and 'exam_url' in request.form:
         url = request.form['exam_url']
         if not url:
-            msg = 'Please fill out the form!'
+            flash('Fill the form!','danger')
         else:
             initiate_scraping(url)
             exam1 = getQuestionAndOption()
@@ -193,10 +194,10 @@ def create_automatic_exam():
                     cursor = mysql.connection.cursor()
                     cursor.execute('INSERT INTO options VALUES (%s, %s, %s, %s)', (o_id, o_desc, is_correct, q_id))
                     mysql.connection.commit()                    
-            msg = 'You have successfully created exam!'
+            flash('Exam created!','success')
             return redirect(url_for('staff_dashboard'))
     elif request.method == 'POST':
-        msg = 'Please fill out the form!'
+        flash('Fill the form!','danger')
     return redirect(url_for('staff_dashboard'))
 
 @app.route('/staff_profile')
@@ -265,22 +266,26 @@ def results():
 @app.route('/exam/<int:exam_code>', methods=["GET"])
 def get_exam(exam_code):
     cursor = mysql.connection.cursor()
-    cursor.execute('SELECT * FROM exam WHERE exam_code = %s', (exam_code,))
-    exam_info = cursor.fetchone()
-    cursor = mysql.connection.cursor()
-    cursor.execute('SELECT * FROM question WHERE exam_code = %s ORDER BY RAND()', (exam_code,))
-    questions = cursor.fetchall()
-    cursor = mysql.connection.cursor()
-    cursor.execute('SELECT * FROM options ORDER BY option_description')
-    options = cursor.fetchall()
-    return render_template('student/attempt_exam.html', exam_info=exam_info, questions=questions, options=options)
+    cursor.execute('SELECT * FROM exams_given WHERE exam_code = %s',(exam_code,))
+    exams_given = cursor.fetchone()
+    if exams_given:
+        flash('You have already attempted the exam', 'danger')
+        return redirect('/home')
+    else:
+        cursor = mysql.connection.cursor()
+        cursor.execute('SELECT * FROM exam WHERE exam_code = %s', (exam_code,))
+        exam_info = cursor.fetchone()
+        cursor = mysql.connection.cursor()
+        cursor.execute('SELECT * FROM question WHERE exam_code = %s ORDER BY RAND()', (exam_code,))
+        questions = cursor.fetchall()
+        cursor = mysql.connection.cursor()
+        cursor.execute('SELECT * FROM options ORDER BY option_description')
+        options = cursor.fetchall()
+        return render_template('student/attempt_exam.html', exam_info=exam_info, questions=questions, options=options)
 
 @app.route('/submit_exam',methods=["GET","POST"])
 def submit_exam():
     if request.method == 'POST':
-
-        #check if this exists in exams_given table
-
         e_code = request.form['exam_code']
         cursor = mysql.connection.cursor()
         cursor.execute('SELECT * FROM question WHERE exam_code = %s ORDER BY RAND()',(e_code,))
@@ -288,7 +293,6 @@ def submit_exam():
         tot_marks=0
         today = datetime.date.today()
         attempts=1
-
 
         cursor = mysql.connection.cursor()
         for q in questions:

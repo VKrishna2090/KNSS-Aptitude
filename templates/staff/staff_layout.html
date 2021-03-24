@@ -12,6 +12,16 @@
             <br>
         </div>
         <div class="col-md-9" id="staff-content">
+            {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <div class="alert alert-{{category}} alert-dismissible fade show" role="alert">
+                    {% for category, message in messages %}
+                        {{ message }}
+                    {% endfor %}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            {% endif %}
+            {% endwith %}
             {% block staff_content %}
             {% endblock %}
         </div>
