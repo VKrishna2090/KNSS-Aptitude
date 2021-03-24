@@ -34,8 +34,8 @@
     <table class="table table-bordered">
         <thead>
             <tr>
-                <th scope="col" style="width: 300px">Subject Name</th>
-                <th scope="col" style="width: 539px">Description</th>
+                <th scope="col" style="width: 31%">Subject Name</th>
+                <th scope="col" style="width: 56%">Description</th>
                 <th scope="col"></th>
             </tr>
         </thead>
@@ -44,7 +44,11 @@
             <tr>
                 <td>{{row[1]}}</td>
                 <td>{{row[2]}}</td>
-                <td><button type="button" class="btn btn-outline-success">View Exams</button></td>
+                <td>
+                    <center>
+                        <button type="button" class="btn btn-outline-success">View Exams</button>
+                    </center>
+                </td>
             </tr>
             {% endfor %}
         </tbody>

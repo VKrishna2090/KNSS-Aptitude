@@ -109,7 +109,7 @@ def staff_dashboard():
     cursor = mysql.connection.cursor()
     cursor.execute('SELECT * FROM subject')
     subjects = cursor.fetchall()
-    cursor.execute('SELECT * FROM exam')
+    cursor.execute('SELECT * FROM exam WHERE user_id = %s',(session['user_id'],))
     exams = cursor.fetchall()
     return render_template('staff/dashboard.html', subjects=subjects, exams=exams, today=today)
 
@@ -205,16 +205,6 @@ def staff_profile():
     cursor.execute('SELECT * FROM users WHERE user_id = %s',(session['user_id'],))
     profile_staff_user = cursor.fetchall()
     return render_template('staff/profile.html', profile_staff_user=profile_staff_user)
-
-@app.route('/my_exams')
-def my_exams():
-    today = datetime.date.today()
-    cursor = mysql.connection.cursor()
-    cursor.execute('SELECT * FROM subject')
-    subjects = cursor.fetchall()
-    cursor.execute('SELECT * FROM exam WHERE user_id = %s',(session['user_id'],))
-    exams = cursor.fetchall()
-    return render_template('staff/dashboard.html', subjects=subjects, exams=exams, today=today)
 
 @app.route('/view_exam/<int:e_code>',methods=["GET"])
 def view_exam(e_code):

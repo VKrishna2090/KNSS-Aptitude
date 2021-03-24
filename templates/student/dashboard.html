@@ -46,8 +46,8 @@
     <thead>
       <tr>
         <th scope="col" style="width: 39%">Exam</th>
-        <th scope="col" style="width: 29%">Subject</th>
-        <th scope="col">End Date</th>
+        <th scope="col" style="width: 32%">Subject</th>
+        <th scope="col" style="width: 13%">End Date</th>
         <th scope="col">Duration</th>
         <th scope="col">&nbsp;</th>
       </tr>
@@ -71,8 +71,10 @@
         <td>{{row[7]}}</td>
         <td>{{row[3]}}</td>
         <td>
-          <a href="{{ url_for('get_exam',exam_code=row[0]) }}" onclick="return myFunction()" type="button"
-            class="btn btn-outline-success">Start</a>
+          <center>
+            <a href="{{ url_for('get_exam',exam_code=row[0]) }}" onclick="return myFunction()" type="button"
+              class="btn btn-outline-success">Start</a>
+          </center>
         </td>
       </tr>
       {% endfor %}
