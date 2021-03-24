@@ -2,8 +2,8 @@
 {% block content %}
 <div class="container">
     <div class="row">
-        <div class="col-md-3">
-            <ul class="list-group">
+        <div class="col-md-3" >
+            <ul class="list-group position-fixed" style="width:20%">
                 <a class="list-group-item list-group-item-action list-group-item-success" href="{{ url_for('home') }}">Dashboard</a>
                 <a class="list-group-item list-group-item-action list-group-item-primary" href="{{ url_for('staff_profile') }}">Profile</a>
                 <a class="list-group-item list-group-item-action list-group-item-success" href="{{ url_for('create_exam_auto_form') }}">Create Exam</a>
@@ -12,10 +12,11 @@
             </ul>
             <br>
         </div>
-        <div class="col-md-9">
+        <div class="col-md-9" id="staff-content">
             {% block staff_content %}
             {% endblock %}
         </div>
     </div>
 </div>
+
 {% endblock %}

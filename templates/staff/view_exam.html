@@ -1,0 +1,29 @@
+{% extends "staff/staff_layout.html" %}
+{% block staff_content %}
+<div class="container">
+    <figure class="text-center">
+        <h2 class="display-5">{{ exam_info[1] }}</h2>
+        <small>{{ exam_info[2] }}</small>
+    </figure>
+    <br>
+    {% for question in questions %}
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">{{question[1]}}</h5>
+            <ul class="list-group list-group-flush">
+                {% for option in options %}
+                {% if option[3] == question[0] %}
+                <div class="list-group-item borderless">
+                    {{ option[1] }}
+                </div>
+                {% endif %}
+                {% endfor %}
+            </ul>
+        </div>
+
+    </div>
+    <br>
+    {% endfor %}
+</div>
+
+{% endblock %}

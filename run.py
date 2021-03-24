@@ -216,6 +216,20 @@ def my_exams():
     exams = cursor.fetchall()
     return render_template('staff/dashboard.html', subjects=subjects, exams=exams, today=today)
 
+@app.route('/view_exam/<int:e_code>',methods=["GET"])
+def view_exam(e_code):
+    cursor = mysql.connection.cursor()
+    cursor.execute('SELECT * FROM exam WHERE exam_code = %s',(e_code,))
+    exam_info = cursor.fetchone()
+    cursor = mysql.connection.cursor()
+    cursor.execute('SELECT * FROM question WHERE exam_code = %s',(e_code,))
+    questions = cursor.fetchall()
+    cursor = mysql.connection.cursor()
+    cursor.execute('SELECT * FROM options ORDER BY option_description')
+    options = cursor.fetchall()
+    #print(selected_options)
+    return render_template('staff/view_exam.html',exam_info=exam_info,questions=questions,options=options)
+
 
 
 #-----------------------STUDENT ROUTES-----------------------------
@@ -267,7 +281,7 @@ def get_exam(exam_code):
     cursor.execute('SELECT * FROM question WHERE exam_code = %s ORDER BY RAND()', (exam_code,))
     questions = cursor.fetchall()
     cursor = mysql.connection.cursor()
-    cursor.execute('SELECT * FROM options ORDER BY RAND()')
+    cursor.execute('SELECT * FROM options ORDER BY option_description')
     options = cursor.fetchall()
     return render_template('student/attempt_exam.html', exam_info=exam_info, questions=questions, options=options)
 
