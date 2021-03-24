@@ -163,7 +163,7 @@ def create_automatic_exam():
             total_num_of_questions = len(exam1[1])
             total_marks = total_num_of_questions * 2
             time_limit = f"{total_num_of_questions * 2}00"
-            print(time_limit)
+            #print(time_limit)
             created_by = session['user_id']
             start_date = datetime.date.today()
             end_date = start_date+datetime.timedelta(20)
@@ -293,7 +293,7 @@ def submit_exam():
             cursor = mysql.connection.cursor()
             cursor.execute('SELECT * FROM options WHERE option_id = %s',(selected_option_id,))
             this_option = cursor.fetchone()
-            print(selected_option_id,str(q[0]))
+            #print(selected_option_id,str(q[0]))
             if this_option[2] == '1':
                 tot_marks += 2
             cursor = mysql.connection.cursor()
@@ -309,15 +309,19 @@ def submit_exam():
         cursor.execute('SELECT * FROM exam WHERE exam_code = %s',(e_code,))
         exam_info = cursor.fetchone()
         cursor = mysql.connection.cursor()
+        cursor.execute('SELECT * FROM selected_options WHERE user_id = %s',(session['user_id'],))
+        selected_options = cursor.fetchall()
+        cursor = mysql.connection.cursor()
         cursor.execute('SELECT * FROM exams_given WHERE exam_code = %s',(e_code,))
-        exam_info = cursor.fetchone()
+        exams_given = cursor.fetchone()
         cursor = mysql.connection.cursor()
         cursor.execute('SELECT * FROM question WHERE exam_code = %s',(e_code,))
         questions = cursor.fetchall()
         cursor = mysql.connection.cursor()
         cursor.execute('SELECT * FROM options')
         options = cursor.fetchall()
-        return render_template('student/results.html',)
+        #print(selected_options)
+        return render_template('student/results.html',selected_options=selected_options,exam_info=exam_info,exams_given=exams_given,questions=questions,options=options)
     else:
         return redirect(url_for('home'))
     
@@ -325,6 +329,27 @@ def submit_exam():
 def get_exam_by_code():
     e_code = request.form['exam_code']
     return redirect (url_for('get_exam',exam_code=e_code))
+
+@app.route('/get_responses/<int:e_code>',methods=["GET"])
+def get_responses(e_code):
+    cursor = mysql.connection.cursor()
+    cursor.execute('SELECT * FROM exam WHERE exam_code = %s',(e_code,))
+    exam_info = cursor.fetchone()
+    cursor = mysql.connection.cursor()
+    cursor.execute('SELECT * FROM selected_options WHERE user_id = %s',(session['user_id'],))
+    selected_options = cursor.fetchall()
+    cursor = mysql.connection.cursor()
+    cursor.execute('SELECT * FROM exams_given WHERE exam_code = %s',(e_code,))
+    exams_given = cursor.fetchone()
+    cursor = mysql.connection.cursor()
+    cursor.execute('SELECT * FROM question WHERE exam_code = %s',(e_code,))
+    questions = cursor.fetchall()
+    cursor = mysql.connection.cursor()
+    cursor.execute('SELECT * FROM options')
+    options = cursor.fetchall()
+    #print(selected_options)
+    return render_template('student/results.html',selected_options=selected_options,exam_info=exam_info,exams_given=exams_given,questions=questions,options=options)
+
     
 if __name__ == '__main__':
     app.run(debug=True)
