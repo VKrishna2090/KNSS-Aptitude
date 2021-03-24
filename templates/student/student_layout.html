@@ -13,7 +13,7 @@
         <div class="col-md-9">
             {% with messages = get_flashed_messages(with_categories=true) %}
             {% if messages %}
-                <div class="alert alert-{{category}} alert-dismissible fade show" role="alert">
+                <div class="alert alert-{{category}} alert-success alert-dismissible fade show" role="alert">
                     {% for category, message in messages %}
                     {{ message }}
                     {% endfor %}
