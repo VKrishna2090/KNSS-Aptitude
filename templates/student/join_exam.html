@@ -2,12 +2,9 @@
 {% block student_content %}
 <h3>Join an exam</h3>
 <br>
-<form class="form-group" action="" method="post">
-    <!--{% if msg %}
-    <div class="msg alert alert-danger">{{ msg }}</div>
-    {% endif %}-->
+<form class="form-group" action="{{url_for('get_exam_by_code')}}" method="post">
     <div class="form-floating">
-        <input type="text" class="shadow form-control has-validation" name="exam_code" placeholder="Enter Exam Code" id="exam_url" required>
+        <input type="text" class="shadow form-control has-validation" name="exam_code" placeholder="Enter Exam Code" id="exam_code" required>
         <label for="exam_code">Enter Exam Code</label>
     </div>
     <div class="invalid-tooltip">

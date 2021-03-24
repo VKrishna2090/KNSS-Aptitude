@@ -13,19 +13,22 @@
     </thead>
     <tbody>
         {% for row in exams_given %}
-        <tr>
-            {% for ex in exams %}
-            <td>{{row[1]}}</td>
-            {% endfor %}
-            {% for sub in subjects %}
-            {% if sub[0] == row[9] %}
-                <td>{{sub[1]}}</td>
-            {% else %}
-            {% endif %}
-            {% endfor %}
-            <td>{{row[4]}}</td>
-            <td>{{row[2]}}</td>
-        </tr>
+            <tr>
+                {% for ex in exams %}
+                    {% if ex[0] == row[0] %}
+                        <td>{{ex[1]}}</td>
+                    {% endif %}
+                    {% for sub in subjects %}
+                        {% if ex[0] == row[0] and sub[0] == ex[9] %}
+                            <td>{{sub[1]}}</td>
+                        {% else %}
+                        {% endif %}
+                    {% endfor %}
+                {% endfor %}
+                
+                <td>{{row[4]}}</td>
+                <td>{{row[2]}}</td>
+            </tr>
         {% endfor %}
     </tbody>
 </table>
