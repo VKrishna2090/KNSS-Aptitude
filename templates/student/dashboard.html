@@ -4,14 +4,49 @@
   <strong>Hello {{session['fname']}}!</strong> Welcome to KNSS Aptitude
   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 </div>
-<h3>All Exams</h3>
 <br>
+<div class="position-relative">
+  <div class="position-absolute top-50 start-0 translate-middle-y">
+    <h3>My Exams</h3>
+  </div>
+  <a type="button" href="{{ url_for('join_exam') }}"
+    class="btn btn-primary position-absolute top-50 end-0 translate-middle-y" data-bs-toggle="modal"
+    data-bs-target="#joinexam">Join Exam</a>
+  <div class="modal fade" id="joinexam" tabindex="-1" aria-labelledby="joinexamLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="joinexamLabel">Join an Exam</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form class="form-group" action="{{url_for('get_exam_by_code')}}" method="post">
+            <div class="form-floating">
+              <input type="text" class="shadow form-control has-validation" name="exam_code"
+                placeholder="Enter Exam Code" id="exam_code" required>
+              <label for="exam_code">Enter Exam Code</label>
+            </div>
+            <div class="invalid-tooltip">
+              Please enter valid code.
+            </div>
+            <br>
+            <button type="submit" class="btn btn-primary">Join Exam</button>
+          </form>
+        </div>
+        <!--<div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        </div>-->
+      </div>
+    </div>
+  </div>
+</div>
+<br><br>
 <div class="table-responsive">
   <table class="table table-bordered">
     <thead>
       <tr>
-        <th scope="col" >Exam</th>
-        <th scope="col" >Subject</th>
+        <th scope="col" style="width: 410px">Exam</th>
+        <th scope="col" style="width: 280px">Subject</th>
         <th scope="col">End Date</th>
         <th scope="col">Duration</th>
         <th scope="col">&nbsp;</th>
@@ -36,7 +71,8 @@
         <td>{{row[7]}}</td>
         <td>{{row[3]}}</td>
         <td>
-          <a href="{{ url_for('get_exam',exam_code=row[0]) }}"  onclick="return myFunction()" type="button" class="btn btn-outline-success">Start</a>
+          <a href="{{ url_for('get_exam',exam_code=row[0]) }}" onclick="return myFunction()" type="button"
+            class="btn btn-outline-success">Start</a>
         </td>
       </tr>
       {% endfor %}
@@ -46,9 +82,9 @@
 
 <script>
   function myFunction() {
-    if (confirm("Start the Exam?")){
+    if (confirm("Start the Exam?")) {
     }
-    else{
+    else {
       return false;
     }
   }
