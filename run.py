@@ -50,7 +50,7 @@ def login():
             session['mobile'] = account[5]
             session['role_id'] = account[6]
             # Redirect to home page
-            flash('You were successfully logged in','success')
+            flash('You are successfully logged in','success')
             return redirect(url_for('home'))
         else:
             # Account doesnt exist or username/password incorrect

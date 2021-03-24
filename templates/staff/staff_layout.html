@@ -2,24 +2,28 @@
 {% block content %}
 <div class="container">
     <div class="row">
-        <div class="col-md-3" >
+        <div class="col-md-3">
             <ul class="list-group position-fixed" style="width:20%">
-                <a class="list-group-item list-group-item-action list-group-item-success" href="{{ url_for('home') }}">Dashboard</a>
-                <a class="list-group-item list-group-item-action list-group-item-primary" href="{{ url_for('staff_profile') }}">Profile</a>
-                <a class="list-group-item list-group-item-action list-group-item-success" href="{{ url_for('create_exam_auto_form') }}">Create Exam</a>
-                <a class="list-group-item list-group-item-action list-group-item-primary" href="{{ url_for('create_subject_form') }}">Manage Subjects</a>
+                <a class="list-group-item list-group-item-action list-group-item-success"
+                    href="{{ url_for('home') }}">Dashboard</a>
+                <a class="list-group-item list-group-item-action list-group-item-primary"
+                    href="{{ url_for('staff_profile') }}">Profile</a>
+                <a class="list-group-item list-group-item-action list-group-item-success"
+                    href="{{ url_for('create_exam_auto_form') }}">Create Exam</a>
+                <a class="list-group-item list-group-item-action list-group-item-primary"
+                    href="{{ url_for('create_subject_form') }}">Manage Subjects</a>
             </ul>
             <br>
         </div>
         <div class="col-md-9" id="staff-content">
             {% with messages = get_flashed_messages(with_categories=true) %}
             {% if messages %}
-                <div class="alert alert-{{category}} alert-success alert-dismissible fade show" role="alert">
-                    {% for category, message in messages %}
-                        {{ message }}
-                    {% endfor %}
+            {% for category, message in messages %}
+            <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+                {{ message }}
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                </div>
+            </div>
+            {% endfor %}
             {% endif %}
             {% endwith %}
             {% block staff_content %}
