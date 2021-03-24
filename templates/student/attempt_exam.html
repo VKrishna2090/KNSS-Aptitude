@@ -4,7 +4,9 @@
     <h2>{{ exam_info[1] }}</h2>
     <small>{{ exam_info[2] }}</small>
     <br><br>
-    <form class="form-group" action="" method="post">
+    <form class="form-group" action="{{ url_for ('submit_exam')}}" method="post">
+        <input type="hidden" id="exam_code" name="exam_code" value="{{exam_info[0]}}">
+
         {% for question in questions %}
             <div class="card" >
                 <!-- <div class="card-header text-muted">
@@ -18,8 +20,8 @@
                                 <div class="list-group-item borderless">
                                     <label>
                                         <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="{{question[0]}}" id="{{option[0]}}">
-                                            <label class="form-check-label" for="flexRadioDefault1">
+                                            <input class="form-check-input" type="radio" name="{{question[0]}}" value="{{option[0]}}">
+                                            <label class="form-check-label" >
                                                 {{ option[1] }}
                                             </label>
                                         </div>

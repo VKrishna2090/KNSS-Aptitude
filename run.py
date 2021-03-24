@@ -246,7 +246,7 @@ def join_exam():
 def completed_exams():
     today = datetime.date.today()
     cursor = mysql.connection.cursor()
-    cursor.execute('SELECT * FROM exams_given')
+    cursor.execute('SELECT * FROM exams_given WHERE user_id = %s',(session['user_id'],))
     exams_given = cursor.fetchall()
     cursor.execute('SELECT * FROM subject')
     subjects = cursor.fetchall()
@@ -271,5 +271,60 @@ def get_exam(exam_code):
     options = cursor.fetchall()
     return render_template('student/attempt_exam.html', exam_info=exam_info, questions=questions, options=options)
 
+@app.route('/submit_exam',methods=["GET","POST"])
+def submit_exam():
+    if request.method == 'POST':
+
+        #check if this exists in exams_given table
+
+        e_code = request.form['exam_code']
+        cursor = mysql.connection.cursor()
+        cursor.execute('SELECT * FROM question WHERE exam_code = %s ORDER BY RAND()',(e_code,))
+        questions = cursor.fetchall()
+        tot_marks=0
+        today = datetime.date.today()
+        attempts=1
+
+
+        cursor = mysql.connection.cursor()
+        for q in questions:
+            rand_opt_id = random.randint(100,1000000)
+            selected_option_id = request.form[str(q[0])]
+            cursor = mysql.connection.cursor()
+            cursor.execute('SELECT * FROM options WHERE option_id = %s',(selected_option_id,))
+            this_option = cursor.fetchone()
+            print(selected_option_id,str(q[0]))
+            if this_option[2] == '1':
+                tot_marks += 2
+            cursor = mysql.connection.cursor()
+            cursor.execute('INSERT INTO selected_options VALUES (%s, %s, %s)',(rand_opt_id,session['user_id'],selected_option_id,))
+            mysql.connection.commit()
+        
+        cursor = mysql.connection.cursor()
+        cursor.execute('INSERT INTO exams_given VALUES (%s, %s, %s, %s, %s)',(e_code,session['user_id'],tot_marks,attempts,today,))
+        mysql.connection.commit()
+        
+
+        cursor = mysql.connection.cursor()
+        cursor.execute('SELECT * FROM exam WHERE exam_code = %s',(e_code,))
+        exam_info = cursor.fetchone()
+        cursor = mysql.connection.cursor()
+        cursor.execute('SELECT * FROM exams_given WHERE exam_code = %s',(e_code,))
+        exam_info = cursor.fetchone()
+        cursor = mysql.connection.cursor()
+        cursor.execute('SELECT * FROM question WHERE exam_code = %s',(e_code,))
+        questions = cursor.fetchall()
+        cursor = mysql.connection.cursor()
+        cursor.execute('SELECT * FROM options')
+        options = cursor.fetchall()
+        return render_template('student/results.html',)
+    else:
+        return redirect(url_for('home'))
+    
+@app.route('/get_exam_by_code',methods=["GET","POST"])
+def get_exam_by_code():
+    e_code = request.form['exam_code']
+    return redirect (url_for('get_exam',exam_code=e_code))
+    
 if __name__ == '__main__':
     app.run(debug=True)
