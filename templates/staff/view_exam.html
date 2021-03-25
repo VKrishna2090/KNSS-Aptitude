@@ -3,8 +3,17 @@
 
     <figure class="text-center">
         <h2 class="display-5">{{ exam_info[1] }}</h2>
-        <small>{{ exam_info[2] }}</small>
     </figure>
+    <small>
+        {{ exam_info[2] }} <br>
+        Time limit: {{exam_info[3]}} <br>
+        Total Number of Questions: {{exam_info[4]}} <br>
+        Total Marks: {{exam_info[5]}} <br>
+        Date created: {{exam_info[6]}} <br>
+        End Date: {{exam_info[7]}} <br>
+    </small>
+
+    
     <br>
     {% for question in questions %}
     <div class="card">

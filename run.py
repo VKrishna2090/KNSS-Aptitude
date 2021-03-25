@@ -221,6 +221,37 @@ def view_exam(e_code):
     #print(selected_options)
     return render_template('staff/view_exam.html',exam_info=exam_info,questions=questions,options=options)
 
+@app.route('/view_responses/<int:e_code>',methods=["GET"])
+def view_responses(e_code):
+    cursor = mysql.connection.cursor()
+    cursor.execute('SELECT * FROM exam WHERE exam_code = %s',(e_code,))
+    exam_info = cursor.fetchone()
+    cursor = mysql.connection.cursor()
+    cursor.execute('SELECT * FROM exams_given INNER JOIN users WHERE users.user_id = exams_given.user_id AND exam_code = %s',(e_code,))
+    exams_given = cursor.fetchall()
+    return render_template('staff/view_responses.html',exam_info=exam_info,exams_given=exams_given)
+
+@app.route('/get_responses/<int:e_code>/<int:user_id>',methods=["GET"])
+def get_student_responses(e_code, user_id):
+    cursor = mysql.connection.cursor()
+    cursor.execute('SELECT * FROM exam WHERE exam_code = %s',(e_code,))
+    exam_info = cursor.fetchone()
+    cursor = mysql.connection.cursor()
+    cursor.execute('SELECT * FROM selected_options WHERE user_id = %s',(user_id,))
+    selected_options = cursor.fetchall()
+    cursor = mysql.connection.cursor()
+    cursor.execute('SELECT * FROM exams_given WHERE exam_code = %s',(e_code,))
+    exams_given = cursor.fetchone()
+    cursor = mysql.connection.cursor()
+    cursor.execute('SELECT * FROM question WHERE exam_code = %s',(e_code,))
+    questions = cursor.fetchall()
+    cursor = mysql.connection.cursor()
+    cursor.execute('SELECT * FROM options')
+    options = cursor.fetchall()
+    #print(selected_options)
+    return render_template('student/results.html',selected_options=selected_options,exam_info=exam_info,exams_given=exams_given,questions=questions,options=options)
+
+
 
 
 #-----------------------STUDENT ROUTES-----------------------------

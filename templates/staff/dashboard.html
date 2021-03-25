@@ -41,7 +41,7 @@
               aria-expanded="false">Actions</button>
             <ul class="dropdown-menu">
               <li><a class="dropdown-item" href="{{ url_for('view_exam',e_code=row[0]) }}">View Form</a></li>
-              <li><a class="dropdown-item" href="#">View Responses</a></li>
+              <li><a class="dropdown-item" href="{{ url_for('view_responses',e_code=row[0]) }}">View Responses</a></li>
               <li><a class="dropdown-item" href="#">Edit Form</a></li>
               <li><a class="dropdown-item" href="#">Delete Form</a></li>
             </ul>
