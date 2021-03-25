@@ -148,6 +148,14 @@ def create_exam_auto_form():
     subjects = cursor.fetchall()
     return render_template('staff/create_exam_auto_form.html', subjects=subjects)
 
+@app.route('/create_exam_manual_form')
+def create_exam_manual_form():
+    cursor = mysql.connection.cursor()
+    cursor.execute('SELECT * FROM subject')
+    subjects = cursor.fetchall()
+    return render_template('staff/create_exam_manual_form.html', subjects=subjects)
+
+
 @app.route('/create_automatic_exam', methods = ['POST','GET'])
 def create_automatic_exam():
     msg = ''
