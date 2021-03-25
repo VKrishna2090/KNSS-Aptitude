@@ -1,0 +1,35 @@
+{% extends "staff/staff_layout.html" %}
+{% block staff_content %}
+
+<h3>All Exams in {{subjects[1]}}</h3>
+<br>
+<div class="table-responsive">
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th scope="col">Code</th>
+        <th scope="col" style="width: 64%">Exam</th>
+        <th scope="col">End Date</th>
+        <th scope="col">Duration</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for row in exams %}
+      <tr>
+        <td>{{row[0]}}</td>
+        <td>{{row[1]}}&nbsp;&nbsp;
+          {% if row[7] >= today %}
+          <span class="badge rounded-pill bg-success">Live</span>
+          {% else %}
+          <span class="badge rounded-pill bg-danger">Ended</span>
+          {% endif %}
+        </td>
+        <td>{{row[7]}}</td>
+        <td>{{row[3]}}</td>
+        
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

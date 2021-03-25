@@ -248,9 +248,21 @@ def get_student_responses(e_code, user_id):
     cursor = mysql.connection.cursor()
     cursor.execute('SELECT * FROM options')
     options = cursor.fetchall()
+    cursor = mysql.connection.cursor()
+    cursor.execute('SELECT * FROM users WHERE user_id = %s',(user_id,))
+    student = cursor.fetchone()
     #print(selected_options)
-    return render_template('student/results.html',selected_options=selected_options,exam_info=exam_info,exams_given=exams_given,questions=questions,options=options)
+    return render_template('staff/student_result.html',student=student,selected_options=selected_options,exam_info=exam_info,exams_given=exams_given,questions=questions,options=options)
 
+@app.route('/subjects_exams/<int:s_id>',methods=["GET"])
+def subjects_exams(s_id):
+    today = datetime.date.today()
+    cursor = mysql.connection.cursor()
+    cursor.execute('SELECT * FROM subject WHERE subject_id = %s',(s_id,))
+    subjects = cursor.fetchone()
+    cursor.execute('SELECT * FROM exam WHERE subject_id = %s',(s_id,))
+    exams = cursor.fetchall()
+    return render_template('staff/subject_exams.html', subjects=subjects, exams=exams, today=today)
 
 
 

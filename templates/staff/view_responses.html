@@ -1,14 +1,13 @@
 {% extends "staff/staff_layout.html" %}
 {% block staff_content %}
 <h3>Responses for {{exam_info[1]}}</h3>
-<!-- <small>Subject: {{exam_info[]}}</small> -->
 <br>
 <div class="table-responsive">
   <table class="table table-bordered">
     <thead>
       <tr>
-        <th scope="col">Name</th>
-        <th scope="col">Email</th>
+        <th scope="col" style="width: 36%">Name</th>
+        <th scope="col" style="width: 36%">Email</th>
         <th scope="col">Marks</th>
         <th scope="col">Attempted on</th>
         <th scope="col"></th>
@@ -19,7 +18,7 @@
       <tr>
         <td>{{response[8]}} {{response[9]}}</td>
         <td>{{response[6]}}</td>
-        <td>{{response[2]}}</td>
+        <td>{{response[2]|int}}/{{exam_info[5]|int}}</td>
         <td>{{response[4]}}</td>
         <td>
           <center>

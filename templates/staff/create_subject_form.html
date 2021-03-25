@@ -46,7 +46,7 @@
                 <td>{{row[2]}}</td>
                 <td>
                     <center>
-                        <button type="button" class="btn btn-outline-success">View Exams</button>
+                        <a href="{{ url_for('subjects_exams',s_id=row[0]) }}" type="button" class="btn btn-outline-success">View Exams</a>
                     </center>
                 </td>
             </tr>
