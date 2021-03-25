@@ -15,7 +15,7 @@
     </div><br>
     <div class="form-floating">
         <textarea class="shadow form-control has-validation" name="exam_instructions"
-            placeholder="Enter Exam Instructions" id="subject_desc" style="width: 522px; height: 90px"></textarea>
+            placeholder="Enter Exam Instructions" id="subject_desc" style="width: 100%; height: 120px"></textarea>
         <label for="subject_desc">Enter Exam Instructions</label>
     </div><br>
     <div class="form-floating">
@@ -41,6 +41,19 @@
             placeholder="Enter Total Marks" id="exam_total_marks" required>
         <label for="exam_no_of_questions">Enter Total Marks</label>
     </div><br>
+    <div class="form-floating">
+        <input type="date" class="shadow form-control has-validation" name="exam_start_date"
+            placeholder="Enter Start Date" id="exam_start_date" required>
+        <label for="exam_start_date">Enter Start Date</label>
+    </div><br>
+
+    <div class="form-floating">
+        <input type="date" class="shadow form-control has-validation" name="exam_end_date"
+            placeholder="Enter End Date" id="exam_end_date" required>
+        <label for="exam_end_date">Enter End Date</label>
+    </div><br>
+
+    <button type="submit" class="btn btn-primary">Create</button>
     
 </form>
 
