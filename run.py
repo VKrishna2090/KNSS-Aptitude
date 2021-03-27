@@ -148,6 +148,14 @@ def create_exam_auto_form():
     subjects = cursor.fetchall()
     return render_template('staff/create_exam_auto_form.html', subjects=subjects)
 
+@app.route('/create_exam_manual_form')
+def create_exam_manual_form():
+    cursor = mysql.connection.cursor()
+    cursor.execute('SELECT * FROM subject')
+    subjects = cursor.fetchall()
+    return render_template('staff/create_exam_manual_form.html', subjects=subjects)
+
+
 @app.route('/create_automatic_exam', methods = ['POST','GET'])
 def create_automatic_exam():
     msg = ''
@@ -220,6 +228,49 @@ def view_exam(e_code):
     options = cursor.fetchall()
     #print(selected_options)
     return render_template('staff/view_exam.html',exam_info=exam_info,questions=questions,options=options)
+
+@app.route('/view_responses/<int:e_code>',methods=["GET"])
+def view_responses(e_code):
+    cursor = mysql.connection.cursor()
+    cursor.execute('SELECT * FROM exam WHERE exam_code = %s',(e_code,))
+    exam_info = cursor.fetchone()
+    cursor = mysql.connection.cursor()
+    cursor.execute('SELECT * FROM exams_given INNER JOIN users WHERE users.user_id = exams_given.user_id AND exam_code = %s',(e_code,))
+    exams_given = cursor.fetchall()
+    return render_template('staff/view_responses.html',exam_info=exam_info,exams_given=exams_given)
+
+@app.route('/get_responses/<int:e_code>/<int:user_id>',methods=["GET"])
+def get_student_responses(e_code, user_id):
+    cursor = mysql.connection.cursor()
+    cursor.execute('SELECT * FROM exam WHERE exam_code = %s',(e_code,))
+    exam_info = cursor.fetchone()
+    cursor = mysql.connection.cursor()
+    cursor.execute('SELECT * FROM selected_options WHERE user_id = %s',(user_id,))
+    selected_options = cursor.fetchall()
+    cursor = mysql.connection.cursor()
+    cursor.execute('SELECT * FROM exams_given WHERE exam_code = %s',(e_code,))
+    exams_given = cursor.fetchone()
+    cursor = mysql.connection.cursor()
+    cursor.execute('SELECT * FROM question WHERE exam_code = %s',(e_code,))
+    questions = cursor.fetchall()
+    cursor = mysql.connection.cursor()
+    cursor.execute('SELECT * FROM options')
+    options = cursor.fetchall()
+    cursor = mysql.connection.cursor()
+    cursor.execute('SELECT * FROM users WHERE user_id = %s',(user_id,))
+    student = cursor.fetchone()
+    #print(selected_options)
+    return render_template('staff/student_result.html',student=student,selected_options=selected_options,exam_info=exam_info,exams_given=exams_given,questions=questions,options=options)
+
+@app.route('/subjects_exams/<int:s_id>',methods=["GET"])
+def subjects_exams(s_id):
+    today = datetime.date.today()
+    cursor = mysql.connection.cursor()
+    cursor.execute('SELECT * FROM subject WHERE subject_id = %s',(s_id,))
+    subjects = cursor.fetchone()
+    cursor.execute('SELECT * FROM exam WHERE subject_id = %s',(s_id,))
+    exams = cursor.fetchall()
+    return render_template('staff/subject_exams.html', subjects=subjects, exams=exams, today=today)
 
 
 
