@@ -1,7 +1,7 @@
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
-Scraped_Text.txt
+
 # C extensions
 *.so
 
@@ -55,3 +55,4 @@ docs/_build/
 
 # PyBuilder
 target/
+Scraped_Text.txt

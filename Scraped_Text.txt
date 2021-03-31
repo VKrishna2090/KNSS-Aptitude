@@ -1,13 +1,13 @@
 
-
-This set of Computer Networks Multiple Choice Questions & Answers (MCQs) focuses on “Reference Models – 1”.
+   
+This set of Computer Networks Multiple Choice Questions & Answers (MCQs) focuses on ï¿½Reference Models ï¿½ 1ï¿½.
 1. How many layers are present in the Internet protocol stack (TCP/IP model)?
 a) 5
 b) 7
 c) 6
 d) 10
 View Answer Answer: a
-Explanation: There are five layers in the Internet Protocol stack. The five layers in Internet Protocol stack is Application, Transport, Network, Data link and Physical layer. The internet protocol stack model is also called the TCP/IP model and it’s used in modern Internet Communication.
+Explanation: There are five layers in the Internet Protocol stack. The five layers in Internet Protocol stack is Application, Transport, Network, Data link and Physical layer. The internet protocol stack model is also called the TCP/IP model and itï¿½s used in modern Internet Communication.
 
 
 advertisement
@@ -105,7 +105,7 @@ d) It is an application specific network model
 View Answer Answer: c
 Explanation: One layer may use the information from another layer, for example timestamp value. The information is contained in the header inserted by the previous layer. The headers are added as the packet moves from higher layers to the lower layers.
 
-Sanfoundry Global Education & Learning Series – Computer Networks.
+Sanfoundry Global Education & Learning Series ï¿½ Computer Networks.
 To practice all areas of Computer Networks, here is complete set of 1000+ Multiple Choice Questions and Answers.
 
 advertisement
@@ -121,4 +121,4 @@ Telegram | Youtube | LinkedIn | Instagram | Facebook | Twitter | Pinterest
 
 Youtube | LinkedIn | Instagram | Facebook | Twitter | Pinterest
 
-« Prev - Computer Networks Questions & Answers – Access Networks» Next - Computer Networks Questions & Answers – Reference Models – 2 
+ï¿½ Prev - Computer Networks Questions & Answers ï¿½ Access Networksï¿½ Next - Computer Networks Questions & Answers ï¿½ Reference Models ï¿½ 2 
