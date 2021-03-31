@@ -1,0 +1,42 @@
+{% extends "staff/staff_layout.html" %}
+{% block staff_content %}
+<!-- 
+{{title}}
+{{subject}}
+{{instructions}}
+{{total_marks}}
+{{no_of_questions}}
+{{time_limit}}
+{{exam_code}}
+{{start_date}}
+{{end_date}}
+-->
+<form class="form-group" method="post"></form>
+    {% for i in range(no_of_questions|int) %}
+        <div class="card shadow">
+            <div class="card-body">
+                    <h5 class="card-title">
+                        <div class="form-floating">
+                        <input type="text" class="form-control has-validation" name="question"
+                        placeholder="Enter Question" id="question" required>
+                        <label for="question">Enter Question</label>
+                        </div>
+                    </h5>
+                <br>
+                    <input type="text" class="form-control has-validation borderless  mb-2" name="option_1"
+                    placeholder="Enter Option 1" id="option_1" required>
+            
+                    <input type="text" class="form-control has-validation  mb-2" name="option_2"
+                    placeholder="Enter Option 2" id="option_2" required>
+                    
+                    <input type="text" class="form-control has-validation mb-2" name="option_3"
+                    placeholder="Enter Option 3" id="option_3" required>
+                    
+                    <input type="text" class="form-control has-validation mb-2" name="option_4"
+                    placeholder="Enter Option 4" id="option_4" required>
+            </div>
+        </div>
+        <br>
+    {% endfor %}
+</form>
+{% endblock %}

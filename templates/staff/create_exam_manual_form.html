@@ -3,7 +3,7 @@
 
 <h3>Create Exam Manually</h3>
 <br>
-<form class="form-group" action="{{ url_for('create_automatic_exam') }}" method="post">
+<form class="form-group" action="{{ url_for('create_manual_exam') }}" method="post">
     {% if msg %}
     <div class="msg alert alert-danger">{{ msg }}</div>
     {% endif %}
@@ -15,8 +15,8 @@
     </div><br>
     <div class="form-floating">
         <textarea class="shadow form-control has-validation" name="exam_instructions"
-            placeholder="Enter Exam Instructions" id="subject_desc" style="width: 100%; height: 120px"></textarea>
-        <label for="subject_desc">Enter Exam Instructions</label>
+            placeholder="Enter Exam Instructions" id="exam_instructions" style="width: 100%; height: 120px"></textarea>
+        <label for="exam_instructions">Enter Exam Instructions</label>
     </div><br>
     <div class="row">
         <div class="col">
