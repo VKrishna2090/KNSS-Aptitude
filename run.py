@@ -18,7 +18,7 @@ app.config['MYSQL_DB'] = 'knss_aptitude'
 mysql = MySQL(app)
 
 
-#-----------------------GENERAL ROUTES-----------------------------
+#---------------------------------------------GENERAL ROUTES------------------------------------------------
 
 
 @app.route('/')
@@ -100,8 +100,7 @@ def register():
 
 
 
-#-----------------------STAFF ROUTES-----------------------------
-
+#---------------------------------------------STAFF ROUTES------------------------------------------------
 
 
 @app.route('/staff_dashboard')
@@ -229,6 +228,35 @@ def view_exam(e_code):
     #print(selected_options)
     return render_template('staff/view_exam.html',exam_info=exam_info,questions=questions,options=options)
 
+@app.route('/delete_exam/<int:e_code>',methods=["GET"])
+def delete_exam(e_code):
+
+    cursor1 = mysql.connection.cursor()
+    cursor1.execute('SELECT * FROM question WHERE exam_code = %s',(e_code,))
+    questions = cursor1.fetchall()
+    for q in questions:
+        cursor6 = mysql.connection.cursor()
+        cursor6.execute('SELECT * FROM options WHERE question_id = %s',(q[0],))
+        options = cursor6.fetchall()
+        for op in options:
+            cursor7 = mysql.connection.cursor()
+            cursor7.execute('DELETE FROM selected_options WHERE option_id = %s',(op[0],))
+            mysql.connection.commit()
+        cursor2 = mysql.connection.cursor()
+        cursor2.execute('DELETE FROM options WHERE question_id = %s',(q[0],))
+        mysql.connection.commit()
+    cursor3 = mysql.connection.cursor()
+    cursor3.execute('DELETE FROM question WHERE exam_code = %s',(e_code,))
+    mysql.connection.commit()
+    cursor4 = mysql.connection.cursor()
+    cursor4.execute('DELETE FROM exams_given WHERE exam_code = %s',(e_code,))
+    mysql.connection.commit()
+    cursor5 = mysql.connection.cursor()
+    cursor5.execute('DELETE FROM exam WHERE exam_code = %s',(e_code,))
+    mysql.connection.commit()
+    
+    return redirect('/home')
+
 @app.route('/view_responses/<int:e_code>',methods=["GET"])
 def view_responses(e_code):
     cursor = mysql.connection.cursor()
@@ -274,7 +302,7 @@ def subjects_exams(s_id):
 
 
 
-#-----------------------STUDENT ROUTES-----------------------------
+#---------------------------------------------STUDENT ROUTES------------------------------------------------
 
 
 @app.route('/student_dashboard')
