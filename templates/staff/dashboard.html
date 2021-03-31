@@ -43,7 +43,7 @@
               <li><a class="dropdown-item" href="{{ url_for('view_exam',e_code=row[0]) }}">View Form</a></li>
               <li><a class="dropdown-item" href="{{ url_for('view_responses',e_code=row[0]) }}">View Responses</a></li>
               <li><a class="dropdown-item" href="#">Edit Form</a></li>
-              <li><a class="dropdown-item" onclick="myFunction()" href="{{ url_for('delete_exam',e_code=row[0]) }}">Delete Exam</a></li>
+              <li><a class="dropdown-item" onclick="return myFunction()" href="{{ url_for('delete_exam',e_code=row[0]) }}">Delete Exam</a></li>
             </ul>
           </center>
         </td>
@@ -55,7 +55,11 @@
 
 <script>
   function myFunction() {
-    confirm("Delete Exam?");
+      if (confirm("Delete exam?")) {
+      }
+      else {
+          return false;
+      }
   }
 </script>
 {% endblock %}
