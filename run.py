@@ -147,6 +147,14 @@ def create_exam_auto_form():
     subjects = cursor.fetchall()
     return render_template('staff/create_exam_auto_form.html', subjects=subjects)
 
+@app.route('/create_exam_manual_form')
+def create_exam_manual_form():
+    cursor = mysql.connection.cursor()
+    cursor.execute('SELECT * FROM subject')
+    subjects = cursor.fetchall()
+    return render_template('staff/create_exam_manual_form.html', subjects=subjects)
+
+
 @app.route('/create_automatic_exam', methods = ['POST','GET'])
 def create_automatic_exam():
     msg = ''
@@ -284,6 +292,27 @@ def student_profile():
     cursor.execute('SELECT * FROM users WHERE user_id = %s',(session['user_id'],))
     profile_student_user = cursor.fetchall()
     return render_template('student/profile.html', profile_student_user=profile_student_user)
+
+@app.route('/update/<int:user_id>', methods = ['POST','GET'])
+def update(user_id):
+    msg = ''
+    cursor = mysql.connection.cursor()
+    #cursor.execute('SELECT * FROM users WHERE user_id = %s', (user_id,))
+    #update = cursor.fetchone()
+    if request.method == 'POST':
+        email = request.form['email']
+        fname = request.form['fname']
+        lname = request.form['lname']
+        mobile = request.form['mobile']
+        #if update:
+            #flash('No changes made!','info')
+        #else:
+        cursor.execute('UPDATE users SET email = %s, fname = %s, lname = %s, mobile_number = %s WHERE user_id = %s', (email, fname, lname, mobile, user_id))
+        mysql.connection.commit()
+        flash('Changes made and successfully saved!','success')
+    else:
+        flash('No changes made!','info')
+    return render_template('student/profile.html', msg=msg)
 
 @app.route('/join_exam')
 def join_exam():

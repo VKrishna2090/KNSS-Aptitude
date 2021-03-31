@@ -1,45 +1,46 @@
 {% extends "student/student_layout.html" %}
 {% block student_content %}
+{% for row in profile_student_user %}
 <div class="row">
     <h3 class="text-right">Profile Settings</h3>
     <div class="col-md-3 border-right">
         <div class="d-flex flex-column align-items-center text-center p-3 ">
             <img class="rounded-circle" width="150px"
                 src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg">
-            <span class="font-weight-bold">{{session['fname']}}</span>
-            <span class="text-black-50">{{session['email']}}</span>
+            <span class="font-weight-bold">{{ row[3] }}</span>
+            <span class="text-black-50">{{ row[1] }}</span>
             <span></span>
         </div>
     </div>
     <div class="col-md-9 border-right">
-        
         <br>
-        <form class="row g-3">
+        <form class="row g-3" action="{{ url_for('update',user_id=row[0]) }}" method="post">
             <div class="col-md-6">
                 <label for="fname" class="form-label">First Name</label>
-                <input type="text" class="shadow form-control" id="fname" placeholder="First name" aria-label="First name"
-                    value="{{session['fname']}}" required>
+                <input type="text" class="shadow form-control" id="fname" placeholder="First name"
+                    aria-label="First name" value="{{ row[3] }}" required>
             </div>
             <div class="col-md-6">
                 <label for="lname" class="form-label">Last Name</label>
                 <input type="text" class="shadow form-control" id="lname" placeholder="Last name" aria-label="Last name"
-                    value="{{session['lname']}}" required>
+                    value="{{ row[4] }}" required>
             </div>
             <div class="col-md-6">
                 <label for="email" class="form-label">Email ID</label>
                 <input type="text" class="shadow form-control" id="email" placeholder="Email ID" aria-label="Email ID"
-                    value="{{session['email']}}" required>
+                    value="{{ row[1] }}" required>
             </div>
             <div class="col-md-6"></div>
             <div class="col-md-6">
                 <label for="mobile" class="form-label">Mobile Number</label>
                 <input type="tel" class="shadow form-control" id="mobile" placeholder="Mobile Number"
-                    aria-label="Mobile Number" value="{{session['mobile']}}" required>
+                    aria-label="Mobile Number" value="{{ row[5] }}" required>
             </div>
             <div class="mt-5 text-center">
-                <button class="btn btn-primary profile-button" type="button">Save Profile</button><br><br>
+                <button class="btn btn-primary" type="submit">Save Profile</button><br><br>
             </div>
         </form>
     </div>
 </div>
+{% endfor %}
 {% endblock %}
