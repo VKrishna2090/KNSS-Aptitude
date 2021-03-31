@@ -18,43 +18,65 @@
             placeholder="Enter Exam Instructions" id="subject_desc" style="width: 100%; height: 120px"></textarea>
         <label for="subject_desc">Enter Exam Instructions</label>
     </div><br>
-    <div class="form-floating">
-        <input type="text" class="shadow form-control has-validation" name="exam_time_limit"
-            placeholder="Enter Time Limit" id="exam_time_limit" required>
-        <label for="exam_time_limit">Enter Time Limit(in Minutes)</label>
-    </div><br>
-    <div class="form-floating">
-        <select class="shadow form-select" id="subject" name="subject">
-            {% for sub in subjects %}
-            <option value='{{ sub[0] }}'>{{sub[1]}}</option>
-            {% endfor %}
-        </select>
-        <label for="subject">Subject</label>
-    </div><br>
-    <div class="form-floating">
-        <input type="text" class="shadow form-control has-validation" name="exam_no_of_questions"
-            placeholder="Enter Number of Questions" id="exam_no_of_questions" required>
-        <label for="exam_no_of_questions">Enter Number of Questions</label>
-    </div><br>
-    <div class="form-floating">
-        <input type="text" class="shadow form-control has-validation" name="exam_total_marks"
-            placeholder="Enter Total Marks" id="exam_total_marks" required>
-        <label for="exam_no_of_questions">Enter Total Marks</label>
-    </div><br>
-    <div class="form-floating">
-        <input type="date" class="shadow form-control has-validation" name="exam_start_date"
-            placeholder="Enter Start Date" id="exam_start_date" required>
-        <label for="exam_start_date">Enter Start Date</label>
-    </div><br>
-
-    <div class="form-floating">
-        <input type="date" class="shadow form-control has-validation" name="exam_end_date"
-            placeholder="Enter End Date" id="exam_end_date" required>
-        <label for="exam_end_date">Enter End Date</label>
-    </div><br>
-
+    <div class="row">
+        <div class="col">
+            <div class="form-floating">
+                <select class="shadow form-select" id="subject" name="subject">
+                    {% for sub in subjects %}
+                    <option value='{{ sub[0] }}'>{{sub[1]}}</option>
+                    {% endfor %}
+                </select>
+                <label for="subject">Subject</label>
+            </div><br>
+        </div>
+        <div class="col">
+            <div class="form-floating">
+                <input type="text" class="shadow form-control has-validation" name="exam_time_limit"
+                    placeholder="Enter Time Limit" id="exam_time_limit" required>
+                <label for="exam_time_limit">Enter Time Limit (in minutes)</label>
+            </div><br>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <div class="form-floating">
+                <input type="text" class="shadow form-control has-validation" name="exam_no_of_questions"
+                    placeholder="Enter Number of Questions" id="exam_no_of_questions" required>
+                <label for="exam_no_of_questions">Enter Number of Questions</label>
+            </div><br>
+        </div>
+        <div class="col">
+            <div class="form-floating">
+                <input type="text" class="shadow form-control has-validation" name="exam_total_marks"
+                    placeholder="Enter Total Marks" id="exam_total_marks" required>
+                <label for="exam_no_of_questions">Enter Total Marks</label>
+            </div><br>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <div class="form-floating">
+                <input type="date" class="shadow form-control has-validation" name="exam_start_date"
+                    placeholder="Enter Start Date" id="exam_start_date" required>
+                <label for="exam_start_date">Enter Start Date</label>
+            </div><br>
+        </div>
+        <div class="col">
+            <div class="form-floating">
+                <input type="date" class="shadow form-control has-validation" name="exam_end_date"
+                    placeholder="Enter End Date" id="exam_end_date" required>
+                <label for="exam_end_date">Enter End Date</label>
+            </div><br>
+        </div>
+    </div>
     <button type="submit" class="btn btn-primary">Create</button>
-    
 </form>
-
+<!--<br>
+<div class="input-group">
+    <span>Question and Option</span>
+    <div class="row row-cols-1">
+        <div class="col"><input type="text" aria-label="First name" class="form-control"></div>
+        <div class="col"><textarea type="text" aria-label="Last name" class="form-control"></textarea></div>
+    </div>
+</div>-->
 {% endblock %}

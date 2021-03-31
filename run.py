@@ -330,7 +330,7 @@ def completed_exams():
     cursor.execute('SELECT * FROM exam')
     exams = cursor.fetchall()
     return render_template('student/completed_exams.html', exams_given=exams_given, subjects=subjects, exams=exams, today=today)
-
+       
 @app.route('/results')
 def results():
     return render_template('student/results.html')
@@ -430,8 +430,6 @@ def get_responses(e_code):
     #print(selected_options)
     return render_template('student/results.html',selected_options=selected_options,exam_info=exam_info,exams_given=exams_given,questions=questions,options=options)
 
-    
+
 if __name__ == '__main__':
     app.run(debug=True)
-
-
