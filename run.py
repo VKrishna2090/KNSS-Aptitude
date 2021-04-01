@@ -207,12 +207,59 @@ def create_automatic_exam():
         flash('Fill the form!','danger')
     return redirect(url_for('staff_dashboard'))
 
+@app.route('/create_manual_exam', methods = ['POST','GET'])
+def create_manual_exam():
+    msg = ''
+    print(('exam_title' and 'exam_no_of_questions' and 'exam_time_limit' and 'exam_total_marks') in request.form)
+    if request.method == 'POST' and ('exam_title' and 'exam_no_of_questions' and 'exam_time_limit' and 'exam_total_marks') in request.form:
+        title = request.form['exam_title']
+        time_limit = request.form['exam_time_limit']
+        instructions = request.form['exam_instructions']
+        total_marks = request.form['exam_total_marks']
+        no_of_questions = request.form['exam_no_of_questions']
+        subject = request.form['subject']
+        exam_code = random.randint(100,1000000)
+        start_date = request.form['exam_start_date']
+        end_date = request.form['exam_end_date']
+
+        return render_template('staff/create_manual_exam_content.html', title=title, time_limit = time_limit, instructions = instructions, total_marks = total_marks, no_of_questions = no_of_questions, subject = subject, exam_code = exam_code, start_date = start_date, end_date = end_date)
+    elif request.method == 'POST':
+        flash('Fill the form!','danger')
+        return redirect(url_for('create_exam_manual_form'))
+
+
 @app.route('/staff_profile')
 def staff_profile():
     cursor = mysql.connection.cursor()
     cursor.execute('SELECT * FROM users WHERE user_id = %s',(session['user_id'],))
     profile_staff_user = cursor.fetchall()
     return render_template('staff/profile.html', profile_staff_user=profile_staff_user)
+
+@app.route('/staff_profile_update', methods = ['POST','GET'])
+def staff_profile_update():
+    if request.method == 'POST' and 'email' in request.form:
+        email = request.form['email']
+        fname = request.form['fname']
+        lname = request.form['lname']
+        mobile = request.form['mobile']
+
+        if not email or not fname or not lname or not mobile:
+            flash('Fill the form!','danger')
+        else:
+            cursor = mysql.connection.cursor()
+            cursor.execute('UPDATE users SET email = %s, fname = %s, lname = %s, mobile_number = %s WHERE user_id = %s' , ( email, fname, lname, mobile, session['user_id'],))
+            mysql.connection.commit()
+            
+            session['email'] = email
+            session['fname'] = fname
+            session['lname'] = lname
+            session['mobile'] = mobile
+
+            flash('Profile Updated!','success')
+            return redirect(url_for('staff_profile'))
+    elif request.method == 'POST':
+        flash('No changes made.','danger')
+    return render_template('staff/profile.html')
 
 @app.route('/view_exam/<int:e_code>',methods=["GET"])
 def view_exam(e_code):
@@ -321,6 +368,35 @@ def student_profile():
     cursor.execute('SELECT * FROM users WHERE user_id = %s',(session['user_id'],))
     profile_student_user = cursor.fetchall()
     return render_template('student/profile.html', profile_student_user=profile_student_user)
+
+@app.route('/student_profile_update', methods = ['POST','GET'])
+def student_profile_update():
+    if request.method == 'POST' and 'email' in request.form:
+        email = request.form['email']
+        fname = request.form['fname']
+        lname = request.form['lname']
+        mobile = request.form['mobile']
+        
+
+
+        if not email or not fname or not lname or not mobile:
+            flash('Fill the form!','danger')
+        else:
+            cursor = mysql.connection.cursor()
+            cursor.execute('UPDATE users SET email = %s, fname = %s, lname = %s, mobile_number = %s WHERE user_id = %s' , ( email, fname, lname, mobile, session['user_id'],))
+            mysql.connection.commit()
+            
+            session['email'] = email
+            session['fname'] = fname
+            session['lname'] = lname
+            session['mobile'] = mobile
+
+            flash('Profile Updated!','success')
+            return redirect(url_for('student_profile'))
+    elif request.method == 'POST':
+        flash('No changes made.','danger')
+    return render_template('student/profile.html')
+
 
 @app.route('/update/<int:user_id>', methods = ['POST','GET'])
 def update(user_id):
