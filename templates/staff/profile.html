@@ -14,30 +14,30 @@
     <div class="col-md-9 border-right">
         
         <br>
-        <form class="row g-3">
+        <form class="row g-3" action="{{ url_for('staff_profile_update') }}" method="post">
             <div class="col-md-6">
                 <label for="fname" class="form-label">First Name</label>
-                <input type="text" class="shadow form-control" id="fname" placeholder="First name" aria-label="First name"
+                <input type="text" class="shadow form-control" name = "fname" id="fname" placeholder="First name" aria-label="First name"
                     value="{{session['fname']}}" required>
             </div>
             <div class="col-md-6">
                 <label for="lname" class="form-label">Last Name</label>
-                <input type="text" class="shadow form-control" id="lname" placeholder="Last name" aria-label="Last name"
+                <input type="text" class="shadow form-control" name = "lname" id="lname" placeholder="Last name" aria-label="Last name"
                     value="{{session['lname']}}" required>
             </div>
             <div class="col-md-6">
                 <label for="email" class="form-label">Email ID</label>
-                <input type="text" class="shadow form-control" id="email" placeholder="Email ID" aria-label="Email ID"
+                <input type="text" class="shadow form-control" id="email" name = "email" placeholder="Email ID" aria-label="Email ID"
                     value="{{session['email']}}" required>
             </div>
             <div class="col-md-6"></div>
             <div class="col-md-6">
                 <label for="mobile" class="form-label">Mobile Number</label>
-                <input type="tel" class="shadow form-control" id="mobile" placeholder="Mobile Number"
+                <input type="tel" class="shadow form-control" name = "mobile" id="mobile" placeholder="Mobile Number"
                     aria-label="Mobile Number" value="{{session['mobile']}}" required>
             </div>
             <div class="mt-5 text-center">
-                <button class="btn btn-primary profile-button" type="button">Save Profile</button><br><br>
+                <button class="btn btn-primary profile-button" type="submit">Save Profile</button><br><br>
             </div>
         </form>
     </div>

@@ -14,26 +14,26 @@
     </div>
     <div class="col-md-9 border-right">
         <br>
-        <form class="row g-3" action="{{ url_for('update',user_id=row[0]) }}" method="post">
+        <form class="row g-3" action="{{ url_for('student_profile_update') }}" method="post">
             <div class="col-md-6">
                 <label for="fname" class="form-label">First Name</label>
-                <input type="text" class="shadow form-control" id="fname" placeholder="First name"
+                <input type="text" name = "fname" class="shadow form-control" id="fname" placeholder="First name"
                     aria-label="First name" value="{{ row[3] }}" required>
             </div>
             <div class="col-md-6">
                 <label for="lname" class="form-label">Last Name</label>
-                <input type="text" class="shadow form-control" id="lname" placeholder="Last name" aria-label="Last name"
+                <input type="text" name = "lname" class="shadow form-control" id="lname" placeholder="Last name" aria-label="Last name"
                     value="{{ row[4] }}" required>
             </div>
             <div class="col-md-6">
                 <label for="email" class="form-label">Email ID</label>
-                <input type="text" class="shadow form-control" id="email" placeholder="Email ID" aria-label="Email ID"
+                <input type="text" name = "email" class="shadow form-control" id="email" placeholder="Email ID" aria-label="Email ID"
                     value="{{ row[1] }}" required>
             </div>
             <div class="col-md-6"></div>
             <div class="col-md-6">
                 <label for="mobile" class="form-label">Mobile Number</label>
-                <input type="tel" class="shadow form-control" id="mobile" placeholder="Mobile Number"
+                <input type="tel" name = "mobile" class="shadow form-control" id="mobile" placeholder="Mobile Number"
                     aria-label="Mobile Number" value="{{ row[5] }}" required>
             </div>
             <div class="mt-5 text-center">
