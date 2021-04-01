@@ -11,7 +11,7 @@
         {% for question in questions %}
         <div class="card">
             <div class="card-body">
-                <h5 class="card-title">{{question[1]}}</h5>
+                <div class="card-title bg-light p-3">{{question[1]|safe}}</div>
                 <ul class="list-group list-group-flush">
                     {% for option in options %}
                         {% if option[3] == question[0] %}

@@ -15,14 +15,14 @@
                     Marks: {{question[3]}}
                 </div> -->
             <div class="card-body">
-                <h5 class="card-title">{{question[1]}}</h5>
+                <div class="card-title bg-light p-3">{{question[1]|safe}}</div>
                 <ul class="list-group list-group-flush">
                     {% for option in options %}
                     {% if option[3] == question[0] %}
                     <div class="list-group-item borderless">
                         <label>
                             <div class="form-check">
-                                <input class="form-check-input" type="radio" name="{{question[0]}}"
+                                <input class="form-check-input" type="radio" name="{{question[0]}}" required
                                     value="{{option[0]}}">
                                 <label class="form-check-label">
                                     {{ option[1] }}

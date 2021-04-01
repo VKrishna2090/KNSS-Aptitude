@@ -85,8 +85,6 @@ def register():
         account = cursor.fetchone()
         if account:
             flash('Account already exists','danger')
-        # elif not re.match(r'[^@]+@[^@]+\.[^@]+', email):
-        #     msg = 'Invalid email address!'
         elif not role or not password or not email:
             flash('Fill the form!','danger')
         else:
@@ -130,7 +128,6 @@ def create_subject():
         else:
             subject_desc = request.form['subject_desc']
             subject_code = random.randint(100,1000000)
-
             cursor = mysql.connection.cursor()
             cursor.execute('INSERT INTO subject VALUES (%s, %s, %s)', (subject_code, subject_name, subject_desc))
             mysql.connection.commit()
@@ -171,7 +168,6 @@ def create_automatic_exam():
             total_num_of_questions = len(exam1[1])
             total_marks = total_num_of_questions * 2
             time_limit = f"{total_num_of_questions * 2}00"
-            #print(time_limit)
             created_by = session['user_id']
             start_date = datetime.date.today()
             end_date = start_date+datetime.timedelta(20)
@@ -199,7 +195,7 @@ def create_automatic_exam():
                         is_correct = '1'
                     # print(option,option[0],exam1[1][ques][0],option[0] == exam1[1][ques][0],is_correct)
                     cursor = mysql.connection.cursor()
-                    cursor.execute('INSERT INTO options VALUES (%s, %s, %s, %s)', (o_id, o_desc, is_correct, q_id))
+                    cursor.execute('INSERT INTO options VALUES (%s, %s, %s, %s)', (o_id, o_desc[2:].strip(), is_correct, q_id))
                     mysql.connection.commit()                    
             flash('Exam created!','success')
             return redirect(url_for('staff_dashboard'))
@@ -210,22 +206,103 @@ def create_automatic_exam():
 @app.route('/create_manual_exam', methods = ['POST','GET'])
 def create_manual_exam():
     msg = ''
-    print(('exam_title' and 'exam_no_of_questions' and 'exam_time_limit' and 'exam_total_marks') in request.form)
     if request.method == 'POST' and ('exam_title' and 'exam_no_of_questions' and 'exam_time_limit' and 'exam_total_marks') in request.form:
         title = request.form['exam_title']
-        time_limit = request.form['exam_time_limit']
-        instructions = request.form['exam_instructions']
+        time_limit = request.form['exam_time_limit'] + "00"
+        if 'exam_instructions' in request.form:
+            instructions = request.form['exam_instructions']
+        else:
+            instructions = ''
         total_marks = request.form['exam_total_marks']
         no_of_questions = request.form['exam_no_of_questions']
-        subject = request.form['subject']
+        subject_id = request.form['subject']
         exam_code = random.randint(100,1000000)
         start_date = request.form['exam_start_date']
         end_date = request.form['exam_end_date']
-
-        return render_template('staff/create_manual_exam_content.html', title=title, time_limit = time_limit, instructions = instructions, total_marks = total_marks, no_of_questions = no_of_questions, subject = subject, exam_code = exam_code, start_date = start_date, end_date = end_date)
+        cursor = mysql.connection.cursor()
+        cursor.execute('INSERT INTO exam VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)', (exam_code, title, instructions, time_limit, no_of_questions, total_marks, start_date, end_date, session['user_id'],subject_id,))
+        mysql.connection.commit()  
+        return redirect(url_for('input_questions',q_no=1,tot_q=no_of_questions,e_code=exam_code))
     elif request.method == 'POST':
         flash('Fill the form!','danger')
         return redirect(url_for('create_exam_manual_form'))
+
+@app.route('/input_questions/<int:q_no>/<int:tot_q>/<int:e_code>',methods=["GET","POST"])
+def input_questions(q_no,tot_q,e_code):
+    if q_no == 1 and q_no <= tot_q:
+        return render_template('staff/create_manual_exam_content.html', q_no=q_no,tot_q=tot_q,exam_code=e_code)
+    elif q_no <= tot_q:
+        if request.method == 'POST' and 'question' in request.form:
+            q_id = random.randint(100,1000000)
+            q_desc = request.form['question']
+            q_type = 'O'
+            marks = request.form['marks']
+            exam_code = request.form['exam_code']
+            cursor = mysql.connection.cursor()
+            cursor.execute('INSERT INTO question VALUES (%s, %s, %s, %s, %s)', (q_id, q_desc, q_type, marks, e_code,))
+            mysql.connection.commit()
+            o_id1 = random.randint(100,1000000)
+            o_desc1 = request.form['correct_option']
+            is_correct1 = '1'
+            cursor = mysql.connection.cursor()
+            cursor.execute('INSERT INTO options VALUES (%s, %s, %s, %s)', (o_id1, o_desc1, is_correct1, q_id,))
+            mysql.connection.commit()
+            o_id2 = random.randint(100,1000000)
+            o_desc2 = request.form['option_1']
+            is_correct2 = '0'
+            cursor = mysql.connection.cursor()
+            cursor.execute('INSERT INTO options VALUES (%s, %s, %s, %s)', (o_id2, o_desc2, is_correct2, q_id,))
+            mysql.connection.commit()
+            o_id3 = random.randint(100,1000000)
+            o_desc3 = request.form['option_2']
+            is_correct3 = '0'
+            cursor = mysql.connection.cursor()
+            cursor.execute('INSERT INTO options VALUES (%s, %s, %s, %s)', (o_id3, o_desc3, is_correct3, q_id,))
+            mysql.connection.commit()
+            o_id4 = random.randint(100,1000000)
+            o_desc4 = request.form['option_3']
+            is_correct4 = '0'
+            cursor = mysql.connection.cursor()
+            cursor.execute('INSERT INTO options VALUES (%s, %s, %s, %s)', (o_id4, o_desc4, is_correct4, q_id,))
+            mysql.connection.commit()
+        return render_template('staff/create_manual_exam_content.html', q_no=q_no,tot_q=tot_q,exam_code=e_code)
+    else:
+        if request.method == 'POST' and 'question' in request.form:
+            q_id = random.randint(100,1000000)
+            q_desc = request.form['question']
+            q_type = 'O'
+            marks = request.form['marks']
+            exam_code = request.form['exam_code']
+            cursor = mysql.connection.cursor()
+            cursor.execute('INSERT INTO question VALUES (%s, %s, %s, %s, %s)', (q_id, q_desc, q_type, marks, e_code,))
+            mysql.connection.commit()
+            o_id1 = random.randint(100,1000000)
+            o_desc1 = request.form['correct_option']
+            is_correct1 = '1'
+            cursor = mysql.connection.cursor()
+            cursor.execute('INSERT INTO options VALUES (%s, %s, %s, %s)', (o_id1, o_desc1, is_correct1, q_id,))
+            mysql.connection.commit()
+            o_id2 = random.randint(100,1000000)
+            o_desc2 = request.form['option_1']
+            is_correct2 = '0'
+            cursor = mysql.connection.cursor()
+            cursor.execute('INSERT INTO options VALUES (%s, %s, %s, %s)', (o_id2, o_desc2, is_correct2, q_id,))
+            mysql.connection.commit()
+            o_id3 = random.randint(100,1000000)
+            o_desc3 = request.form['option_2']
+            is_correct3 = '0'
+            cursor = mysql.connection.cursor()
+            cursor.execute('INSERT INTO options VALUES (%s, %s, %s, %s)', (o_id3, o_desc3, is_correct3, q_id,))
+            mysql.connection.commit()
+            o_id4 = random.randint(100,1000000)
+            o_desc4 = request.form['option_3']
+            is_correct4 = '0'
+            cursor = mysql.connection.cursor()
+            cursor.execute('INSERT INTO options VALUES (%s, %s, %s, %s)', (o_id4, o_desc4, is_correct4, q_id,))
+            mysql.connection.commit()
+        flash('Exam created successfully!','success')
+        return redirect(url_for('home'))
+
 
 
 @app.route('/staff_profile')
@@ -242,19 +319,16 @@ def staff_profile_update():
         fname = request.form['fname']
         lname = request.form['lname']
         mobile = request.form['mobile']
-
         if not email or not fname or not lname or not mobile:
-            flash('Fill the form!','danger')
+            flash('Form field cannot be empty!','danger')
         else:
             cursor = mysql.connection.cursor()
             cursor.execute('UPDATE users SET email = %s, fname = %s, lname = %s, mobile_number = %s WHERE user_id = %s' , ( email, fname, lname, mobile, session['user_id'],))
             mysql.connection.commit()
-            
             session['email'] = email
             session['fname'] = fname
             session['lname'] = lname
             session['mobile'] = mobile
-
             flash('Profile Updated!','success')
             return redirect(url_for('staff_profile'))
     elif request.method == 'POST':
@@ -272,12 +346,10 @@ def view_exam(e_code):
     cursor = mysql.connection.cursor()
     cursor.execute('SELECT * FROM options ORDER BY option_description')
     options = cursor.fetchall()
-    #print(selected_options)
     return render_template('staff/view_exam.html',exam_info=exam_info,questions=questions,options=options)
 
 @app.route('/delete_exam/<int:e_code>',methods=["GET"])
 def delete_exam(e_code):
-
     cursor1 = mysql.connection.cursor()
     cursor1.execute('SELECT * FROM question WHERE exam_code = %s',(e_code,))
     questions = cursor1.fetchall()
@@ -376,25 +448,20 @@ def student_profile_update():
         fname = request.form['fname']
         lname = request.form['lname']
         mobile = request.form['mobile']
-        
-
-
         if not email or not fname or not lname or not mobile:
-            flash('Fill the form!','danger')
+            flash('Form field cannot be empty!','danger')
         else:
             cursor = mysql.connection.cursor()
             cursor.execute('UPDATE users SET email = %s, fname = %s, lname = %s, mobile_number = %s WHERE user_id = %s' , ( email, fname, lname, mobile, session['user_id'],))
             mysql.connection.commit()
-            
             session['email'] = email
             session['fname'] = fname
             session['lname'] = lname
             session['mobile'] = mobile
-
             flash('Profile Updated!','success')
             return redirect(url_for('student_profile'))
     elif request.method == 'POST':
-        flash('No changes made.','danger')
+        flash('No changes made','danger')
     return render_template('student/profile.html')
 
 
@@ -409,9 +476,6 @@ def update(user_id):
         fname = request.form['fname']
         lname = request.form['lname']
         mobile = request.form['mobile']
-        #if update:
-            #flash('No changes made!','info')
-        #else:
         cursor.execute('UPDATE users SET email = %s, fname = %s, lname = %s, mobile_number = %s WHERE user_id = %s', (email, fname, lname, mobile, user_id))
         mysql.connection.commit()
         flash('Changes made and successfully saved!','success')
@@ -455,7 +519,7 @@ def get_exam(exam_code):
         cursor.execute('SELECT * FROM question WHERE exam_code = %s ORDER BY RAND()', (exam_code,))
         questions = cursor.fetchall()
         cursor = mysql.connection.cursor()
-        cursor.execute('SELECT * FROM options ORDER BY option_description')
+        cursor.execute('SELECT * FROM options ORDER BY RAND()')
         options = cursor.fetchall()
         return render_template('student/attempt_exam.html', exam_info=exam_info, questions=questions, options=options)
 
@@ -469,7 +533,6 @@ def submit_exam():
         tot_marks=0
         today = datetime.date.today()
         attempts=1
-
         cursor = mysql.connection.cursor()
         for q in questions:
             rand_opt_id = random.randint(100,1000000)
@@ -483,12 +546,9 @@ def submit_exam():
             cursor = mysql.connection.cursor()
             cursor.execute('INSERT INTO selected_options VALUES (%s, %s, %s)',(rand_opt_id,session['user_id'],selected_option_id,))
             mysql.connection.commit()
-        
         cursor = mysql.connection.cursor()
         cursor.execute('INSERT INTO exams_given VALUES (%s, %s, %s, %s, %s)',(e_code,session['user_id'],tot_marks,attempts,today,))
         mysql.connection.commit()
-        
-
         cursor = mysql.connection.cursor()
         cursor.execute('SELECT * FROM exam WHERE exam_code = %s',(e_code,))
         exam_info = cursor.fetchone()
@@ -504,7 +564,6 @@ def submit_exam():
         cursor = mysql.connection.cursor()
         cursor.execute('SELECT * FROM options')
         options = cursor.fetchall()
-        #print(selected_options)
         return render_template('student/results.html',selected_options=selected_options,exam_info=exam_info,exams_given=exams_given,questions=questions,options=options)
     else:
         return redirect(url_for('home'))
@@ -531,7 +590,6 @@ def get_responses(e_code):
     cursor = mysql.connection.cursor()
     cursor.execute('SELECT * FROM options')
     options = cursor.fetchall()
-    #print(selected_options)
     return render_template('student/results.html',selected_options=selected_options,exam_info=exam_info,exams_given=exams_given,questions=questions,options=options)
 
 
