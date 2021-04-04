@@ -1,6 +1,8 @@
 # KNSS-Aptitude
 
 Today Online Examination System has become a fast growing examination method because of its speed and accuracy. It is also needed less manpower to execute the examination. Almost all organizations now-a-days, are conducting their objective exams by online examination system, it saves students time in examinations. Organizations can also easily check the performance of the student that they give in an examination. As a result of this, organizations are releasing results in less time. It also helps the environment by saving paper.
+<br>
+Our system will be accessible for two types of registered users: students and staff. The staff  members can create timed exams for students. A questionnaire can be filled in prior to the examination which will then in turn be randomized and presented to the students. The MCQs will be checked and the subjective answers will be checked for keywords, based on which marks will be assigned to the student. Students can view their all exams and their performance and grades as a graph on their dashboard, and the staff can view the grades of every student who gave a particular test. 
 
 ## Objectives/Scope
 
