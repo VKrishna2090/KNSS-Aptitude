@@ -14,7 +14,7 @@ The main objective of Online Examination System is to efficiently evaluate the c
 
 ## Technologies Used
 
-### Frontend:
+#### Frontend:
 
 * Flask framework
 * HTML
@@ -22,11 +22,11 @@ The main objective of Online Examination System is to efficiently evaluate the c
 * CSS
 * Javascript
 
-### Backend:
+#### Backend:
 
 * MySQL
 
-### Software requirement:
+#### Software requirement:
 
 * XAMPP server
 * Visual Studio Code
