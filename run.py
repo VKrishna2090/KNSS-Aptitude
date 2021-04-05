@@ -5,6 +5,13 @@ from flask_mysqldb import MySQL
 from SanFoundry_Scraped import initiate_scraping, scrape
 from separation_quest_ans import getQuestionAndOption
 import os
+import calendar
+import time
+from werkzeug.utils import secure_filename
+
+STAFF_UPLOAD_FOLDER = 'static\\staff_uploads'
+STUDENT_UPLOAD_FOLDER = 'static\\student_uploads'
+ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'}
 
 app = Flask(__name__)
 
@@ -14,9 +21,16 @@ app.config['MYSQL_HOST'] = 'localhost'
 app.config['MYSQL_USER'] = 'root'
 app.config['MYSQL_PASSWORD'] = ''
 app.config['MYSQL_DB'] = 'knss_aptitude'
+app.config['STAFF_UPLOAD_FOLDER'] = STAFF_UPLOAD_FOLDER
+app.config['STUDENT_UPLOAD_FOLDER'] = STUDENT_UPLOAD_FOLDER
 
 mysql = MySQL(app)
 
+#---------------------------------------------GENERAL Methods------------------------------------------------
+
+def allowed_file(filename):
+    return '.' in filename and \
+           filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 #---------------------------------------------GENERAL ROUTES------------------------------------------------
 
@@ -214,7 +228,11 @@ def create_manual_exam():
         else:
             instructions = ''
         total_marks = request.form['exam_total_marks']
-        no_of_questions = request.form['exam_no_of_questions']
+         
+        no_of_obj_q = request.form['exam_no_of_questions']
+        no_of_sub_q = request.form['no_of_subjective_questions']
+        no_of_questions = no_of_obj_q + no_of_sub_q
+
         subject_id = request.form['subject']
         exam_code = random.randint(100,1000000)
         start_date = request.form['exam_start_date']
@@ -222,16 +240,18 @@ def create_manual_exam():
         cursor = mysql.connection.cursor()
         cursor.execute('INSERT INTO exam VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)', (exam_code, title, instructions, time_limit, no_of_questions, total_marks, start_date, end_date, session['user_id'],subject_id,))
         mysql.connection.commit()  
-        return redirect(url_for('input_questions',q_no=1,tot_q=no_of_questions,e_code=exam_code))
+        return redirect(url_for('input_questions',q_no=1,tot_obj_q=no_of_obj_q,tot_sub_q=no_of_sub_q,e_code=exam_code))
     elif request.method == 'POST':
         flash('Fill the form!','danger')
         return redirect(url_for('create_exam_manual_form'))
 
-@app.route('/input_questions/<int:q_no>/<int:tot_q>/<int:e_code>',methods=["GET","POST"])
-def input_questions(q_no,tot_q,e_code):
-    if q_no == 1 and q_no <= tot_q:
-        return render_template('staff/create_manual_exam_content.html', q_no=q_no,tot_q=tot_q,exam_code=e_code)
-    elif q_no <= tot_q:
+@app.route('/input_questions/<int:q_no>/<int:tot_obj_q>/<int:tot_sub_q>/<int:e_code>',methods=["GET","POST"])
+def input_questions(q_no,tot_obj_q,tot_sub_q,e_code):
+    if tot_obj_q == 0:
+        return redirect(url_for('input_subjective_questions',q_no=1,tot_sub_q=tot_sub_q,e_code=e_code))
+    if q_no == 1 and q_no <= tot_obj_q:
+        return render_template('staff/create_manual_exam_content.html', q_no=q_no,tot_obj_q=tot_obj_q,tot_sub_q=tot_sub_q,exam_code=e_code)
+    elif q_no <= tot_obj_q:
         if request.method == 'POST' and 'question' in request.form:
             q_id = random.randint(100,1000000)
             q_desc = request.form['question']
@@ -265,7 +285,7 @@ def input_questions(q_no,tot_q,e_code):
             cursor = mysql.connection.cursor()
             cursor.execute('INSERT INTO options VALUES (%s, %s, %s, %s)', (o_id4, o_desc4, is_correct4, q_id,))
             mysql.connection.commit()
-        return render_template('staff/create_manual_exam_content.html', q_no=q_no,tot_q=tot_q,exam_code=e_code)
+        return render_template('staff/create_manual_exam_content.html', q_no=q_no,tot_obj_q=tot_obj_q,tot_sub_q=tot_sub_q,exam_code=e_code)
     else:
         if request.method == 'POST' and 'question' in request.form:
             q_id = random.randint(100,1000000)
@@ -300,9 +320,71 @@ def input_questions(q_no,tot_q,e_code):
             cursor = mysql.connection.cursor()
             cursor.execute('INSERT INTO options VALUES (%s, %s, %s, %s)', (o_id4, o_desc4, is_correct4, q_id,))
             mysql.connection.commit()
+        #flash('Exam created successfully!','success')
+        return redirect(url_for('input_subjective_questions',q_no=1,tot_sub_q=tot_sub_q,e_code=exam_code)) 
+        #return redirect(url_for('home'))
+
+#input subjective q
+@app.route('/input_subjective_questions/<int:q_no>/<int:tot_sub_q>/<int:e_code>',methods=["GET","POST"])
+def input_subjective_questions(q_no,tot_sub_q,e_code):
+    if tot_sub_q == 0:
         flash('Exam created successfully!','success')
         return redirect(url_for('home'))
-
+    if q_no == 1 and q_no <= tot_sub_q:
+        
+        return render_template('staff/create_subjective_exam_form.html', q_no=q_no,tot_sub_q=tot_sub_q,exam_code=e_code)
+    elif q_no <= tot_sub_q:
+        if request.method == 'POST' and 'question' in request.form:
+            q_id = random.randint(100,1000000)
+            q_desc = request.form['question']
+            q_type = 'S'
+            marks = request.form['marks']
+            exam_code = request.form['exam_code']
+            cursor = mysql.connection.cursor()
+            cursor.execute('INSERT INTO question VALUES (%s, %s, %s, %s, %s)', (q_id, q_desc, q_type, marks, e_code,))
+            mysql.connection.commit()
+            sol_id = random.randint(100,1000000)
+            subjective_solution = request.files['subjective_solution']
+            if subjective_solution.filename == '':
+                flash('Solution file not uploaded!','danger')
+                return redirect(request.url)
+            if subjective_solution and allowed_file(subjective_solution.filename):
+                filename = secure_filename(subjective_solution.filename)
+                gmt = time.gmtime()
+                ts = calendar.timegm(gmt)
+                fileNameToStore = str(ts) + '_' + filename
+                cursor = mysql.connection.cursor()
+                cursor.execute('INSERT INTO subjective_solution VALUES (%s, %s, %s)', (sol_id, fileNameToStore, q_id,))
+                mysql.connection.commit()
+                subjective_solution.save(os.path.join(app.config['STAFF_UPLOAD_FOLDER'], fileNameToStore))
+        return render_template('staff/create_subjective_exam_form.html', q_no=q_no,tot_sub_q=tot_sub_q,exam_code=e_code)
+    else:
+        if request.method == 'POST' and 'question' in request.form:
+            q_id = random.randint(100,1000000)
+            q_desc = request.form['question']
+            q_type = 'S'
+            marks = request.form['marks']
+            exam_code = request.form['exam_code']
+            cursor = mysql.connection.cursor()
+            cursor.execute('INSERT INTO question VALUES (%s, %s, %s, %s, %s)', (q_id, q_desc, q_type, marks, e_code,))
+            mysql.connection.commit()
+            sol_id = random.randint(100,1000000)
+            subjective_solution = request.files['subjective_solution']
+            if subjective_solution.filename == '':
+                flash('Solution file not uploaded!','danger')
+                return redirect(request.url)
+            if subjective_solution and allowed_file(subjective_solution.filename):
+                filename = secure_filename(subjective_solution.filename)
+                gmt = time.gmtime()
+                ts = calendar.timegm(gmt)
+                fileNameToStore = str(ts) + '_' + filename
+                cursor = mysql.connection.cursor()
+                cursor.execute('INSERT INTO subjective_solution VALUES (%s, %s, %s)', (sol_id, fileNameToStore, q_id,))
+                mysql.connection.commit()
+                subjective_solution.save(os.path.join(app.config['STAFF_UPLOAD_FOLDER'], fileNameToStore))
+        flash('Exam created successfully!','success')
+        return redirect(url_for('home'))
+        
 
 
 @app.route('/staff_profile')
@@ -346,7 +428,10 @@ def view_exam(e_code):
     cursor = mysql.connection.cursor()
     cursor.execute('SELECT * FROM options ORDER BY option_description')
     options = cursor.fetchall()
-    return render_template('staff/view_exam.html',exam_info=exam_info,questions=questions,options=options)
+    cursor = mysql.connection.cursor()
+    cursor.execute('SELECT * FROM subjective_solution')
+    subjective_solutions = cursor.fetchall()
+    return render_template('staff/view_exam.html',exam_info=exam_info,questions=questions,options=options,subjective_solutions=subjective_solutions)
 
 @app.route('/delete_exam/<int:e_code>',methods=["GET"])
 def delete_exam(e_code):
@@ -363,6 +448,12 @@ def delete_exam(e_code):
             mysql.connection.commit()
         cursor2 = mysql.connection.cursor()
         cursor2.execute('DELETE FROM options WHERE question_id = %s',(q[0],))
+        mysql.connection.commit()
+        cursor7 = mysql.connection.cursor()
+        cursor7.execute('DELETE FROM subjective_solution WHERE question_id = %s',(q[0],))
+        mysql.connection.commit()
+        cursor10 = mysql.connection.cursor()
+        cursor10.execute('DELETE FROM subjective_student_solution WHERE question_id = %s',(q[0],))
         mysql.connection.commit()
     cursor3 = mysql.connection.cursor()
     cursor3.execute('DELETE FROM question WHERE exam_code = %s',(e_code,))
@@ -404,10 +495,13 @@ def get_student_responses(e_code, user_id):
     cursor.execute('SELECT * FROM options')
     options = cursor.fetchall()
     cursor = mysql.connection.cursor()
+    cursor.execute('SELECT * FROM subjective_student_solution')
+    subjective_solutions = cursor.fetchall()
+    cursor = mysql.connection.cursor()
     cursor.execute('SELECT * FROM users WHERE user_id = %s',(user_id,))
     student = cursor.fetchone()
     #print(selected_options)
-    return render_template('staff/student_result.html',student=student,selected_options=selected_options,exam_info=exam_info,exams_given=exams_given,questions=questions,options=options)
+    return render_template('staff/student_result.html',student=student,subjective_solutions=subjective_solutions,selected_options=selected_options,exam_info=exam_info,exams_given=exams_given,questions=questions,options=options)
 
 @app.route('/subjects_exams/<int:s_id>',methods=["GET"])
 def subjects_exams(s_id):
@@ -419,6 +513,33 @@ def subjects_exams(s_id):
     exams = cursor.fetchall()
     return render_template('staff/subject_exams.html', subjects=subjects, exams=exams, today=today)
 
+@app.route('/unchecked_exams')
+def unchecked_exams():
+    cursor = mysql.connection.cursor()
+    cursor.execute('SELECT * FROM subject')
+    subjects = cursor.fetchall()
+    cursor = mysql.connection.cursor()
+    cursor.execute('SELECT * FROM exams_given, users, exam WHERE users.user_id = exams_given.user_id AND exam.exam_code = exams_given.exam_code AND is_checked = 0',)
+    exams_given = cursor.fetchall()
+    return render_template('staff/show_unchecked_exams.html',subjects=subjects,exams_given=exams_given)
+
+@app.route('/store_marks',methods=["GET","POST"])
+def store_marks():
+    if request.method == 'POST' and 'marks' in request.form:
+        exam_code = request.form['exam_code']
+        marks = request.form['marks']
+        is_checked = 1
+        if not marks:
+            flash('Form field cannot be empty!','danger')
+        else:
+            cursor = mysql.connection.cursor()
+            cursor.execute('UPDATE exams_given SET marks = %s, is_checked = %s WHERE exam_code = %s' , ( marks, is_checked,exam_code,))
+            mysql.connection.commit()
+            flash('Marks Updated!','success')
+            return redirect(url_for('home'))
+    elif request.method == 'POST':
+        flash('No changes made.','danger')
+    return redirect(url_for('unchecked_exams'))
 
 
 #---------------------------------------------STUDENT ROUTES------------------------------------------------
@@ -535,17 +656,33 @@ def submit_exam():
         attempts=1
         cursor = mysql.connection.cursor()
         for q in questions:
-            rand_opt_id = random.randint(100,1000000)
-            selected_option_id = request.form[str(q[0])]
-            cursor = mysql.connection.cursor()
-            cursor.execute('SELECT * FROM options WHERE option_id = %s',(selected_option_id,))
-            this_option = cursor.fetchone()
-            #print(selected_option_id,str(q[0]))
-            if this_option[2] == '1':
-                tot_marks += 2
-            cursor = mysql.connection.cursor()
-            cursor.execute('INSERT INTO selected_options VALUES (%s, %s, %s)',(rand_opt_id,session['user_id'],selected_option_id,))
-            mysql.connection.commit()
+            if q[2] == 'O':
+                rand_opt_id = random.randint(100,1000000)
+                selected_option_id = request.form[str(q[0])]
+                cursor = mysql.connection.cursor()
+                cursor.execute('SELECT * FROM options WHERE option_id = %s',(selected_option_id,))
+                this_option = cursor.fetchone()
+                #print(selected_option_id,str(q[0]))
+                if this_option[2] == '1':
+                    tot_marks += q[3]
+                cursor = mysql.connection.cursor()
+                cursor.execute('INSERT INTO selected_options VALUES (%s, %s, %s)',(rand_opt_id,session['user_id'],selected_option_id,))
+                mysql.connection.commit()
+            elif q[2] == 'S':
+                sol_id = random.randint(100,1000000)
+                subjective_solution = request.files[str(q[0])]
+                if subjective_solution.filename == '':
+                    flash('Solution file not uploaded!','danger')
+                    return redirect(request.url)
+                if subjective_solution and allowed_file(subjective_solution.filename):
+                    filename = secure_filename(subjective_solution.filename)
+                    gmt = time.gmtime()
+                    ts = calendar.timegm(gmt)
+                    fileNameToStore = str(ts) + '_' + filename
+                    cursor = mysql.connection.cursor()
+                    cursor.execute('INSERT INTO subjective_student_solution VALUES (%s, %s, %s, %s)', (sol_id, fileNameToStore, q[0], session['user_id'],))
+                    mysql.connection.commit()
+                    subjective_solution.save(os.path.join(app.config['STUDENT_UPLOAD_FOLDER'], fileNameToStore))
         cursor = mysql.connection.cursor()
         cursor.execute('INSERT INTO exams_given VALUES (%s, %s, %s, %s, %s)',(e_code,session['user_id'],tot_marks,attempts,today,))
         mysql.connection.commit()
@@ -562,9 +699,12 @@ def submit_exam():
         cursor.execute('SELECT * FROM question WHERE exam_code = %s',(e_code,))
         questions = cursor.fetchall()
         cursor = mysql.connection.cursor()
+        cursor.execute('SELECT * FROM subjective_student_solution')
+        subjective_solutions = cursor.fetchall()
+        cursor = mysql.connection.cursor()
         cursor.execute('SELECT * FROM options')
         options = cursor.fetchall()
-        return render_template('student/results.html',selected_options=selected_options,exam_info=exam_info,exams_given=exams_given,questions=questions,options=options)
+        return render_template('student/results.html',selected_options=selected_options,subjective_solutions=subjective_solutions,exam_info=exam_info,exams_given=exams_given,questions=questions,options=options)
     else:
         return redirect(url_for('home'))
     
@@ -572,6 +712,8 @@ def submit_exam():
 def get_exam_by_code():
     e_code = request.form['exam_code']
     return redirect (url_for('get_exam',exam_code=e_code))
+
+
 
 @app.route('/get_responses/<int:e_code>',methods=["GET"])
 def get_responses(e_code):
@@ -588,9 +730,12 @@ def get_responses(e_code):
     cursor.execute('SELECT * FROM question WHERE exam_code = %s',(e_code,))
     questions = cursor.fetchall()
     cursor = mysql.connection.cursor()
+    cursor.execute('SELECT * FROM subjective_student_solution')
+    subjective_solutions = cursor.fetchall()
+    cursor = mysql.connection.cursor()
     cursor.execute('SELECT * FROM options')
     options = cursor.fetchall()
-    return render_template('student/results.html',selected_options=selected_options,exam_info=exam_info,exams_given=exams_given,questions=questions,options=options)
+    return render_template('student/results.html',selected_options=selected_options,subjective_solutions=subjective_solutions,exam_info=exam_info,exams_given=exams_given,questions=questions,options=options)
 
 
 if __name__ == '__main__':

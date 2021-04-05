@@ -19,15 +19,23 @@
     <div class="card">
         <div class="card-body">
             <div class="card-title bg-light p-3">{{question[1]|safe}}</div>
-            <ul class="list-group list-group-flush">
-                {% for option in options %}
-                {% if option[3] == question[0] %}
-                <div class="list-group-item borderless">
-                    {{ option[1] }}
-                </div>
-                {% endif %}
+            {% if question[2] == 'O' %}
+                <ul class="list-group list-group-flush">
+                    {% for option in options %}
+                    {% if option[3] == question[0] %}
+                    <div class="list-group-item borderless">
+                        {{ option[1] }}
+                    </div>
+                    {% endif %}
+                    {% endfor %}
+                </ul>
+            {% elif question[2] == 'S' %}
+                {% for sub_sol in subjective_solutions %}
+                    {% if question[0] == sub_sol[2] %}
+                        <embed src="/static/staff_uploads/{{sub_sol[1]}}" width="100%" height="500px"/>
+                    {% endif %}
                 {% endfor %}
-            </ul>
+            {% endif %}
         </div>
 
     </div>
