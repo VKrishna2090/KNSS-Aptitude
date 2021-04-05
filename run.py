@@ -433,6 +433,52 @@ def view_exam(e_code):
     subjective_solutions = cursor.fetchall()
     return render_template('staff/view_exam.html',exam_info=exam_info,questions=questions,options=options,subjective_solutions=subjective_solutions)
 
+@app.route('/edit_exam/<int:e_code>',methods=["GET"])
+def edit_exam(e_code):
+    cursor = mysql.connection.cursor()
+    cursor.execute('SELECT * FROM exam WHERE exam_code = %s',(e_code,))
+    exam_info = cursor.fetchone()
+    cursor.execute('SELECT * FROM subject')
+    subjects = cursor.fetchall()
+    #cursor = mysql.connection.cursor()
+    #cursor.execute('SELECT * FROM question WHERE exam_code = %s',(e_code,))
+    #questions = cursor.fetchall()
+    #cursor = mysql.connection.cursor()
+    #cursor.execute('SELECT * FROM options ORDER BY option_description')
+    #options = cursor.fetchall()
+    return render_template('staff/edit_exam.html',exam_info=exam_info,subjects=subjects)
+
+@app.route('/update_exam_details/<int:e_code>', methods = ['POST','GET'])
+def update_exam_details(e_code):
+    if request.method == 'POST' and 'exam_title' in request.form:
+        exam_title = request.form['exam_title']
+        exam_instructions = request.form['exam_instructions']
+        subject = request.form['subject']
+        time_limit = request.form['exam_time_limit']
+        total_num_of_questions = request.form['exam_no_of_questions']
+        total_marks = request.form['exam_total_marks']
+        start_date = request.form['exam_start_date']
+        end_date = request.form['exam_end_date']
+        if not exam_title or not time_limit or not total_num_of_questions or not total_marks or not start_date or not end_date:
+            flash('Form field cannot be empty!','danger')
+        else:
+            cursor = mysql.connection.cursor()
+            cursor.execute('UPDATE exam SET exam_title = %s, exam_instructions = %s, time_limit = %s, total_number_of_questions = %s, total_marks = %s, start_date = %s, end_date = %s, subject_id = %s WHERE exam_code = %s' , ( exam_title, exam_instructions, time_limit, total_num_of_questions, total_marks, start_date, end_date, subject, e_code,))
+            mysql.connection.commit()
+            session['exam_title'] = exam_title
+            session['exam_instructions'] = exam_instructions
+            session['subject'] = subject
+            session['exam_time_limit'] = time_limit
+            session['exam_no_of_questions'] = total_num_of_questions
+            session['exam_total_marks'] = total_marks
+            session['exam_start_date'] = start_date
+            session['exam_end_date'] = end_date
+            flash('Exam Details Updated!','success')
+            return redirect(url_for('staff_dashboard'))
+    elif request.method == 'POST':
+        flash('No changes made.','danger')
+    return render_template('staff/edit_exam.html')
+
 @app.route('/delete_exam/<int:e_code>',methods=["GET"])
 def delete_exam(e_code):
     cursor1 = mysql.connection.cursor()
