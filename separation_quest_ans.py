@@ -16,7 +16,7 @@ def getQuestionAndOption():
         line = line.rstrip()
         if re.search('^[1-9]\. .*', line) or re.search('^[1-9][0-9]\. .*', line):
             i=i+1
-            ques = line[3:].strip()
+            ques = "<b>"+line[3:].strip()+"</b>"
             qno[ques] = list()
             answers[ques] = ""
         if re.search('^[a-d]\).*', line):
