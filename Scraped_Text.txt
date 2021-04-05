@@ -1,52 +1,40 @@
 
 
-This set of Computer Networks Multiple Choice Questions & Answers (MCQs) focuses on “Reference Models – 2”.
-1. OSI stands for __________
-a) open system interconnection
-b) operating system interface
-c) optical service implementation
-d) open service Internet
-View Answer Answer: a
-Explanation: OSI is the abbreviation for Open System Interconnection. OSI model provides a structured plan on how applications communicate over a network, which also helps us to have a structured plan for troubleshooting. It is recognized by the ISO as the generalized model for computer network i.e. it can be modified to design any kind of computer network.
-
+This set of Java Multiple Choice Questions & Answers (MCQs) focuses on “Concepts of OOPs”.
+1. Which of the following is not OOPS concept in Java?
+a) Inheritance
+b) Encapsulation
+c) Polymorphism
+d) Compilation
+View AnswerAnswer: d
+Explanation: There are 4 OOPS concepts in Java. Inheritance, Encapsulation, Polymorphism and Abstraction.
 
 advertisement
 
 
 
 
-2. The number of layers in ISO OSI reference model is __________
-a) 4
-b) 5
-c) 6
-d) 7
-View Answer Answer: d
-Explanation: In OSI reference model, there are 7 layers namely Application, Presentation, Session, Transport, Network, Data Link and Physical layer. Each layer uses a protocol to perform its designated function, for example, the data link layer uses error detection protocols for error control functions.
-
-3. TCP/IP model does not have ______ layer but OSI model have this layer.
-a) session layer
-b) transport layer
-c) application layer
-d) network layer
-View Answer Answer: a
-Explanation: In OSI reference model, there are two layers which are not present in TCP/IP model. They are Presentation and Session layer. The functions of Presentation and Session layer in the OSI model are handled by the transport layer itself in TCP/IP.
-
-4. Which layer is used to link the network support layers and user support layers?
-a) session layer
-b) data link layer
-c) transport layer
-d) network layer
-View Answer Answer: c
-Explanation: Physical, data link and network layers are network support layers and session, presentation and application layers are user support layers. The transport layer links these layers by segmenting and rearranging the data. It uses protocols like TCP and UDP.
-
-5. Which address is used on the internet for employing the TCP/IP protocols?
-a) physical address and logical address
-b) port address
-c) specific address
-d) all of the mentioned
-View Answer Answer: d
-Explanation: The physical, logical, port and specific addresses are used in TCP/IP protocol. All the addressing schemes, that is physical (MAC) and logical address, port address and specific address are employed in both TCP/IP model and OSI model. In TCP/IP, the addresses are more focused on the internet implementation of these addresses.
-
+2. Which of the following is a type of polymorphism in Java?
+a) Compile time polymorphism
+b) Execution time polymorphism
+c) Multiple polymorphism
+d) Multilevel polymorphism
+View AnswerAnswer: a
+Explanation: There are two types of polymorphism in Java. Compile time polymorphism (overloading) and runtime polymorphism (overriding).
+3. When does method overloading is determined?
+a) At run time
+b) At compile time
+c) At coding time
+d) At execution time
+View AnswerAnswer: b
+Explanation: Overloading is determined at compile time. Hence, it is also known as compile time polymorphism.
+4. When Overloading does not occur?
+a) More than one method with same name but different method signature and different number or type of parameters
+b) More than one method with same name, same signature but different number of signature
+c) More than one method with same name, same signature, same number of parameters but different type
+d) More than one method with same name, same number of parameters and type but different signature
+View AnswerAnswer: d
+Explanation: Overloading occurs when more than one method with same name but different constructor and also when same signature but different number of parameters and/or parameter type.
 
 advertisement
 
@@ -59,54 +47,60 @@ advertisement
 
 
 
-6. TCP/IP model was developed _____ the OSI model.
-a) prior to
-b) after
-c) simultaneous to
-d) with no link to
-View Answer Answer: a
-Explanation: Several TCP/IP prototypes were developed at multiple research centers between 1978 and 1983, whereas OSI reference model was developed in the year 1984. TCP/IP was developed with the intention to create a model for the Internet while OSI was intended to be a general network model.
-
-7. Which layer is responsible for process to process delivery in a general network model?
-a) network layer
-b) transport layer
-c) session layer
-d) data link layer
-View Answer Answer: b
-Explanation: The role of Transport layer (Layer 4) is to establish a logical end to end connection between two systems in a network. The protocols used in Transport layer is TCP and UDP. The transport layer is responsible for segmentation of the data. It uses ports for the implementation of process-to-process delivery.
-
-8. Which address is used to identify a process on a host by the transport layer?
-a) physical address
-b) logical address
-c) port address
-d) specific address
-View Answer Answer: c
-Explanation: A port number is a way to identify a specific process to which an Internet or other network message is to be forwarded when it arrives at a server. Some examples of port numbers are port 20 which is used for FTP data, port 22 which is used for SSH remote login ,and port 23 which is used for TELNET.
-
-9. Which layer provides the services to user?
-a) application layer
-b) session layer
-c) presentation layer
-d) physical layer
-View Answer Answer: a
-Explanation: In networking, a user mainly interacts with application layer to create and send information to other computer or network. Application layer provides the interface between applications and the network. It is the top-most layer in both the TCP/IP and the OSI model.
-
+5. Which concept of Java is a way of converting real world objects in terms of class?
+a) Polymorphism
+b) Encapsulation
+c) Abstraction
+d) Inheritance
+View AnswerAnswer: c
+Explanation: Abstraction is the concept of defining real world objects in terms of classes or interfaces.
+6. Which concept of Java is achieved by combining methods and attribute into a class?
+a) Encapsulation
+b) Inheritance
+c) Polymorphism
+d) Abstraction
+View AnswerAnswer: a
+Explanation: Encapsulation is implemented by combining methods and attribute into a class. The class acts like a container of encapsulating properties.
+7. What is it called if an object has its own lifecycle and there is no owner?
+a) Aggregation
+b) Composition
+c) Encapsulation
+d) Association
+View AnswerAnswer: d
+Explanation: It is a relationship where all objects have their own lifecycle and there is no owner. This occurs where many to many relationships are available, instead of one to one or one to many.
 
 advertisement
 
 
 
 
-10. Transmission data rate is decided by ____________
-a) network layer
-b) physical layer
-c) data link layer
-d) transport layer
-View Answer Answer: b
-Explanation: Physical layer is a layer 1 device which deals with network cables or the standards in use like connectors, pins, electric current used etc. Basically the transmission speed is determined by the cables and connectors used. Hence it is physical layer that determines the transmission speed in network. Some of the cables used for high speed data transmission are optical fiber cables and twisted pair cables.
+8. What is it called where child object gets killed if parent object is killed?
+a) Aggregation
+b) Composition
+c) Encapsulation
+d) Association
+View AnswerAnswer: b
+Explanation: Composition occurs when child object gets killed if parent object gets killed. Aggregation is also known as strong Aggregation.
+9. What is it called where object has its own lifecycle and child object cannot belong to another parent object?
+a) Aggregation
+b) Composition
+c) Encapsulation
+d) Association
+View AnswerAnswer: a
+Explanation: Aggregation occurs when objects have their own life cycle and child object can associate with only one parent object.
+10. Method overriding is combination of inheritance and polymorphism?
+a) True
+b) false
+View AnswerAnswer: a
+Explanation: In order for method overriding, method with same signature in both superclass and subclass is required with same signature. That satisfies both concepts inheritance and polymorphism.
 
-Sanfoundry Global Education & Learning Series – Computer Networks.
-To practice all areas of Computer Networks, here is complete set of 1000+ Multiple Choice Questions and Answers.
+advertisement
+
+
+
+
+Sanfoundry Global Education & Learning Series – Java Programming Language.
+Java Practice ResourcesJava Mock Tests & Certification Test | 1000 Java MCQs | 1000 Java Programs | 1000 Java Algorithms | Best Java Books
 
 Participate in the Sanfoundry Certification contest to get free Certificate of Merit. Join our social networks below and stay updated with latest contests, videos, internships and jobs!
 
@@ -115,4 +109,4 @@ Telegram | Youtube | LinkedIn | Instagram | Facebook | Twitter | Pinterest
 
 Youtube | LinkedIn | Instagram | Facebook | Twitter | Pinterest
 
-« Prev - Computer Networks Questions & Answers – Reference Models – 1» Next - Computer Networks Questions & Answers – Physical Layer 
+« Prev - Java Questions & Answers – Control Statements – 2» Next - Java Questions & Answers – JDK-JRE-JIT-JVM 
