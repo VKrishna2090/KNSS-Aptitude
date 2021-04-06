@@ -27,13 +27,17 @@
             {% endfor %}
             {% endfor %}
             <td>{{row[4]}}</td>
-            <td>{{row[2]|int}} / 
-                {% for ex in exams %}
-                    {% if ex[0] == row[0] %}
-                        {{ex[5]|int}}
-                    {% endif %}
-                {% endfor %}
-            </td>
+            {% if row[5] == 1 %} 
+                <td>{{row[2]|int}} / 
+                    {% for ex in exams %}
+                        {% if ex[0] == row[0] %}
+                            {{ex[5]|int}}
+                        {% endif %}
+                    {% endfor %}
+                </td>
+            {% else %}
+                <td>--</td>
+            {% endif %}
             <td>
                 <center>
                     <a href="{{ url_for('get_responses',e_code=row[0]) }}" type="button"

@@ -3,7 +3,11 @@
 <div class="container">
     <figure class="text-center">
         <h3 class="display-5">{{ exam_info[1] }}</h3>
-        <h4><strong>Score: {{exams_given[2]}} out of {{exam_info[5]}}</strong></h4>
+        {% if exams_given[5] == 1 %} 
+            <h4><strong>Score: {{exams_given[2]}} out of {{exam_info[5]}}</strong></h4>
+        {% else %}
+            <h4><strong>Assessment is pending</strong></h4>
+        {% endif %}
     </figure>
     <br>
     <form class="form-group">

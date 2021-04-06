@@ -1,13 +1,15 @@
-from flask import *
-import random
-import datetime
-from flask_mysqldb import MySQL
-from SanFoundry_Scraped import initiate_scraping, scrape
-from separation_quest_ans import getQuestionAndOption
 import os
-import calendar
 import time
+import random
+import calendar
+import datetime
+from flask import *
+from flask_mysqldb import MySQL
+from flask_mail import Mail, Message
 from werkzeug.utils import secure_filename
+from separation_quest_ans import getQuestionAndOption
+from SanFoundry_Scraped import initiate_scraping, scrape
+
 
 STAFF_UPLOAD_FOLDER = 'static\\staff_uploads'
 STUDENT_UPLOAD_FOLDER = 'static\\student_uploads'
@@ -24,7 +26,15 @@ app.config['MYSQL_DB'] = 'knss_aptitude'
 app.config['STAFF_UPLOAD_FOLDER'] = STAFF_UPLOAD_FOLDER
 app.config['STUDENT_UPLOAD_FOLDER'] = STUDENT_UPLOAD_FOLDER
 
+app.config['MAIL_SERVER']='smtp.gmail.com'
+app.config['MAIL_PORT'] = 465
+app.config['MAIL_USERNAME'] = 'knss.aptitude@gmail.com'
+app.config['MAIL_PASSWORD'] = 'knss12345!'
+app.config['MAIL_USE_TLS'] = False
+app.config['MAIL_USE_SSL'] = True
+
 mysql = MySQL(app)
+mail = Mail(app)
 
 #---------------------------------------------GENERAL Methods------------------------------------------------
 
@@ -220,7 +230,7 @@ def create_automatic_exam():
 @app.route('/create_manual_exam', methods = ['POST','GET'])
 def create_manual_exam():
     msg = ''
-    if request.method == 'POST' and ('exam_title' and 'exam_no_of_questions' and 'exam_time_limit' and 'exam_total_marks') in request.form:
+    if request.method == 'POST' and ('exam_title' and 'no_of_objective_questions' and 'exam_time_limit' and 'exam_total_marks') in request.form:
         title = request.form['exam_title']
         time_limit = request.form['exam_time_limit'] + "00"
         if 'exam_instructions' in request.form:
@@ -229,9 +239,9 @@ def create_manual_exam():
             instructions = ''
         total_marks = request.form['exam_total_marks']
          
-        no_of_obj_q = request.form['exam_no_of_questions']
+        no_of_obj_q = request.form['no_of_objective_questions']
         no_of_sub_q = request.form['no_of_subjective_questions']
-        no_of_questions = no_of_obj_q + no_of_sub_q
+        no_of_questions = int(no_of_obj_q) + int(no_of_sub_q)
 
         subject_id = request.form['subject']
         exam_code = random.randint(100,1000000)
@@ -465,14 +475,6 @@ def update_exam_details(e_code):
             cursor = mysql.connection.cursor()
             cursor.execute('UPDATE exam SET exam_title = %s, exam_instructions = %s, time_limit = %s, total_number_of_questions = %s, total_marks = %s, start_date = %s, end_date = %s, subject_id = %s WHERE exam_code = %s' , ( exam_title, exam_instructions, time_limit, total_num_of_questions, total_marks, start_date, end_date, subject, e_code,))
             mysql.connection.commit()
-            session['exam_title'] = exam_title
-            session['exam_instructions'] = exam_instructions
-            session['subject'] = subject
-            session['exam_time_limit'] = time_limit
-            session['exam_no_of_questions'] = total_num_of_questions
-            session['exam_total_marks'] = total_marks
-            session['exam_start_date'] = start_date
-            session['exam_end_date'] = end_date
             flash('Exam Details Updated!','success')
             return redirect(url_for('staff_dashboard'))
     elif request.method == 'POST':
@@ -574,13 +576,28 @@ def store_marks():
     if request.method == 'POST' and 'marks' in request.form:
         exam_code = request.form['exam_code']
         marks = request.form['marks']
+        student_id = request.form['user_id']
         is_checked = 1
         if not marks:
             flash('Form field cannot be empty!','danger')
         else:
             cursor = mysql.connection.cursor()
-            cursor.execute('UPDATE exams_given SET marks = %s, is_checked = %s WHERE exam_code = %s' , ( marks, is_checked,exam_code,))
+            cursor.execute('UPDATE exams_given SET marks = %s, is_checked = %s WHERE exam_code = %s AND user_id = %s' , ( marks, is_checked,exam_code,student_id,))
             mysql.connection.commit()
+            cursor = mysql.connection.cursor()
+            cursor.execute('SELECT * FROM exam WHERE exam_code = %s' , (exam_code,))
+            exam = cursor.fetchone()
+            cursor = mysql.connection.cursor()
+            cursor.execute('SELECT * FROM users WHERE user_id = %s' , (student_id,))
+            student = cursor.fetchone()
+
+            msg = Message('Score released for  '+exam[1], sender = 'knss.aptitude@gmail.com', recipients = [student[1]])
+            msg.body = f"""Hello {student[3]},
+Assessment for {exam[1]} has been completed. 
+You have received {marks} out of {int(exam[5])}.
+Visit website for more details."""
+            mail.send(msg)
+
             flash('Marks Updated!','success')
             return redirect(url_for('home'))
     elif request.method == 'POST':
