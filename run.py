@@ -730,7 +730,7 @@ def submit_exam():
                     mysql.connection.commit()
                     subjective_solution.save(os.path.join(app.config['STUDENT_UPLOAD_FOLDER'], fileNameToStore))
         cursor = mysql.connection.cursor()
-        cursor.execute('INSERT INTO exams_given VALUES (%s, %s, %s, %s, %s)',(e_code,session['user_id'],tot_marks,attempts,today,))
+        cursor.execute('INSERT INTO exams_given VALUES (%s, %s, %s, %s, %s, %s)',(e_code,session['user_id'],tot_marks,attempts,today,0,))
         mysql.connection.commit()
         cursor = mysql.connection.cursor()
         cursor.execute('SELECT * FROM exam WHERE exam_code = %s',(e_code,))
