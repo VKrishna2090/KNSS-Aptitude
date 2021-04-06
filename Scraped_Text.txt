@@ -1,191 +1,110 @@
 
 
-<<<<<<< HEAD
-This set of Java Multiple Choice Questions & Answers (MCQs) focuses on “Concepts of OOPs”.
-1. Which of the following is not OOPS concept in Java?
-a) Inheritance
-b) Encapsulation
-c) Polymorphism
-d) Compilation
-View AnswerAnswer: d
-Explanation: There are 4 OOPS concepts in Java. Inheritance, Encapsulation, Polymorphism and Abstraction.
-=======
-This set of Python Multiple Choice Questions & Answers (MCQs) focuses on “Lists”.
-1. Which of the following commands will create a list?
-a) list1 = list()
-b) list1 = [] 
-c) list1 = list([1, 2, 3])
-d) all of the mentioned
-View Answer Answer: d
-Explanation: Execute in the shell to verify
->>>>>>> c36154d7f6abfc14a2e311f24b929b5e0b66e68f
+This set of Database Multiple Choice Questions & Answers (MCQs) focuses on “Keys”.
+1. Which one of the following is a set of one or more attributes taken collectively to uniquely identify a record?
+a) Candidate key
+b) Sub key
+c) Super key
+d) Foreign key
+View Answer Answer: c
+Explanation: Super key is the superset of all the keys in a relation. 
 
 advertisement
 
 
 
 
-<<<<<<< HEAD
-2. Which of the following is a type of polymorphism in Java?
-a) Compile time polymorphism
-b) Execution time polymorphism
-c) Multiple polymorphism
-d) Multilevel polymorphism
-View AnswerAnswer: a
-Explanation: There are two types of polymorphism in Java. Compile time polymorphism (overloading) and runtime polymorphism (overriding).
-3. When does method overloading is determined?
-a) At run time
-b) At compile time
-c) At coding time
-d) At execution time
-View AnswerAnswer: b
-Explanation: Overloading is determined at compile time. Hence, it is also known as compile time polymorphism.
-4. When Overloading does not occur?
-a) More than one method with same name but different method signature and different number or type of parameters
-b) More than one method with same name, same signature but different number of signature
-c) More than one method with same name, same signature, same number of parameters but different type
-d) More than one method with same name, same number of parameters and type but different signature
-View AnswerAnswer: d
-Explanation: Overloading occurs when more than one method with same name but different constructor and also when same signature but different number of parameters and/or parameter type.
-=======
-2. What is the output when we execute list(“hello”)?
-a) [‘h’, ‘e’, ‘l’, ‘l’, ‘o’] 
-b) [‘hello’] 
-c) [‘llo’] 
-d) [‘olleh’] 
+2. Consider attributes ID, CITY and NAME. Which one of this can be considered as a super key?
+a) NAME
+b) ID
+c) CITY
+d) CITY, ID
+View Answer Answer: b
+Explanation: Here the id is the only attribute which can be taken as a key. Other attributes are not uniquely identified. 
+3. The subset of a super key is a candidate key under what condition?
+a) No proper subset is a super key
+b) All subsets are super keys
+c) Subset is a super key
+d) Each subset is a super key
 View Answer Answer: a
-Explanation: Execute in the shell to verify. 
-3. Suppose listExample is [‘h’,’e’,’l’,’l’,’o’], what is len(listExample)?
-a) 5
-b) 4
-c) None
-d) Error
-View Answer Answer: a
-Explanation: Execute in the shell and verify. 
-4. Suppose list1 is [2445,133,12454,123], what is max(list1)?
-a) 2445
-b) 133
-c) 12454
-d) 123
+Explanation: The subset of a set cannot be the same set. Candidate key is a set from a super key which cannot be the whole of the super set.  
+4. A _____ is a property of the entire relation, rather than of the individual tuples in which each tuple is unique.
+a) Rows
+b) Key
+c) Attribute
+d) Fields
+View Answer Answer: b
+Explanation: Key is the constraint which specifies uniqueness. 
+
+advertisement
+
+
+
+
+
+advertisement
+
+
+
+
+5. Which one of the following attribute can be taken as a primary key?
+a) Name
+b) Street
+c) Id
+d) Department
 View Answer Answer: c
-Explanation: Max returns the maximum element in the list.
-5. Suppose list1 is [3, 5, 25, 1, 3], what is min(list1)?
-a) 3
-b) 5
-c) 25
-d) 1
+Explanation: The attributes name, street and department can repeat for some tuples. But the id attribute has to be unique. So it forms a primary key. 
+6. Which one of the following cannot be taken as a primary key?
+a) Id
+b) Register number
+c) Dept_id
+d) Street
 View Answer Answer: d
-Explanation: Min returns the minimum element in the list.
->>>>>>> c36154d7f6abfc14a2e311f24b929b5e0b66e68f
+Explanation: Street is the only attribute which can occur more than once. 
+7. An attribute in a relation is a foreign key if the _______ key from one relation is used as an attribute in that relation.
+a) Candidate
+b) Primary
+c) Super
+d) Sub
+View Answer Answer: b
+Explanation: The primary key has to be referred in the other relation to form a foreign key in that relation. 
 
 advertisement
 
 
 
 
-
-advertisement
-
-
-
-
-<<<<<<< HEAD
-5. Which concept of Java is a way of converting real world objects in terms of class?
-a) Polymorphism
-b) Encapsulation
-c) Abstraction
-d) Inheritance
-View AnswerAnswer: c
-Explanation: Abstraction is the concept of defining real world objects in terms of classes or interfaces.
-6. Which concept of Java is achieved by combining methods and attribute into a class?
-a) Encapsulation
-b) Inheritance
-c) Polymorphism
-d) Abstraction
-View AnswerAnswer: a
-Explanation: Encapsulation is implemented by combining methods and attribute into a class. The class acts like a container of encapsulating properties.
-7. What is it called if an object has its own lifecycle and there is no owner?
-a) Aggregation
-b) Composition
-c) Encapsulation
-d) Association
-View AnswerAnswer: d
-Explanation: It is a relationship where all objects have their own lifecycle and there is no owner. This occurs where many to many relationships are available, instead of one to one or one to many.
-
-advertisement
-
-
-
-
-8. What is it called where child object gets killed if parent object is killed?
-a) Aggregation
-b) Composition
-c) Encapsulation
-d) Association
-View AnswerAnswer: b
-Explanation: Composition occurs when child object gets killed if parent object gets killed. Aggregation is also known as strong Aggregation.
-9. What is it called where object has its own lifecycle and child object cannot belong to another parent object?
-a) Aggregation
-b) Composition
-c) Encapsulation
-d) Association
-View AnswerAnswer: a
-Explanation: Aggregation occurs when objects have their own life cycle and child object can associate with only one parent object.
-10. Method overriding is combination of inheritance and polymorphism?
-a) True
-b) false
-View AnswerAnswer: a
-Explanation: In order for method overriding, method with same signature in both superclass and subclass is required with same signature. That satisfies both concepts inheritance and polymorphism.
-=======
-6. Suppose list1 is [1, 5, 9], what is sum(list1)?
-a) 1
-b) 9
-c) 15
-d) Error
+8. The relation with the attribute which is the primary key is referenced in another relation. The relation which has the attribute as a primary key is called ______________
+a) Referential relation
+b) Referencing relation
+c) Referenced relation
+d) Referred relation
 View Answer Answer: c
-Explanation: Sum returns the sum of all elements in the list. 
-7. To shuffle the list(say list1) what function do we use?
-a) list1.shuffle()
-b) shuffle(list1)
-c) random.shuffle(list1)
-d) random.shuffleList(list1)
+Explanation: None. 
+9. The ______ is the one in which the primary key of one relation is used as a normal attribute in another relation.
+a) Referential relation
+b) Referencing relation
+c) Referenced relation
+d) Referred relation
 View Answer Answer: c
-Explanation: Execute in the shell to verify.
-8. Suppose list1 is [4, 2, 2, 4, 5, 2, 1, 0], Which of the following is correct syntax for slicing operation?
-a) print(list1[0])
-b) print(list1[:2])
-c) print(list1[:-2])
-d) all of the mentioned
-View Answer Answer: d
-Explanation: Slicing is allowed in lists just as in the case of strings.
-9. Suppose list1 is [2, 33, 222, 14, 25], What is list1[-1]?
-a) Error
-b) None
-c) 25
-d) 2
-View Answer Answer: c
-Explanation: -1 corresponds to the last index in the list.
->>>>>>> c36154d7f6abfc14a2e311f24b929b5e0b66e68f
-
-advertisement
-
-
-
-
-<<<<<<< HEAD
-Sanfoundry Global Education & Learning Series – Java Programming Language.
-Java Practice ResourcesJava Mock Tests & Certification Test | 1000 Java MCQs | 1000 Java Programs | 1000 Java Algorithms | Best Java Books
-=======
-10. Suppose list1 is [2, 33, 222, 14, 25], What is list1[:-1]?
-a) [2, 33, 222, 14] 
-b) Error
-c) 25
-d) [25, 14, 222, 33, 2] 
+Explanation: None. 
+10. A _________ integrity constraint requires that the values appearing in specified attributes of any tuple in the referencing relation also appear in specified attributes of at least one tuple in the referenced relation.
+a) Referential
+b) Referencing
+c) Specific
+d) Primary
 View Answer Answer: a
-Explanation: Execute in the shell to verify.
-Sanfoundry Global Education & Learning Series – Python.
-To practice all areas of Python, here is complete set of 1000+ Multiple Choice Questions and Answers.
->>>>>>> c36154d7f6abfc14a2e311f24b929b5e0b66e68f
+Explanation: A relation, say r1, may include among its attributes the primary key of another relation, say r2. This attribute is called a foreign key from r1, referencing r2. The relation r1 is also called the referencing relation of the foreign key dependency, and r2 is called the referenced relation of the foreign key. 
+
+advertisement
+
+
+
+
+Sanfoundry Global Education & Learning Series – Database Management System.
+
+To practice all areas of Database Management System, here is complete set on 1000+ Multiple Choice Questions and Answers on Database Management System.
+
 
 Participate in the Sanfoundry Certification contest to get free Certificate of Merit. Join our social networks below and stay updated with latest contests, videos, internships and jobs!
 
@@ -194,8 +113,4 @@ Telegram | Youtube | LinkedIn | Instagram | Facebook | Twitter | Pinterest
 
 Youtube | LinkedIn | Instagram | Facebook | Twitter | Pinterest
 
-<<<<<<< HEAD
-« Prev - Java Questions & Answers – Control Statements – 2» Next - Java Questions & Answers – JDK-JRE-JIT-JVM 
-=======
-« Prev - Python Questions and Answers – Strings – 13» Next - Python Questions and Answers – Lists – 2 
->>>>>>> c36154d7f6abfc14a2e311f24b929b5e0b66e68f
+« Prev - Database Questions and Answers – Relational Database and Database Schema» Next - Database Questions and Answers – Relational Query Operations and Relational Operators 
