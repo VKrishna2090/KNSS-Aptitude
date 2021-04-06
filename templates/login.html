@@ -1,6 +1,7 @@
 {% extends "layout.html" %}
 {% block content %}
-<div class="container-fluid" style="background-image: url('static/uploads/background_image.jpg'); background-attachment: fixed; height: 90vh">
+<div class="container-fluid"
+    style="background-image: url('static/uploads/background_image.jpg'); background-attachment: fixed; height: 90vh">
     <div class="row">
         <br><br>
     </div>
@@ -14,15 +15,16 @@
                 {% with messages = get_flashed_messages(with_categories=true) %}
                 {% if messages %}
                 {% for category, message in messages %}
-                    <div class="alert alert-{{category}} alert-dismissible fade show" role="alert">
-                        {{ message }}
+                <div class="alert alert-{{category}} alert-dismissible fade show" role="alert">
+                    {{ message }}
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                    </div>
+                </div>
                 {% endfor %}
                 {% endif %}
                 {% endwith %}
                 <div class="form-floating">
-                    <input type="text" class="shadow form-control has-validation " name="email" placeholder="Email" id="email" required>
+                    <input type="text" class="shadow form-control has-validation " name="email" placeholder="Email"
+                        id="email" required>
                     <label for="email">Email</label>
                 </div>
                 <div class="invalid-tooltip">
@@ -30,8 +32,16 @@
                 </div>
                 <br>
                 <div class="form-floating">
-                    <input type="password" class="shadow form-control" name="password" placeholder="Password" id="password" required>
+                    <input type="password" class="shadow form-control" name="password" placeholder="Password"
+                        id="password" required>
                     <label for="password">Password</label>
+                </div>
+                <br>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" onclick="myFunction()">
+                    <label class="form-check-label" for="flexCheckDefault">
+                        Show Password
+                    </label>
                 </div>
                 <br>
                 <button type="submit" class="btn btn-primary">Login</button>
@@ -43,7 +53,7 @@
                 </small>
             </div>
         </div>
-        
+
         <div class="col-md-3.5">
         </div>
     </div>
@@ -51,4 +61,14 @@
         <br><br>
     </div>
 </div>
+<script>
+    function myFunction() {
+        var x = document.getElementById("password");
+        if (x.type === "password") {
+            x.type = "text";
+        } else {
+            x.type = "password";
+        }
+    }
+</script>
 {% endblock %}
