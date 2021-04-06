@@ -220,7 +220,7 @@ def create_automatic_exam():
 @app.route('/create_manual_exam', methods = ['POST','GET'])
 def create_manual_exam():
     msg = ''
-    if request.method == 'POST' and ('exam_title' and 'exam_no_of_questions' and 'exam_time_limit' and 'exam_total_marks') in request.form:
+    if request.method == 'POST' and ('exam_title' and 'no_of_objective_questions' and 'exam_time_limit' and 'exam_total_marks') in request.form:
         title = request.form['exam_title']
         time_limit = request.form['exam_time_limit'] + "00"
         if 'exam_instructions' in request.form:
@@ -229,9 +229,9 @@ def create_manual_exam():
             instructions = ''
         total_marks = request.form['exam_total_marks']
          
-        no_of_obj_q = request.form['exam_no_of_questions']
+        no_of_obj_q = request.form['no_of_objective_questions']
         no_of_sub_q = request.form['no_of_subjective_questions']
-        no_of_questions = no_of_obj_q + no_of_sub_q
+        no_of_questions = int(no_of_obj_q) + int(no_of_sub_q)
 
         subject_id = request.form['subject']
         exam_code = random.randint(100,1000000)
