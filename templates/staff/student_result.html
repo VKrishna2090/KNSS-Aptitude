@@ -13,6 +13,7 @@
                 <form class="form-group" action="{{ url_for ('store_marks')}}" method="post" >
                     <div class="input-group mb-3">
                         <input type="hidden" id="exam_code" name="exam_code" value="{{exam_info[0]}}">
+                        <input type="hidden" id="user_id" name="user_id" value="{{student[0]}}">
                         <input type="text" class="form-control"  name="marks" placeholder="Enter Final Marks" id="marks" required>
                         <button onclick="return myFunction()" class="btn btn-outline-danger" type="submit">Save Final Marks</button>
                       </div>
