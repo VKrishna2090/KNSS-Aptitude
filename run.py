@@ -1,14 +1,15 @@
-from flask import *
-import random
-import datetime
-from flask_mysqldb import MySQL
-from SanFoundry_Scraped import initiate_scraping, scrape
-from separation_quest_ans import getQuestionAndOption
 import os
-import calendar
 import time
-from werkzeug.utils import secure_filename
+import random
+import calendar
+import datetime
+from flask import *
+from flask_mysqldb import MySQL
 from flask_mail import Mail, Message
+from werkzeug.utils import secure_filename
+from separation_quest_ans import getQuestionAndOption
+from SanFoundry_Scraped import initiate_scraping, scrape
+
 
 STAFF_UPLOAD_FOLDER = 'static\\staff_uploads'
 STUDENT_UPLOAD_FOLDER = 'static\\student_uploads'
