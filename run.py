@@ -430,7 +430,7 @@ def staff_profile_update():
 @app.route('/view_exam/<int:e_code>',methods=["GET"])
 def view_exam(e_code):
     cursor = mysql.connection.cursor()
-    cursor.execute('SELECT * FROM exam WHERE exam_code = %s',(e_code,))
+    cursor.execute('SELECT * FROM exam WHERE exam_code = %s AND user_id = %s',(e_code,session['user_id'],))
     exam_info = cursor.fetchone()
     cursor = mysql.connection.cursor()
     cursor.execute('SELECT * FROM question WHERE exam_code = %s',(e_code,))
@@ -446,16 +446,10 @@ def view_exam(e_code):
 @app.route('/edit_exam/<int:e_code>',methods=["GET"])
 def edit_exam(e_code):
     cursor = mysql.connection.cursor()
-    cursor.execute('SELECT * FROM exam WHERE exam_code = %s',(e_code,))
+    cursor.execute('SELECT * FROM exam WHERE exam_code = %s AND user_id = %s',(e_code,session['user_id'],))
     exam_info = cursor.fetchone()
     cursor.execute('SELECT * FROM subject')
     subjects = cursor.fetchall()
-    #cursor = mysql.connection.cursor()
-    #cursor.execute('SELECT * FROM question WHERE exam_code = %s',(e_code,))
-    #questions = cursor.fetchall()
-    #cursor = mysql.connection.cursor()
-    #cursor.execute('SELECT * FROM options ORDER BY option_description')
-    #options = cursor.fetchall()
     return render_template('staff/edit_exam.html',exam_info=exam_info,subjects=subjects)
 
 @app.route('/update_exam_details/<int:e_code>', methods = ['POST','GET'])
@@ -473,7 +467,7 @@ def update_exam_details(e_code):
             flash('Form field cannot be empty!','danger')
         else:
             cursor = mysql.connection.cursor()
-            cursor.execute('UPDATE exam SET exam_title = %s, exam_instructions = %s, time_limit = %s, total_number_of_questions = %s, total_marks = %s, start_date = %s, end_date = %s, subject_id = %s WHERE exam_code = %s' , ( exam_title, exam_instructions, time_limit, total_num_of_questions, total_marks, start_date, end_date, subject, e_code,))
+            cursor.execute('UPDATE exam SET exam_title = %s, exam_instructions = %s, time_limit = %s, total_number_of_questions = %s, total_marks = %s, start_date = %s, end_date = %s, subject_id = %s WHERE exam_code = %s AND user_id = %s' , ( exam_title, exam_instructions, time_limit, total_num_of_questions, total_marks, start_date, end_date, subject, e_code, session['user_id'],))
             mysql.connection.commit()
             flash('Exam Details Updated!','success')
             return redirect(url_for('staff_dashboard'))
@@ -557,7 +551,7 @@ def subjects_exams(s_id):
     cursor = mysql.connection.cursor()
     cursor.execute('SELECT * FROM subject WHERE subject_id = %s',(s_id,))
     subjects = cursor.fetchone()
-    cursor.execute('SELECT * FROM exam WHERE subject_id = %s',(s_id,))
+    cursor.execute('SELECT * FROM exam WHERE subject_id = %s AND user_id = %s',(s_id,session['user_id'],))
     exams = cursor.fetchall()
     return render_template('staff/subject_exams.html', subjects=subjects, exams=exams, today=today)
 
@@ -567,7 +561,7 @@ def unchecked_exams():
     cursor.execute('SELECT * FROM subject')
     subjects = cursor.fetchall()
     cursor = mysql.connection.cursor()
-    cursor.execute('SELECT * FROM exams_given, users, exam WHERE users.user_id = exams_given.user_id AND exam.exam_code = exams_given.exam_code AND is_checked = 0',)
+    cursor.execute('SELECT * FROM exams_given, users, exam WHERE users.user_id = exams_given.user_id AND exam.exam_code = exams_given.exam_code AND is_checked = 0 AND exam.user_id = %s',(session['user_id'],))
     exams_given = cursor.fetchall()
     return render_template('staff/show_unchecked_exams.html',subjects=subjects,exams_given=exams_given)
 
