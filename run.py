@@ -9,6 +9,7 @@ from flask_mail import Mail, Message
 from werkzeug.utils import secure_filename
 from separation_quest_ans import getQuestionAndOption
 from SanFoundry_Scraped import initiate_scraping, scrape
+from werkzeug.security import generate_password_hash, check_password_hash
 
 
 STAFF_UPLOAD_FOLDER = 'static\\staff_uploads'
@@ -62,9 +63,10 @@ def login():
         email = request.form['email']
         password = request.form['password']
         cursor = mysql.connection.cursor()
-        cursor.execute('SELECT * FROM users WHERE email = %s AND password = %s',(email,password,))
+        cursor.execute('SELECT * FROM users WHERE email = %s',(email,))
         account = cursor.fetchone()
-        if account:
+        
+        if account and check_password_hash(account[2],password):
             # Create session data, we can access this data in other routes
             session['loggedin'] = True
             session['user_id'] = account[0]
@@ -112,7 +114,7 @@ def register():
         elif not role or not password or not email:
             flash('Fill the form!','danger')
         else:
-            cursor.execute('INSERT INTO users VALUES (%s, %s, %s, %s, %s, %s, %s)', ('', email, password, fname, lname, mobile, role))
+            cursor.execute('INSERT INTO users VALUES (%s, %s, %s, %s, %s, %s, %s)', ('', email, generate_password_hash(password), fname, lname, mobile, role))
             mysql.connection.commit()
             flash('You have successfully registered!','success')
             return redirect(url_for('login'))
