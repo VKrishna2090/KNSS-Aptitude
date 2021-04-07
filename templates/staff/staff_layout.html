@@ -5,37 +5,37 @@
         <div class="col-md-3">
             <ul class="list-group position-fixed" style="width:20%">
 
-                {% if url_for(request.endpoint) == url_for('staff_dashboard')%}
+                {% if request.url[21:] == url_for('staff_dashboard')%}
                     <a class="active list-group-item list-group-item-action list-group-item-success" href="{{ url_for('home') }}">Dashboard</a>
                 {% else %}
                     <a class="list-group-item list-group-item-action list-group-item-success" href="{{ url_for('home') }}">Dashboard</a>
                 {% endif %}
 
-                {% if url_for(request.endpoint) == url_for('staff_profile')%}
+                {% if request.url[21:] == url_for('staff_profile')%}
                     <a class="active list-group-item list-group-item-action list-group-item-primary" href="{{ url_for('staff_profile') }}">Profile</a>
                 {% else %}
                     <a class="list-group-item list-group-item-action list-group-item-primary" href="{{ url_for('staff_profile') }}">Profile</a>
                 {% endif %}
                 
-                {% if url_for(request.endpoint) == url_for('create_exam_auto_form')%}
+                {% if request.url[21:] == url_for('create_exam_auto_form')%}
                     <a class="active list-group-item list-group-item-action list-group-item-success" href="{{ url_for('create_exam_auto_form') }}">Create Exam</a>
                 {% else %}
                     <a class="list-group-item list-group-item-action list-group-item-success" href="{{ url_for('create_exam_auto_form') }}">Create Exam</a>
                 {% endif %}
 
-                {% if url_for(request.endpoint) == url_for('create_exam_manual_form')%}
+                {% if request.url[21:] == url_for('create_exam_manual_form')%}
                     <a class="active list-group-item list-group-item-action list-group-item-primary" href="{{ url_for('create_exam_manual_form') }}">Create Exam Manually</a>
                 {% else %}
                     <a class="list-group-item list-group-item-action list-group-item-primary" href="{{ url_for('create_exam_manual_form') }}">Create Exam Manually</a>
                 {% endif %}
 
-                {% if url_for(request.endpoint) == url_for('create_subject_form')%}
+                {% if request.url[21:] == url_for('create_subject_form')%}
                     <a class="active list-group-item list-group-item-action list-group-item-success" href="{{ url_for('create_subject_form') }}">Manage Subjects</a>
                 {% else %}
                     <a class="list-group-item list-group-item-action list-group-item-success" href="{{ url_for('create_subject_form') }}">Manage Subjects</a>
                 {% endif %}
 
-                {% if url_for(request.endpoint) == url_for('unchecked_exams')%}
+                {% if request.url[21:] == url_for('unchecked_exams')%}
                     <a class="active list-group-item list-group-item-action list-group-item-primary" href="{{ url_for('unchecked_exams') }}">Unchecked Exams</a>
                 {% else %}
                     <a class="list-group-item list-group-item-action list-group-item-primary" href="{{ url_for('unchecked_exams') }}">Unchecked Exams</a>
