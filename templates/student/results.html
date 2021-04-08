@@ -14,12 +14,12 @@
         {% for question in questions %}
         <div class="card">
             <div class="card-body">
-                <div class="card-title bg-light p-3">{{question[1]|safe}}</div>
+                <div class="card-title bg-white p-3">{{question[1]|safe}}</div>
                 {% if question[2] == 'O' %}
                 <ul class="list-group list-group-flush">
                     {% for option in options %}
                         {% if option[3] == question[0] %}
-                            
+                        
                             {% set isCorrect=0 %} 
                             {% if option[2] == '1' %}
                                 {% set isCorrect=1 %}                                        
@@ -32,31 +32,55 @@
                                     {% set ns.isSelected=1 %} 
                                 {% endif %}
                             {% endfor %}
-
-                            {% if ((isCorrect == 1) and (ns.isSelected == 1)) %}
-                                <div class="list-group-item list-group-item-success">
-                                    <label>
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="radio" checked name="{{question[0]}}" value="{{option[0]}}">
-                                            <label class="form-check-label">
-                                                {{ option[1] }}
-                                            </label>
-                                        </div>
-                                    </label>
-                                </div>
-                            {% elif ((isCorrect == 1) and (ns.isSelected == 0)) %}
-                                <div class="list-group-item list-group-item-success">
-                                    <label>
-                                        <div class="form-check">
-                                            <input class="form-check-input"  type="radio" name="{{question[0]}}" value="{{option[0]}}">
-                                            <label class="form-check-label">
-                                                {{ option[1] }}
-                                            </label>
-                                        </div>
-                                    </label>
-                                </div>
-                            {% elif ((isCorrect == 0) and (ns.isSelected == 1)) %}
-                                <div class="list-group-item list-group-item-danger">
+                            {% if exams_given[5] == 1 %}
+                                {% if ((isCorrect == 1) and (ns.isSelected == 1)) %}
+                                    <div class="list-group-item list-group-item-success">
+                                        <label>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="radio" checked name="{{question[0]}}" value="{{option[0]}}">
+                                                <label class="form-check-label">
+                                                    {{ option[1] }}
+                                                </label>
+                                            </div>
+                                        </label>
+                                    </div>
+                                {% elif ((isCorrect == 1) and (ns.isSelected == 0)) %}
+                                    <div class="list-group-item list-group-item-success">
+                                        <label>
+                                            <div class="form-check">
+                                                <input class="form-check-input"  type="radio" name="{{question[0]}}" value="{{option[0]}}">
+                                                <label class="form-check-label">
+                                                    {{ option[1] }}
+                                                </label>
+                                            </div>
+                                        </label>
+                                    </div>
+                                {% elif ((isCorrect == 0) and (ns.isSelected == 1)) %}
+                                    <div class="list-group-item list-group-item-danger">
+                                        <label>
+                                            <div class="form-check">
+                                                <input class="form-check-input"  checked type="radio" name="{{question[0]}}" value="{{option[0]}}">
+                                                <label class="form-check-label">
+                                                    {{ option[1] }}
+                                                </label>
+                                            </div>
+                                        </label>
+                                    </div>
+                                {% else %}
+                                    <div class="list-group-item ">
+                                        <label>
+                                            <div class="form-check">
+                                                <input class="form-check-input"  type="radio" name="{{question[0]}}" value="{{option[0]}}">
+                                                <label class="form-check-label">
+                                                    {{ option[1] }} {{colour}}
+                                                </label>
+                                            </div>
+                                        </label>
+                                    </div>
+                                {% endif %}
+                            {% else %}
+                                {% if (ns.isSelected == 1) %}
+                                <div class="list-group-item ">
                                     <label>
                                         <div class="form-check">
                                             <input class="form-check-input"  checked type="radio" name="{{question[0]}}" value="{{option[0]}}">
@@ -66,7 +90,7 @@
                                         </div>
                                     </label>
                                 </div>
-                            {% else %}
+                                {% else %}
                                 <div class="list-group-item ">
                                     <label>
                                         <div class="form-check">
@@ -77,6 +101,7 @@
                                         </div>
                                     </label>
                                 </div>
+                                {% endif %}
                             {% endif %}
                         {% endif %}
                     {% endfor %}

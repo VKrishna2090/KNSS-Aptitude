@@ -1,4 +1,5 @@
 import os
+import re
 import time
 import random
 import calendar
@@ -101,17 +102,51 @@ def register():
     msg = ''
     if request.method == 'POST' and 'email' in request.form and 'password' in request.form:
         email = request.form['email']
+        if not re.match("[^@]+@[^@]+\.[^@]+",email):
+            flash('Invalid email','danger')
+            return redirect(url_for('register'))
         fname = request.form['firstname']
         lname = request.form['lastname']
         mobile = request.form['mobile']
+        if not (len(mobile) == 13 and re.match("^\+[0-9]+$",mobile) or len(mobile) == 10 and re.match("^[0-9]+$",mobile)):
+            flash('Invalid mobile number','danger')
+            return redirect(url_for('register'))
+        
         password = request.form['password']
+
+        #PASSWORD VALIDATION
+        
+        if len(password) < 8 or len(password) > 25:
+            flash('Password length should between 8 and 25','danger')
+            return redirect(url_for('register'))
+        
+        count = 0
+        arr = ['0', '1', '2', '3','4', '5', '6', '7', '8', '9']
+        for i in password:
+            if i in arr:
+                count = 1
+                break
+        if count == 0:
+            flash('Password should contain atleast one digit','danger')
+            return redirect(url_for('register'))
+        
+        count = 0
+        arr = ['@', '#','!','~','$','%','^','&','*','(',',','-','+','/',':','.',',','<','>','?','|']
+        for i in password:
+            if i in arr:
+                count = 1
+                break
+        if count == 0:
+            flash('Password should contain atleast one special character','danger')
+            return redirect(url_for('register'))
+             
         role = request.form['role'] 
         cursor = mysql.connection.cursor()
         cursor.execute('SELECT * FROM users WHERE email = %s', (email,))
         account = cursor.fetchone()
         if account:
             flash('Account already exists','danger')
-        elif not role or not password or not email:
+        elif not role or not password or not email or not fname or not lname:
             flash('Fill the form!','danger')
         else:
             cursor.execute('INSERT INTO users VALUES (%s, %s, %s, %s, %s, %s, %s)', ('', email, generate_password_hash(password), fname, lname, mobile, role))
@@ -249,6 +284,9 @@ def create_manual_exam():
         exam_code = random.randint(100,1000000)
         start_date = request.form['exam_start_date']
         end_date = request.form['exam_end_date']
+        if start_date>= end_date:
+            flash('Time travelling is not possible! (as of yet 😜)','danger')
+            return redirect(url_for('create_exam_manual_form'))
         cursor = mysql.connection.cursor()
         cursor.execute('INSERT INTO exam VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)', (exam_code, title, instructions, time_limit, no_of_questions, total_marks, start_date, end_date, session['user_id'],subject_id,))
         mysql.connection.commit()  
@@ -396,8 +434,6 @@ def input_subjective_questions(q_no,tot_sub_q,e_code):
                 subjective_solution.save(os.path.join(app.config['STAFF_UPLOAD_FOLDER'], fileNameToStore))
         flash('Exam created successfully!','success')
         return redirect(url_for('home'))
-        
-
 
 @app.route('/staff_profile')
 def staff_profile():
@@ -590,7 +626,7 @@ def store_marks():
             msg = Message('Score released for  '+exam[1], sender = 'knss.aptitude@gmail.com', recipients = [student[1]])
             msg.body = f"""Hello {student[3]},
 Assessment for {exam[1]} has been completed. 
-You have received {marks} out of {int(exam[5])}.
+You have received {marks} out of {int(exam[5])} marks.
 Visit website for more details."""
             mail.send(msg)
 

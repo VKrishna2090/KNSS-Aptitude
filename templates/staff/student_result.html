@@ -7,9 +7,9 @@
         <strong>Score:</strong> {{exams_given[2]}} out of {{exam_info[5]}} <br>
     </figure>
     <br>
+    {% if exams_given[5] == 0 %}
     <div class="card">
         <div class="card-body p-4">
-            {% if exams_given[5] == 0 %} 
                 <form class="form-group" action="{{ url_for ('store_marks')}}" method="post" >
                     <div class="input-group mb-3">
                         <input type="hidden" id="exam_code" name="exam_code" value="{{exam_info[0]}}">
@@ -18,15 +18,16 @@
                         <button onclick="return myFunction()" class="btn btn-outline-danger" type="submit">Save Final Marks</button>
                       </div>
                 </form>
-            {% endif %}
         </div>
     </div>
     <br>
+    {% endif %}
+    
     <form class="form-group">
         {% for question in questions %}
         <div class="card">
             <div class="card-body">
-                <div class="card-title bg-light p-3">{{question[1]|safe}}</div>
+                <div class="card-title bg-white p-3">{{question[1]|safe}}</div>
                 {% if question[2] == 'O' %}
                 <ul class="list-group list-group-flush">
                     {% for option in options %}

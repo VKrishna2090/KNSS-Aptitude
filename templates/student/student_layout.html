@@ -4,12 +4,23 @@
     <div class="row">
         <div class="col-md-3">
             <ul class="list-group">
-                <a class="list-group-item list-group-item-action list-group-item-success"
-                    href="{{ url_for('home') }}">Dashboard</a>
-                <a class="list-group-item list-group-item-action list-group-item-primary"
-                    href="{{ url_for('student_profile') }}">Profile</a>
-                <a class="list-group-item list-group-item-action list-group-item-success"
-                    href="{{ url_for('completed_exams') }}">Exams Given</a>
+                {% if request.url[21:] == url_for('student_dashboard')%}
+                    <a class="active list-group-item list-group-item-action list-group-item-success" href="{{ url_for('home') }}">Dashboard</a>
+                {% else %}
+                    <a class="list-group-item list-group-item-action list-group-item-success" href="{{ url_for('home') }}">Dashboard</a>
+                {% endif %}
+
+                {% if request.url[21:] == url_for('student_profile')%}
+                    <a class="active list-group-item list-group-item-action list-group-item-primary" href="{{ url_for('student_profile') }}">Profile</a>
+                {% else %}
+                    <a class="list-group-item list-group-item-action list-group-item-primary" href="{{ url_for('student_profile') }}">Profile</a>
+                {% endif %}
+
+                {% if request.url[21:] == url_for('completed_exams')%}
+                <a class="active list-group-item list-group-item-action list-group-item-success" href="{{ url_for('completed_exams') }}">Exams Given</a>
+                {% else %}
+                <a class="list-group-item list-group-item-action list-group-item-success" href="{{ url_for('completed_exams') }}">Exams Given</a>
+                {% endif %}
             </ul>
             <br>
         </div>
