@@ -168,7 +168,7 @@ def staff_dashboard():
     cursor = mysql.connection.cursor()
     cursor.execute('SELECT * FROM subject')
     subjects = cursor.fetchall()
-    cursor.execute('SELECT * FROM exam WHERE user_id = %s',(session['user_id'],))
+    cursor.execute('SELECT * FROM exam WHERE user_id = %s ORDER BY subject_id',(session['user_id'],))
     exams = cursor.fetchall()
     return render_template('staff/dashboard.html', subjects=subjects, exams=exams, today=today)
 
@@ -370,18 +370,15 @@ def input_questions(q_no,tot_obj_q,tot_sub_q,e_code):
             cursor = mysql.connection.cursor()
             cursor.execute('INSERT INTO options VALUES (%s, %s, %s, %s)', (o_id4, o_desc4, is_correct4, q_id,))
             mysql.connection.commit()
-        #flash('Exam created successfully!','success')
         return redirect(url_for('input_subjective_questions',q_no=1,tot_sub_q=tot_sub_q,e_code=exam_code)) 
-        #return redirect(url_for('home'))
 
-#input subjective q
+#input subjective questions one by one
 @app.route('/input_subjective_questions/<int:q_no>/<int:tot_sub_q>/<int:e_code>',methods=["GET","POST"])
 def input_subjective_questions(q_no,tot_sub_q,e_code):
     if tot_sub_q == 0:
         flash('Exam created successfully!','success')
         return redirect(url_for('home'))
     if q_no == 1 and q_no <= tot_sub_q:
-        
         return render_template('staff/create_subjective_exam_form.html', q_no=q_no,tot_sub_q=tot_sub_q,exam_code=e_code)
     elif q_no <= tot_sub_q:
         if request.method == 'POST' and 'question' in request.form:
@@ -544,7 +541,6 @@ def delete_exam(e_code):
     cursor5 = mysql.connection.cursor()
     cursor5.execute('DELETE FROM exam WHERE exam_code = %s',(e_code,))
     mysql.connection.commit()
-    
     return redirect('/home')
 
 @app.route('/view_responses/<int:e_code>',methods=["GET"])
@@ -580,7 +576,6 @@ def get_student_responses(e_code, user_id):
     cursor = mysql.connection.cursor()
     cursor.execute('SELECT * FROM users WHERE user_id = %s',(user_id,))
     student = cursor.fetchone()
-    #print(selected_options)
     return render_template('staff/student_result.html',student=student,subjective_solutions=subjective_solutions,selected_options=selected_options,exam_info=exam_info,exams_given=exams_given,questions=questions,options=options)
 
 @app.route('/subjects_exams/<int:s_id>',methods=["GET"])
@@ -599,7 +594,7 @@ def unchecked_exams():
     cursor.execute('SELECT * FROM subject')
     subjects = cursor.fetchall()
     cursor = mysql.connection.cursor()
-    cursor.execute('SELECT * FROM exams_given, users, exam WHERE users.user_id = exams_given.user_id AND exam.exam_code = exams_given.exam_code AND is_checked = 0 AND exam.user_id = %s',(session['user_id'],))
+    cursor.execute('SELECT * FROM exams_given, users, exam WHERE users.user_id = exams_given.user_id AND exam.exam_code = exams_given.exam_code AND is_checked = 0 AND exam.user_id = %s ORDER BY exam.subject_id',(session['user_id'],))
     exams_given = cursor.fetchall()
     return render_template('staff/show_unchecked_exams.html',subjects=subjects,exams_given=exams_given)
 
@@ -646,7 +641,7 @@ def student_dashboard():
     cursor = mysql.connection.cursor()
     cursor.execute('SELECT * FROM subject')
     subjects = cursor.fetchall()
-    cursor.execute('SELECT * FROM exam')
+    cursor.execute('SELECT * FROM exam ORDER BY subject_id')
     exams = cursor.fetchall()
     return render_template('student/dashboard.html', subjects=subjects, exams=exams, today=today)
 
@@ -685,8 +680,6 @@ def student_profile_update():
 def update(user_id):
     msg = ''
     cursor = mysql.connection.cursor()
-    #cursor.execute('SELECT * FROM users WHERE user_id = %s', (user_id,))
-    #update = cursor.fetchone()
     if request.method == 'POST':
         email = request.form['email']
         fname = request.form['fname']

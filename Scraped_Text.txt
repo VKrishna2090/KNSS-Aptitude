@@ -1,100 +1,100 @@
 
 
-This set of Database Multiple Choice Questions & Answers (MCQs) focuses on “Keys”.
-1. Which one of the following is a set of one or more attributes taken collectively to uniquely identify a record?
-a) Candidate key
-b) Sub key
-c) Super key
-d) Foreign key
-View Answer Answer: c
-Explanation: Super key is the superset of all the keys in a relation. 
-
-advertisement
-
-
-
-
-2. Consider attributes ID, CITY and NAME. Which one of this can be considered as a super key?
-a) NAME
-b) ID
-c) CITY
-d) CITY, ID
+This set of Database Multiple Choice Questions & Answers (MCQs) focuses on “Triggers”.
+1. A __________ is a special kind of a store procedure that executes in response to certain action on the table like insertion, deletion or updation of data.
+a) Procedures
+b) Triggers
+c) Functions
+d) None of the mentioned
 View Answer Answer: b
-Explanation: Here the id is the only attribute which can be taken as a key. Other attributes are not uniquely identified. 
-3. The subset of a super key is a candidate key under what condition?
-a) No proper subset is a super key
-b) All subsets are super keys
-c) Subset is a super key
-d) Each subset is a super key
-View Answer Answer: a
-Explanation: The subset of a set cannot be the same set. Candidate key is a set from a super key which cannot be the whole of the super set.  
-4. A _____ is a property of the entire relation, rather than of the individual tuples in which each tuple is unique.
-a) Rows
-b) Key
-c) Attribute
-d) Fields
-View Answer Answer: b
-Explanation: Key is the constraint which specifies uniqueness. 
+Explanation: Triggers are automatically generated when a particular operation takes place. 
 
 advertisement
 
 
 
 
-
-advertisement
-
-
-
-
-5. Which one of the following attribute can be taken as a primary key?
-a) Name
-b) Street
-c) Id
-d) Department
+2. Triggers are supported in
+a) Delete
+b) Update
+c) Views
+d) All of the mentioned
 View Answer Answer: c
-Explanation: The attributes name, street and department can repeat for some tuples. But the id attribute has to be unique. So it forms a primary key. 
-6. Which one of the following cannot be taken as a primary key?
-a) Id
-b) Register number
-c) Dept_id
-d) Street
+Explanation: The triggers run after an insert, update or delete on a table. They are not supported for views.  
+3. The CREATE TRIGGER statement is used to create the trigger. THE _____ clause specifies the table name on which the trigger is to be attached. The ______ specifies that this is an AFTER INSERT trigger.
+a) for insert, on
+b) On, for insert
+c) For, insert
+d) None of the mentioned
+View Answer Answer: b
+Explanation: The triggers run after an insert, update or delete on a table. They are not supported for views.  
+4. What are the after triggers?
+a) Triggers generated after a particular operation
+b) These triggers run after an insert, update or delete on a table
+c) These triggers run after an insert, views, update or delete on a table
+d) All of the mentioned
+View Answer Answer: b
+Explanation: AFTER TRIGGERS can be classified further into three types as: AFTER INSERT Trigger, AFTER UPDATE Trigger, AFTER DELETE Trigger.   
+
+advertisement
+
+
+
+
+
+advertisement
+
+
+
+
+5. The variables in the triggers are declared using
+a) –
+b) @
+c) /
+d) /@
+View Answer Answer: b
+Explanation: Example : declare @empid int; where empid is the variable.   
+6. The default extension for an Oracle SQL*Plus file is:
+a) .txt
+b) .pls
+c) .ora
+d) .sql
 View Answer Answer: d
-Explanation: Street is the only attribute which can occur more than once. 
-7. An attribute in a relation is a foreign key if the _______ key from one relation is used as an attribute in that relation.
-a) Candidate
-b) Primary
-c) Super
-d) Sub
+Explanation: Example :None.   
+7. Which of the following is NOT an Oracle-supported trigger?
+a) BEFORE
+b) DURING
+c) AFTER
+d) INSTEAD OF
 View Answer Answer: b
-Explanation: The primary key has to be referred in the other relation to form a foreign key in that relation. 
+Explanation: Example: During trigger is not possible in any database.   
 
 advertisement
 
 
 
 
-8. The relation with the attribute which is the primary key is referenced in another relation. The relation which has the attribute as a primary key is called ______________
-a) Referential relation
-b) Referencing relation
-c) Referenced relation
-d) Referred relation
+8. What are the different in triggers?
+a) Define, Create
+b) Drop, Comment
+c) Insert, Update, Delete
+d) All of the mentioned
 View Answer Answer: c
-Explanation: None. 
-9. The ______ is the one in which the primary key of one relation is used as a normal attribute in another relation.
-a) Referential relation
-b) Referencing relation
-c) Referenced relation
-d) Referred relation
-View Answer Answer: c
-Explanation: None. 
-10. A _________ integrity constraint requires that the values appearing in specified attributes of any tuple in the referencing relation also appear in specified attributes of at least one tuple in the referenced relation.
-a) Referential
-b) Referencing
-c) Specific
-d) Primary
+Explanation: Triggers are not possible for create, drop.   
+9. Triggers ________ enabled or disabled
+a) Can be
+b) Cannot be
+c) Ought to be
+d) Always
 View Answer Answer: a
-Explanation: A relation, say r1, may include among its attributes the primary key of another relation, say r2. This attribute is called a foreign key from r1, referencing r2. The relation r1 is also called the referencing relation of the foreign key dependency, and r2 is called the referenced relation of the foreign key. 
+Explanation: Triggers can be manipulated.   
+10. Which prefixes are available to Oracle triggers?
+a) : new only
+b) : old only
+c) Both :new and : old
+d) Neither :new nor : old
+View Answer Answer: c
+Explanation: None.   
 
 advertisement
 
@@ -113,4 +113,4 @@ Telegram | Youtube | LinkedIn | Instagram | Facebook | Twitter | Pinterest
 
 Youtube | LinkedIn | Instagram | Facebook | Twitter | Pinterest
 
-« Prev - Database Questions and Answers – Relational Database and Database Schema» Next - Database Questions and Answers – Relational Query Operations and Relational Operators 
+« Prev - Database Questions and Answers – Functions and Procedures» Next - Database Questions and Answers – Recursive Queries and Aggregation Features 

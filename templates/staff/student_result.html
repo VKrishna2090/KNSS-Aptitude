@@ -4,7 +4,7 @@
         <h3 class="display-5">{{ exam_info[1] }}</h3>
         <strong>Name:</strong> {{student[3]}} {{student[4]}} <br>
         <strong>Email:</strong> {{student[1]}} <br>
-        <strong>Score:</strong> {{exams_given[2]}} out of {{exam_info[5]}} <br>
+        <strong>Score for MCQ questions:</strong> {{exams_given[2]}}<br>
     </figure>
     <br>
     {% if exams_given[5] == 0 %}
@@ -27,7 +27,7 @@
         {% for question in questions %}
         <div class="card">
             <div class="card-body">
-                <div class="card-title bg-white p-3">{{question[1]|safe}}</div>
+                <div class="card-title bg-light p-3">{{question[1]|safe}}</div>
                 {% if question[2] == 'O' %}
                 <ul class="list-group list-group-flush">
                     {% for option in options %}
