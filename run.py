@@ -14,8 +14,8 @@ from werkzeug.utils import secure_filename
 from separation_quest_ans import getQuestionAndOption
 from SanFoundry_Scraped import initiate_scraping, scrape
 from werkzeug.security import generate_password_hash, check_password_hash
-from matplotlib.backends.backend_agg import FigureCanvasAgg
-from matplotlib.backends.backend_svg import FigureCanvasSVG
+from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
+from matplotlib.figure import Figure
 
 
 
@@ -831,6 +831,12 @@ def get_responses(e_code):
 
 @app.route('/progress')
 def progress():
+    fig = create_figure()
+    output = io.BytesIO()
+    FigureCanvas(fig).print_png(output)
+    return Response(output.getvalue(), mimetype='image/png')
+
+def create_figure():
     mycursor = mysql.connection.cursor()
     mycursor.execute("SELECT eg.marks, e.total_marks, s.subject_name FROM exams_given AS eg, exam AS e, subject AS s WHERE eg.exam_code = e.exam_code AND e.subject_id = s.subject_id AND eg.is_checked = 1 AND eg.user_id = %s ORDER By s.subject_name",(session['user_id'],))
     marks = mycursor.fetchall()
@@ -849,13 +855,12 @@ def progress():
             avg = tot/count
         mymarks.append(avg)
     mysubjects = [s[0] for s in subjects]
-    colors = ['blue','green']
+    #colors = ['blue','green']
     plt.xlabel("Percentage Marks")
-    figure = plt.figure(figsize=(10,4))
-    axes = figure.add_subplot(1,1,1)
-    axes.barh(mysubjects,mymarks,color=colors,tick_label=mysubjects)
-    return render_template('student/progress.html',image=mpld3.fig_to_html(figure))
-
+    fig = Figure()
+    axis = fig.add_subplot(1,1,1)
+    axis.plot(mymarks,mysubjects)
+    return fig
 
 if __name__ == '__main__':
     app.run(debug=True)
