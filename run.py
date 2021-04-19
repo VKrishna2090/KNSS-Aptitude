@@ -1,16 +1,22 @@
 import os
 import re
 import time
+import mpld3
 import random
 import calendar
 import datetime
+import io
 from flask import *
+import matplotlib.pyplot as plt
 from flask_mysqldb import MySQL
 from flask_mail import Mail, Message
 from werkzeug.utils import secure_filename
 from separation_quest_ans import getQuestionAndOption
 from SanFoundry_Scraped import initiate_scraping, scrape
 from werkzeug.security import generate_password_hash, check_password_hash
+from matplotlib.backends.backend_agg import FigureCanvasAgg
+from matplotlib.backends.backend_svg import FigureCanvasSVG
+
 
 
 STAFF_UPLOAD_FOLDER = 'static\\staff_uploads'
@@ -801,8 +807,6 @@ def get_exam_by_code():
     e_code = request.form['exam_code']
     return redirect (url_for('get_exam',exam_code=e_code))
 
-
-
 @app.route('/get_responses/<int:e_code>',methods=["GET"])
 def get_responses(e_code):
     cursor = mysql.connection.cursor()
@@ -824,6 +828,33 @@ def get_responses(e_code):
     cursor.execute('SELECT * FROM options')
     options = cursor.fetchall()
     return render_template('student/results.html',selected_options=selected_options,subjective_solutions=subjective_solutions,exam_info=exam_info,exams_given=exams_given,questions=questions,options=options)
+
+@app.route('/progress')
+def progress():
+    mycursor = mysql.connection.cursor()
+    mycursor.execute("SELECT eg.marks, e.total_marks, s.subject_name FROM exams_given AS eg, exam AS e, subject AS s WHERE eg.exam_code = e.exam_code AND e.subject_id = s.subject_id AND eg.is_checked = 1 AND eg.user_id = %s ORDER By s.subject_name",(session['user_id'],))
+    marks = mycursor.fetchall()
+    mycursor.execute("SELECT subject_name FROM subject ORDER By subject_name")
+    subjects = mycursor.fetchall()
+    mymarks = []
+    for s in subjects:
+        avg = 0.0
+        count = 0
+        tot = 0.0
+        for m in marks:
+            if m[2] == s[0]:
+                tot += m[0]/m[1]*100
+                count += 1
+        if count > 0:
+            avg = tot/count
+        mymarks.append(avg)
+    mysubjects = [s[0] for s in subjects]
+    colors = ['blue','green']
+    plt.xlabel("Percentage Marks")
+    figure = plt.figure(figsize=(10,4))
+    axes = figure.add_subplot(1,1,1)
+    axes.barh(mysubjects,mymarks,color=colors,tick_label=mysubjects)
+    return render_template('student/progress.html',image=mpld3.fig_to_html(figure))
 
 
 if __name__ == '__main__':
