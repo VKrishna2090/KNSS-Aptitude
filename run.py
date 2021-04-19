@@ -7,6 +7,7 @@ import calendar
 import datetime
 import io
 from flask import *
+import numpy as np
 import matplotlib.pyplot as plt
 from flask_mysqldb import MySQL
 from flask_mail import Mail, Message
@@ -15,6 +16,7 @@ from separation_quest_ans import getQuestionAndOption
 from SanFoundry_Scraped import initiate_scraping, scrape
 from werkzeug.security import generate_password_hash, check_password_hash
 from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
+from matplotlib.backends.backend_svg import FigureCanvasSVG
 from matplotlib.figure import Figure
 
 
@@ -832,9 +834,10 @@ def get_responses(e_code):
 @app.route('/progress')
 def progress():
     fig = create_figure()
+    fig.suptitle("Test")
     output = io.BytesIO()
-    FigureCanvas(fig).print_png(output)
-    return Response(output.getvalue(), mimetype='image/png')
+    FigureCanvasSVG(fig).print_svg(output)
+    return render_template('student/progress.html',image=mpld3.fig_to_html(fig))
 
 def create_figure():
     mycursor = mysql.connection.cursor()
@@ -855,11 +858,14 @@ def create_figure():
             avg = tot/count
         mymarks.append(avg)
     mysubjects = [s[0] for s in subjects]
-    #colors = ['blue','green']
-    plt.xlabel("Percentage Marks")
-    fig = Figure()
+    colors = ['blue','green']
+    fig = Figure(figsize=(15,6))
     axis = fig.add_subplot(1,1,1)
-    axis.plot(mymarks,mysubjects)
+    axis.set_xlim(left=0, right=100)
+    axis.set_xlabel('Percentage',fontsize=13)
+    axis.set_title('Average score per cent in each subject',fontsize=20)
+    axis.set_yticklabels(mysubjects,fontsize=13)
+    axis.barh(mysubjects,mymarks,color=colors)
     return fig
 
 if __name__ == '__main__':
