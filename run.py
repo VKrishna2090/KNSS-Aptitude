@@ -262,7 +262,6 @@ def create_automatic_exam():
                     is_correct = '0'
                     if option[0] == exam1[1][ques][0]:
                         is_correct = '1'
-                    # print(option,option[0],exam1[1][ques][0],option[0] == exam1[1][ques][0],is_correct)
                     cursor = mysql.connection.cursor()
                     cursor.execute('INSERT INTO options VALUES (%s, %s, %s, %s)', (o_id, o_desc[2:].strip(), is_correct, q_id))
                     mysql.connection.commit()                    
@@ -293,7 +292,7 @@ def create_manual_exam():
         start_date = request.form['exam_start_date']
         end_date = request.form['exam_end_date']
         if start_date>= end_date:
-            flash('Time travelling is not possible! (as of yet 😜)','danger')
+            flash('Start date is more than the end date','danger')
             return redirect(url_for('create_exam_manual_form'))
         cursor = mysql.connection.cursor()
         cursor.execute('INSERT INTO exam VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)', (exam_code, title, instructions, time_limit, no_of_questions, total_marks, start_date, end_date, session['user_id'],subject_id,))
@@ -502,15 +501,14 @@ def update_exam_details(e_code):
         exam_instructions = request.form['exam_instructions']
         subject = request.form['subject']
         time_limit = request.form['exam_time_limit']
-        total_num_of_questions = request.form['exam_no_of_questions']
         total_marks = request.form['exam_total_marks']
         start_date = request.form['exam_start_date']
         end_date = request.form['exam_end_date']
-        if not exam_title or not time_limit or not total_num_of_questions or not total_marks or not start_date or not end_date:
+        if not exam_title or not time_limit or not total_marks or not start_date or not end_date:
             flash('Form field cannot be empty!','danger')
         else:
             cursor = mysql.connection.cursor()
-            cursor.execute('UPDATE exam SET exam_title = %s, exam_instructions = %s, time_limit = %s, total_number_of_questions = %s, total_marks = %s, start_date = %s, end_date = %s, subject_id = %s WHERE exam_code = %s AND user_id = %s' , ( exam_title, exam_instructions, time_limit, total_num_of_questions, total_marks, start_date, end_date, subject, e_code, session['user_id'],))
+            cursor.execute('UPDATE exam SET exam_title = %s, exam_instructions = %s, time_limit = %s,  total_marks = %s, start_date = %s, end_date = %s, subject_id = %s WHERE exam_code = %s AND user_id = %s' , ( exam_title, exam_instructions, time_limit,  total_marks, start_date, end_date, subject, e_code, session['user_id'],))
             mysql.connection.commit()
             flash('Exam Details Updated!','success')
             return redirect(url_for('staff_dashboard'))

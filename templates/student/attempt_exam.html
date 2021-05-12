@@ -11,9 +11,6 @@
 
         {% for question in questions %}
         <div class="card">
-            <!-- <div class="card-header text-muted">
-                    Marks: {{question[3]}}
-                </div> -->
             <div class="card-body">
                 <div class="card-title bg-light p-3">{{question[1]|safe}}</div>
                 {% if question[2] == 'O' %}
@@ -67,5 +64,19 @@
             return false;
         }
     }
+    let siteTitle = '';
+    let count=0;
+    window.addEventListener('blur', () => {
+        siteTitle = document.title;
+        document.title = 'Come back to your exam!';
+        count++;
+        confirm("You have switched tabs/windows "+count+" times! After 5 switches, your exam will be automatically submitted!")
+        if (count>=5){
+            window.close();
+        }
+    });
+    window.addEventListener('focus', () => {
+        document.title = siteTitle;
+    });
 </script>
 {% endblock %}
