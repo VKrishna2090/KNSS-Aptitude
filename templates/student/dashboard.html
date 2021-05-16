@@ -67,9 +67,9 @@
         <td>
           <center>
             {% if row[7] >= today %}
-              <a href="{{ url_for('get_exam',exam_code=row[0]) }}" onclick="return myFunction()" type="button" target="_blank" class="btn btn-outline-success">Start</a>
+              <a href="{{ url_for('get_exam',exam_code=row[0]) }}" onclick="return myFunction()" type="button" class="btn btn-outline-success">Start</a>
             {% else %}
-              <a href="{{ url_for('get_exam',exam_code=row[0]) }}" onclick="return myFunction()" type="button" target="_blank" class="disabled btn btn-outline-success">Start</a>
+              <a href="{{ url_for('get_exam',exam_code=row[0]) }}" onclick="return myFunction()" type="button" class="disabled btn btn-outline-success">Start</a>
             {% endif %}
           </center>
         </td>
