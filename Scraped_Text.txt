@@ -1,109 +1,145 @@
 
 
-This set of Database Multiple Choice Questions & Answers (MCQs) focuses on “Triggers”.
-1. A __________ is a special kind of a store procedure that executes in response to certain action on the table like insertion, deletion or updation of data.
-a) Procedures
-b) Triggers
-c) Functions
-d) None of the mentioned
-View Answer Answer: b
-Explanation: Triggers are automatically generated when a particular operation takes place. 
+This set of Operating System Multiple Choice Questions & Answers (MCQs) focuses on “CPU Scheduling Benefits”.
+1. CPU scheduling is the basis of ___________
+a) multiprocessor systems
+b) multiprogramming operating systems
+c) larger memory sized systems
+d) none of the mentioned
+View AnswerAnswer: b
+Explanation: None.
 
 advertisement
 
 
 
 
-2. Triggers are supported in
-a) Delete
-b) Update
-c) Views
+2. With multiprogramming ______ is used productively.
+a) time
+b) space
+c) money
+d) all of the mentioned
+View AnswerAnswer: a
+Explanation: None.
+3. What are the two steps of a process execution?
+a) I/O & OS Burst
+b) CPU & I/O Burst
+c) Memory & I/O Burst
+d) OS & Memory Burst
+View AnswerAnswer: b
+Explanation: None.
+4. An I/O bound program will typically have ____________
+a) a few very short CPU bursts
+b) many very short I/O bursts
+c) many very short CPU bursts
+d) a few very short I/O bursts
+View AnswerAnswer: c
+Explanation: None.
+5. A process is selected from the ______ queue by the ________ scheduler, to be executed.
+a) blocked, short term
+b) wait, long term
+c) ready, short term
+d) ready, long term
+View AnswerAnswer: c
+Explanation: None.
+
+advertisement
+
+
+
+
+
+advertisement
+
+
+
+
+6. In the following cases non – preemptive scheduling occurs?
+a) When a process switches from the running state to the ready state
+b) When a process goes from the running state to the waiting state
+c) When a process switches from the waiting state to the ready state
 d) All of the mentioned
-View Answer Answer: c
-Explanation: The triggers run after an insert, update or delete on a table. They are not supported for views.  
-3. The CREATE TRIGGER statement is used to create the trigger. THE _____ clause specifies the table name on which the trigger is to be attached. The ______ specifies that this is an AFTER INSERT trigger.
-a) for insert, on
-b) On, for insert
-c) For, insert
-d) None of the mentioned
-View Answer Answer: b
-Explanation: The triggers run after an insert, update or delete on a table. They are not supported for views.  
-4. What are the after triggers?
-a) Triggers generated after a particular operation
-b) These triggers run after an insert, update or delete on a table
-c) These triggers run after an insert, views, update or delete on a table
-d) All of the mentioned
-View Answer Answer: b
-Explanation: AFTER TRIGGERS can be classified further into three types as: AFTER INSERT Trigger, AFTER UPDATE Trigger, AFTER DELETE Trigger.   
+View AnswerAnswer: b
+Explanation: There is no other choice.
+7. The switching of the CPU from one process or thread to another is called ____________
+a) process switch
+b) task switch
+c) context switch
+d) all of the mentioned
+View AnswerAnswer: d
+Explanation: None.
+8. What is Dispatch latency?
+a) the speed of dispatching a process from running to the ready state
+b) the time of dispatching a process from running to ready state and keeping the CPU idle
+c) the time to stop one process and start running another one
+d) none of the mentioned
+View AnswerAnswer: c
+Explanation: None.
+9. Scheduling is done so as to ____________
+a) increase CPU utilization
+b) decrease CPU utilization
+c) keep the CPU more idle
+d) none of the mentioned
+View AnswerAnswer: a
+Explanation: None.
 
 advertisement
 
 
 
 
+10. Scheduling is done so as to ____________
+a) increase the throughput
+b) decrease the throughput
+c) increase the duration of a specific amount of work
+d) none of the mentioned
+View AnswerAnswer: a
+Explanation: None.
+11. What is Turnaround time?
+a) the total waiting time for a process to finish execution
+b) the total time spent in the ready queue
+c) the total time spent in the running queue
+d) the total time from the completion till the submission of a process
+View AnswerAnswer: d
+Explanation: None.
+12. Scheduling is done so as to ____________
+a) increase the turnaround time
+b) decrease the turnaround time
+c) keep the turnaround time same
+d) there is no relation between scheduling and turnaround time
+View AnswerAnswer: b
+Explanation: None.
+13. What is Waiting time?
+a) the total time in the blocked and waiting queues
+b) the total time spent in the ready queue
+c) the total time spent in the running queue
+d) the total time from the completion till the submission of a process
+View AnswerAnswer: b
+Explanation: None.
 
 advertisement
 
 
 
 
-5. The variables in the triggers are declared using
-a) –
-b) @
-c) /
-d) /@
-View Answer Answer: b
-Explanation: Example : declare @empid int; where empid is the variable.   
-6. The default extension for an Oracle SQL*Plus file is:
-a) .txt
-b) .pls
-c) .ora
-d) .sql
-View Answer Answer: d
-Explanation: Example :None.   
-7. Which of the following is NOT an Oracle-supported trigger?
-a) BEFORE
-b) DURING
-c) AFTER
-d) INSTEAD OF
-View Answer Answer: b
-Explanation: Example: During trigger is not possible in any database.   
+14. Scheduling is done so as to ____________
+a) increase the waiting time
+b) keep the waiting time the same
+c) decrease the waiting time
+d) none of the mentioned
+View AnswerAnswer: c
+Explanation: None.
+15. What is Response time?
+a) the total time taken from the submission time till the completion time
+b) the total time taken from the submission time till the first response is produced
+c) the total time taken from submission time till the response is output
+d) none of the mentioned
+View AnswerAnswer: b
+Explanation: None.
+Sanfoundry Global Education & Learning Series – Operating System.
 
-advertisement
-
-
-
-
-8. What are the different in triggers?
-a) Define, Create
-b) Drop, Comment
-c) Insert, Update, Delete
-d) All of the mentioned
-View Answer Answer: c
-Explanation: Triggers are not possible for create, drop.   
-9. Triggers ________ enabled or disabled
-a) Can be
-b) Cannot be
-c) Ought to be
-d) Always
-View Answer Answer: a
-Explanation: Triggers can be manipulated.   
-10. Which prefixes are available to Oracle triggers?
-a) : new only
-b) : old only
-c) Both :new and : old
-d) Neither :new nor : old
-View Answer Answer: c
-Explanation: None.   
-
-advertisement
-
-
-
-
-Sanfoundry Global Education & Learning Series – Database Management System.
-
-To practice all areas of Database Management System, here is complete set on 1000+ Multiple Choice Questions and Answers on Database Management System.
+Here’s the list of Best Reference Books in Operating System.
+To practice all areas of Operating System, here is complete set on 1000+ Multiple Choice Questions and Answers on Operating System.
 
 
 Participate in the Sanfoundry Certification contest to get free Certificate of Merit. Join our social networks below and stay updated with latest contests, videos, internships and jobs!
@@ -113,4 +149,4 @@ Telegram | Youtube | LinkedIn | Instagram | Facebook | Twitter | Pinterest
 
 Youtube | LinkedIn | Instagram | Facebook | Twitter | Pinterest
 
-« Prev - Database Questions and Answers – Functions and Procedures» Next - Database Questions and Answers – Recursive Queries and Aggregation Features 
+« Prev - Operating System Questions & Answers – CPU Scheduling» Next - Operating System Questions and Answers – CPU Scheduling Algorithms-1 

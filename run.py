@@ -52,6 +52,8 @@ def allowed_file(filename):
     return '.' in filename and \
            filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
+
+
 #---------------------------------------------GENERAL ROUTES------------------------------------------------
 
 
@@ -123,11 +125,9 @@ def register():
         password = request.form['password']
 
         #PASSWORD VALIDATION
-        
         if len(password) < 8 or len(password) > 25:
             flash('Password length should between 8 and 25','danger')
             return redirect(url_for('register'))
-        
         count = 0
         arr = ['0', '1', '2', '3','4', '5', '6', '7', '8', '9']
         for i in password:
@@ -137,7 +137,6 @@ def register():
         if count == 0:
             flash('Password should contain atleast one digit','danger')
             return redirect(url_for('register'))
-        
         count = 0
         arr = ['@', '#','!','~','$','%','^','&','*','(',',','-','+','/',':','.',',','<','>','?','|']
         for i in password:
@@ -147,7 +146,6 @@ def register():
         if count == 0:
             flash('Password should contain atleast one special character','danger')
             return redirect(url_for('register'))
-             
         role = request.form['role'] 
         cursor = mysql.connection.cursor()
         cursor.execute('SELECT * FROM users WHERE email = %s', (email,))
@@ -241,9 +239,12 @@ def create_automatic_exam():
             start_date = datetime.date.today()
             end_date = start_date+datetime.timedelta(20)
             
-
-            #check if same exam is there or not
-
+            cursor = mysql.connection.cursor()
+            cursor.execute('SELECT * FROM exam WHERE exam_title = %s AND user_id = %s',(e_title,created_by,))
+            existingExam = cursor.fetchall()
+            if existingExam:
+                flash('Exam with same name already exists!','danger')
+                return redirect(url_for('staff_dashboard'))
 
             cursor = mysql.connection.cursor()
             cursor.execute('INSERT INTO exam VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)', (e_code, e_title, '', time_limit, total_num_of_questions, total_marks, start_date, end_date, created_by, subject_id))
@@ -282,11 +283,9 @@ def create_manual_exam():
         else:
             instructions = ''
         total_marks = request.form['exam_total_marks']
-         
         no_of_obj_q = request.form['no_of_objective_questions']
         no_of_sub_q = request.form['no_of_subjective_questions']
         no_of_questions = int(no_of_obj_q) + int(no_of_sub_q)
-
         subject_id = request.form['subject']
         exam_code = random.randint(100,1000000)
         start_date = request.form['exam_start_date']
@@ -294,6 +293,14 @@ def create_manual_exam():
         if start_date>= end_date:
             flash('Start date is more than the end date','danger')
             return redirect(url_for('create_exam_manual_form'))
+
+        cursor = mysql.connection.cursor()
+        cursor.execute('SELECT * FROM exam WHERE e_title = %s AND user_id = %s',(e_title,created_by,))
+        existingExam = cursor.fetchall()
+        if existingExam:
+            flash('Exam with same name already exists!','danger')
+            return redirect(url_for('staff_dashboard'))
+
         cursor = mysql.connection.cursor()
         cursor.execute('INSERT INTO exam VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)', (exam_code, title, instructions, time_limit, no_of_questions, total_marks, start_date, end_date, session['user_id'],subject_id,))
         mysql.connection.commit()  

@@ -4,9 +4,9 @@ import json
 
 def getQuestionAndOption():
     hand = open('Scraped_Text.txt',"r")
-    #print(hand.readlines())
-    quest = [1,2,3,4,5,6,7]
-    rows, cols = (50, 3)
+    # #print(hand.readlines())
+    # quest = [1,2,3,4,5,6,7]
+    # rows, cols = (50, 3)
     qno = dict()
     answers = dict()
 
