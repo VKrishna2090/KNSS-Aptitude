@@ -1,146 +1,96 @@
 
 
-This set of Operating System Multiple Choice Questions & Answers (MCQs) focuses on “CPU Scheduling Benefits”.
-1. CPU scheduling is the basis of ___________
-a) multiprocessor systems
-b) multiprogramming operating systems
-c) larger memory sized systems
-d) none of the mentioned
+This set of Computer Networks Assessment  Questions and Answers focuses on “Socket Programming”.
+1. Which methods are commonly used in Server Socket class?
+a) Public Output Stream get Output Stream ()
+b) Public Socket accept ()
+c) Public synchronized void close ()
+d) Public void connect ()
 View AnswerAnswer: b
-Explanation: None.
+Explanation: The Public socket accept () method is used by the ServerSocket class to accept the connection request of exactly one client at a time. The client requests by initializing the socket object with the servers IP address.
 
 advertisement
 
 
 
 
-2. With multiprogramming ______ is used productively.
-a) time
-b) space
-c) money
-d) all of the mentioned
+2. Which constructor of Datagram Socket class is used to create a datagram socket and binds it with the given Port Number?
+a) Datagram Socket(int port)
+b) Datagram Socket(int port, Int Address address)
+c) Datagram Socket()
+d) Datagram Socket(int address)
+View AnswerAnswer: b
+Explanation: Datagram Socket (int port, Int Address address) is used to create a datagram socket. A datagram socket is created for connection-less communication between the server and the client. There is no accept() method in this class.
+3. The client in socket programming must know which information?
+a) IP address of Server
+b) Port number
+c) Both IP address of Server & Port number
+d) Only its own IP address
+View AnswerAnswer: c
+Explanation: The client in socket programming must know IP address of Server as it has to use that IP address in order to initialize the socket class constructor. That is how the client requests a connection to the server.
+4. The URL Connection class can be used to read and write data to the specified resource that is referred by the URL.
+a) True
+b) False
 View AnswerAnswer: a
-Explanation: None.
-3. What are the two steps of a process execution?
-a) I/O & OS Burst
-b) CPU & I/O Burst
-c) Memory & I/O Burst
-d) OS & Memory Burst
-View AnswerAnswer: b
-Explanation: None.
-4. An I/O bound program will typically have ____________
-a) a few very short CPU bursts
-b) many very short I/O bursts
-c) many very short CPU bursts
-d) a few very short I/O bursts
-View AnswerAnswer: c
-Explanation: None.
-5. A process is selected from the ______ queue by the ________ scheduler, to be executed.
-a) blocked, short term
-b) wait, long term
-c) ready, short term
-d) ready, long term
-View AnswerAnswer: c
-Explanation: None.
-
-advertisement
-
-
-
-
-
-advertisement
-
-
-
-
-6. In the following cases non – preemptive scheduling occurs?
-a) When a process switches from the running state to the ready state
-b) When a process goes from the running state to the waiting state
-c) When a process switches from the waiting state to the ready state
-d) All of the mentioned
-View AnswerAnswer: b
-Explanation: There is no other choice.
-7. The switching of the CPU from one process or thread to another is called ____________
-a) process switch
-b) task switch
-c) context switch
-d) all of the mentioned
-View AnswerAnswer: d
-Explanation: None.
-8. What is Dispatch latency?
-a) the speed of dispatching a process from running to the ready state
-b) the time of dispatching a process from running to ready state and keeping the CPU idle
-c) the time to stop one process and start running another one
-d) none of the mentioned
-View AnswerAnswer: c
-Explanation: None.
-9. Scheduling is done so as to ____________
-a) increase CPU utilization
-b) decrease CPU utilization
-c) keep the CPU more idle
-d) none of the mentioned
+Explanation: The URL Connection class can be used to read and write data to the specified resource referred by the URL. A connection to the URL is initialized by the OpenConnection() method of the class.
+5. Datagram is basically just a piece of information but there is no guarantee of its content, arrival or arrival time.
+a) True
+b) False
 View AnswerAnswer: a
-Explanation: None.
+Explanation: Datagram is basically some information travelling between the sender and the receiver, but there is no guarantee of its content, arrival or arrival time. A Datagram socket class object is created to make a datagram connection between the server and the client.
 
 advertisement
 
 
 
 
-10. Scheduling is done so as to ____________
-a) increase the throughput
-b) decrease the throughput
-c) increase the duration of a specific amount of work
-d) none of the mentioned
-View AnswerAnswer: a
-Explanation: None.
-11. What is Turnaround time?
-a) the total waiting time for a process to finish execution
-b) the total time spent in the ready queue
-c) the total time spent in the running queue
-d) the total time from the completion till the submission of a process
-View AnswerAnswer: d
-Explanation: None.
-12. Scheduling is done so as to ____________
-a) increase the turnaround time
-b) decrease the turnaround time
-c) keep the turnaround time same
-d) there is no relation between scheduling and turnaround time
-View AnswerAnswer: b
-Explanation: None.
-13. What is Waiting time?
-a) the total time in the blocked and waiting queues
-b) the total time spent in the ready queue
-c) the total time spent in the running queue
-d) the total time from the completion till the submission of a process
-View AnswerAnswer: b
-Explanation: None.
 
 advertisement
 
 
 
 
-14. Scheduling is done so as to ____________
-a) increase the waiting time
-b) keep the waiting time the same
-c) decrease the waiting time
-d) none of the mentioned
+6. TCP, FTP, Telnet, SMTP, POP etc. are examples of ___________
+a) Socket
+b) IP Address
+c) Protocol
+d) MAC Address
 View AnswerAnswer: c
-Explanation: None.
-15. What is Response time?
-a) the total time taken from the submission time till the completion time
-b) the total time taken from the submission time till the first response is produced
-c) the total time taken from submission time till the response is output
-d) none of the mentioned
+Explanation: TCP, FTP, Telnet, SMTP, POP etc. are examples of Protocol. Out of them, TCP is a transport layer protocol and FTP, TELNET, SMTP and POP are application layer protocols.
+7. What does the java.net.InetAddress class represent?
+a) Socket
+b) IP Address
+c) Protocol
+d) MAC Address
 View AnswerAnswer: b
-Explanation: None.
-Sanfoundry Global Education & Learning Series – Operating System.
+Explanation: The java.net.InetAddress class represents IP Address of a particular specified host. It can be used to resolve the host name from the IP address or the IP address from the host name.
+8. The flush () method of Print Stream class flushes any un-cleared buffers in the memory.
+a) True
+b) False
+View AnswerAnswer: a
+Explanation: The flush () method of Print Stream class flushes any un cleared buffers in memory.
+9. Which classes are used for connection-less socket programming?
+a) Datagram Socket
+b) Datagram Packet
+c) Both Datagram Socket & Datagram Packet
+d) Server Socket
+View AnswerAnswer: c
+Explanation: Datagram is basically some information travelling between the sender and the receiver, but there is no guarantee of its content, arrival or arrival time. Datagram Socket, Datagram Packet are used for connection-less socket programming, while Server Socket is used for connection-oriented socket programming.
 
-Here’s the list of Best Reference Books in Operating System.
-To practice all areas of Operating System, here is complete set on 1000+ Multiple Choice Questions and Answers on Operating System.
+advertisement
 
+
+
+
+10. In Inet Address class, which method returns the host name of the IP Address?
+a) Public String get Hostname()
+b) Public String getHostAddress()
+c) Public static InetAddress get Localhost()
+d) Public getByName()
+View AnswerAnswer: a
+Explanation: In Inet Address class public String getHostname() method returns the host name of the IP Address. The getHostAddress() method returns the IP address of the given host name.
+Sanfoundry Global Education & Learning Series – Computer Networks.
+To practice all areas of Computer Networks Assessment Questions, here is complete set of 1000+ Multiple Choice Questions and Answers.
 
 Participate in the Sanfoundry Certification contest to get free Certificate of Merit. Join our social networks below and stay updated with latest contests, videos, internships and jobs!
 
@@ -149,4 +99,4 @@ Telegram | Youtube | LinkedIn | Instagram | Facebook | Twitter | Pinterest
 
 Youtube | LinkedIn | Instagram | Facebook | Twitter | Pinterest
 
-« Prev - Operating System Questions & Answers – CPU Scheduling» Next - Operating System Questions and Answers – CPU Scheduling Algorithms-1 
+« Prev - Computer Networks Questions & Answers – Ports» Next - Computer Networks Questions & Answers – Cookies 
