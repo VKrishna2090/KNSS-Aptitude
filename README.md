@@ -36,7 +36,7 @@ The main objective of Online Examination System is to efficiently evaluate the c
 
 ## Developers:
 
-* Iyer Sreekesh Subramanian
+* Sreekesh Iyer
 * Rao Ninad Shivanand
 * V Krishnasubramaniam
 * Shalaka Waghamale
