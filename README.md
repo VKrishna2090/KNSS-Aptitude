@@ -34,6 +34,63 @@ The main objective of Online Examination System is to efficiently evaluate the c
 * Visual Studio Code
 * Python 3.9.2
 
+## Screenshots:
+
+Login Page <br>
+![](/images/image15.png)
+
+#### Staff
+
+Dashboard <br>
+![](/images/image2.png)
+
+Profile Page<br>
+![](/images/image18.png)
+
+Create Exam using Sanfoundry Link Page <br>
+![](/images/image1.png)
+
+Create Exam Manually Page <br>
+![](/images/image9.png)
+
+Add Objective Questions Page <br>
+![](/images/image10.png)
+
+Add Subjective Questions Page <br>
+![](/images/image6.png)
+
+Preview Exam Page <br>
+![](/images/image8.png)
+
+Edit Exam Details Page<br>
+![](/images/image19.png)
+
+Manage Subjects Page <br>
+![](/images/image3.png)
+
+Unchecked Exams Page <br>
+![](/images/image4.png)
+
+Submitted Unchecked Response Page <br>
+![](/images/image5.png)
+
+#### Students
+
+Dashboard<br>
+![](/images/image20.png)
+
+Join Exam Button <br>
+![](/images/image13.png)
+
+Exams Given Page <br>
+![](/images/image11.png)
+
+Submitted Exam Response Page <br>
+![](/images/image14.png)
+
+Progress Page <br>
+![](/images/image17.png)
+
 ## Developers:
 
 * Sreekesh Iyer
