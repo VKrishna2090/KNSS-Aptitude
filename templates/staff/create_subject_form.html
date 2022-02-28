@@ -46,7 +46,11 @@
                 <td>{{row[2]}}</td>
                 <td>
                     <center>
-                        <a href="{{ url_for('subjects_exams',s_id=row[0]) }}" type="button" class="btn btn-outline-success">View Exams</a>
+                        <button type="button" class="btn btn-outline-primary dropdown-toggle" data-bs-toggle="dropdown"aria-expanded="false">Actions</button>
+                        <ul class="dropdown-menu">
+                            <li><a href="{{ url_for('subjects_exams',s_id=row[0]) }}" class="dropdown-item">View Exams</a></li>
+                            <li><a href="" class="dropdown-item">Edit Subject</a></li>
+                        </ul>
                     </center>
                 </td>
             </tr>
